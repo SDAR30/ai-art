@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 
 const imagesController = require('./controllers/images')
+const usersController = require('./controllers/users')
 
 // ROUTES
 app.get("/", (req, res) => {
@@ -12,5 +13,6 @@ app.get("/", (req, res) => {
 
 //CONTROLLERS
 app.use('/images', imagesController);
+app.use('/users', usersController)
 
 module.exports = app;
