@@ -1,7 +1,8 @@
 const users = require('express').Router();
 
 users.get('/', (req, res) => {
-    res.json({ success: true, error: false, message: "get all students" })
+    res.json({ success: true, error: false, message: "get all students", 
+        users: [{name: 'Adam Z', email: 'adam01@gmail.com', password: '0zxv33'}, {name: 'Brian J', email: 'bbjame@gmail.com', password: 'ki1293'}] })
 })
 
 users.get('/:id', async (req, res) => {
