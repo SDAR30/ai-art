@@ -1,7 +1,11 @@
 const express = require('express');
+const cors = require("cors");
 
-//initialize app
+//CONFIGURATION
 const app = express();
+
+// MIDDLEWARE
+app.use(cors());
 
 const imagesController = require('./controllers/images')
 const usersController = require('./controllers/users')
