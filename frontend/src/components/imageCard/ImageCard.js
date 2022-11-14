@@ -8,7 +8,7 @@ function ImageCard({image}) {
         <div className='imageCard'>
             <div className='imageCard__title'>{`Title: ${title}`}</div>
             {`ID: ${id} AI: ${ai}`}
-            <div>
+            <div className='imageCard__image'>
             <img src={url} alt="ai img"/>
             </div>
         </div>

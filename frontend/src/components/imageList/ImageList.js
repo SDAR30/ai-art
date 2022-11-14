@@ -6,7 +6,7 @@ const ImageList = () => {
     const [images, setImages] = useState([])
 
     useEffect(() => {
-        const URL = 'http://localhost:3333/images'
+        const URL = 'https://ai-art-backend.adaptable.app/images'
         fetch(URL).then(res => res.json())
             .then(data => {
                 setImages(data)
