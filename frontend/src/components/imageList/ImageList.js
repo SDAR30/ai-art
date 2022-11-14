@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import ImageCard from '../imageCard/ImageCard';
+import './ImageList.scss'
 
-const imageList = () => {
+const ImageList = () => {
     const [images, setImages] = useState([])
 
     useEffect(() => {
         const URL = 'http://localhost:3333/images'
         fetch(URL).then(res => res.json())
             .then(data => {
-                setImages(data.images)
+                setImages(data)
             })
     }, [])
 
     return (
-        <div>
-            images:
-            {images[0]}
+        <div className="imageList">
+            {images.map(image=> <ImageCard image={image} key={image.id} />)}
         </div>
     );
 }
