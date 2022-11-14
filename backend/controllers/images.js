@@ -1,17 +1,28 @@
 const images = require('express').Router();
 
-images.get('/', (req, res) => {
-    res.json({ success: true, error: false, message: "ALl images" })
+const db = require('../db/index');
+
+images.get('/', async (req, res) => {
+    let { min = 1, max = 999999999, limit = 27 } = req.query;
+    limit = Number(limit)
+    min = Number(min)
+    max = Number(max)
+    return res.json(await db.any('SELECT * FROM images WHERE id >= $1 AND id <= $2 LIMIT $3', [min, max, limit]))
 })
 
-images.get('/:id', (req, res) => {
+images.get('/:id', async (req, res) => {
     try {
         const imageID = req.params.id;
         if (!/[0-9]/.test(imageID)) {
             res.send("image id is not a number")
             return;
         }
-        res.json({message: "return image with ID: "+imageID})
+        const image = await db.oneOrNone('SELECT * FROM images where id = $1', [imageID])
+        if (image) {
+            res.json(image)
+        } else {
+            res.status(404).json({ success: false, error: true, message: "invalid image id" })
+        }
     } catch (error) {
         res.status(500).send('Error occured: ', error)
     }
