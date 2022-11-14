@@ -1,26 +1,25 @@
 const users = require('express').Router();
 
-users.get('/', (req, res) => {
-    res.json({ success: true, error: false, message: "get all students", 
-        users: [{name: 'Adam Z', email: 'adam01@gmail.com', password: '0zxv33'}, {name: 'Brian J', email: 'bbjame@gmail.com', password: 'ki1293'}] })
-})
+const db = require('../db/index');
+
+users.get('/', async (req, res) => res.json(await db.any('SELECT * FROM users')))
 
 users.get('/:id', async (req, res) => {
     try {
         const userID = req.params.id;
 
         if (!/[0-9]/.test(userID)) {
-            res.send('User ID must be a number')
+            res.send('user ID must be a number')
             return;
         }
         const singleUser = await db.oneOrNone('SELECT * FROM users WHERE id = $1', [userID])
         if (singleUser) {
             res.json(singleUser)
         } else {
-            res.send('student not found')
+            res.send('user not found')
         }
     } catch (err) {
-        res.status(500).send("aN error occured")
+        res.status(500).send("an error occured")
     }
 })
 

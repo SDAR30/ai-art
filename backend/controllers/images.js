@@ -1,7 +1,7 @@
 const images = require('express').Router();
 
 images.get('/', (req, res) => {
-    res.json({ success: false, error: true, message: "invalid id" })
+    res.json({ success: true, error: false, message: "ALl images" })
 })
 
 images.get('/:id', (req, res) => {
@@ -11,7 +11,7 @@ images.get('/:id', (req, res) => {
             res.send("image id is not a number")
             return;
         }
-        res.json({})
+        res.json({message: "return image with ID: "+imageID})
     } catch (error) {
         res.status(500).send('Error occured: ', error)
     }
