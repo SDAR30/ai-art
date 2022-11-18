@@ -23,7 +23,6 @@ const ImageList = () => {
             return title.split(' ').some(word => word.startsWith(search)) ? title : null;
         })
     }
-    console.log(filteredImages)
 
     return (
         <div className="imageList">
