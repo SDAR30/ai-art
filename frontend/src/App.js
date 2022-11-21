@@ -12,7 +12,6 @@ function App() {
           <Route path="/" element={<ImageList />} />
         </Routes>
       </BrowserRouter>
-      <ImageList />
     </div>
   );
 }

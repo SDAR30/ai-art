@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import FilterBar from '../filterBar/FilterBar';
 import ImageCard from '../imageCard/ImageCard';
 import SearchBar from '../searchBar/SearchBar';
 import './ImageList.scss'
@@ -16,8 +17,8 @@ const ImageList = () => {
     }, [])
 
     let filteredImages = images;
-    if(searchTerm){
-        filteredImages = images.filter(image=>{
+    if (searchTerm) {
+        filteredImages = images.filter(image => {
             const search = searchTerm.toLowerCase();
             const title = image.title.toLowerCase();
             return title.split(' ').some(word => word.startsWith(search)) ? title : null;
@@ -26,8 +27,11 @@ const ImageList = () => {
 
     return (
         <div className="imageList">
-            <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
-            {filteredImages.map(image=> <ImageCard image={image} key={image.id} />)}
+            <div className='imageList__bar'>
+                <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+                <FilterBar />
+            </div>
+            {filteredImages.map(image => <ImageCard image={image} key={image.id} />)}
             {!filteredImages.length && <div className='imageList__noResults'>No results</div>}
         </div>
     );
