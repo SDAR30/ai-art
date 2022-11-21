@@ -24,5 +24,4 @@ images.get('/:id', async (req, res) => {
     }
 })
 
-
 module.exports = images;
