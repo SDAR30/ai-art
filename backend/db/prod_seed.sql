@@ -1,7 +1,10 @@
 INSERT INTO users (name, email, password, pic)
 VALUES ('Adam Z', 'adam01@gmail.com', 'ghj678','https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png'),
 		('Brian Kindo', 'bjkindo@gmail.com', 'jkl890','https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png'),
-		('Casmen Joike', 'casguuh@gmail.com', 'hjk789','https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png');
+		('Casmen Joike', 'casguuh@gmail.com', 'hjk789','https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png'),
+		('David Jolib', 'jolib@gmail.com', 'jkl789','https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png');
+
+
 
 INSERT INTO images (title, ai, url, instructions, prompt, date, user_id)
 VALUES ('Sunflower with sunglasses', 'DALL-E 2','https://cdn.openai.com/labs/images/A%20photograph%20of%20a%20sunflower%20with%20sunglasses%20on%20in%20the%20middle%20of%20the%20flower%20in%20a%20field%20on%20a%20bright%20sunny%20day.webp?v=1','', 'A photograph of a sunflower with sunglasses on in the middle of the flower in a field on a bright sunny day','2022-03-24', 1),
