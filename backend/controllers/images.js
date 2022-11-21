@@ -18,7 +18,7 @@ images.get('/:id', async (req, res) => {
             return;
         }
         const image = await db.oneOrNone('SELECT * FROM images where id = $1', [imageID])
-        return image ? res.json(image) : res.status(422).json({success: false, error: true, message: "No image with that id"})
+        return image ? res.json(image) : res.status(422).send({success: false, error: true, message: "No image with that id"})
     } catch (error) {
         res.status(500).send('Error occured: ', error)
     }

@@ -6,6 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
+    "init": "psql $DB_ADAPTABLE_URL -f db/prod_schema.sql",
+    "seed": "psql $DB_ADAPTABLE_URL -f db/prod_seed.sql",
     "db:init": "psql -U postgres -f db/schema.sql",
     "db:seed": "psql -U postgres -f db/seed.sql",
     "comment": "to install packaged in dev but not in production environment, use 'npm i -D ___' ",
@@ -15,6 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "cross-var": "^1.1.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "pg-promise": "^10.12.1"
