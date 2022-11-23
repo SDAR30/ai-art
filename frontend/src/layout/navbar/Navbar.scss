@@ -9,6 +9,11 @@
 
     border: 2px solid rgb(0, 0, 0);
 
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
     &__logo{
         font-size: 28px;
         font-weight: 700;
@@ -25,10 +30,6 @@
     &__menuItem{
         font-size: 20px;
         font-weight: 500;
-        a {
-            text-decoration: none;
-            color: black;
-        }
     }
 
     &__toggleIcon{

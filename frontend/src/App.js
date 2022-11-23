@@ -1,8 +1,8 @@
 import './App.css';
-import ImageList from './components/imageList/ImageList';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from './layout/navbar/Navbar';
 import ImageView from './components/imageView/ImageView';
+import Home from './pages/Home';
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/images/:imageID" element={<ImageView />} />
-          <Route path="/" element={<ImageList />} />
+          <Route path="/" element={<Home />} />
         </Routes>
       </BrowserRouter>
     </div>
