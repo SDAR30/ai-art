@@ -1,6 +1,8 @@
 const users = require('express').Router();
-
 const db = require('../db/index');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const jwtTokens = require('../utils/jwt-helpers');
 
 users.get('/', async (req, res) => res.json(await db.any('SELECT * FROM users')))
 
@@ -18,6 +20,31 @@ users.get('/:id', async (req, res) => {
         } else {
             res.send('user not found')
         }
+    } catch (err) {
+        res.status(500).send("an error occured")
+    }
+})
+
+users.post('/', async (req, res) => {
+    try {
+        let { name, email, password, pic } = req.body;
+
+        if (name.length < 4) {
+            throw { message: 'username must be 4 or more characters' }
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        pic = pic || 'https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png'
+
+        const user = await db.oneOrNone('INSERT INTO users (name, email, password, pic) VALUES ($1, $2, $3, $4) RETURNING id, name, email',
+            [name, email.toLowerCase(), hashedPassword, pic]);
+
+        if(user){ //if user properly created, generate JWT Token
+            let data = jwtTokens(user);
+            res.json(data);
+        }
+
     } catch (err) {
         res.status(500).send("an error occured")
     }
