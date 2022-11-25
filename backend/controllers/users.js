@@ -1,7 +1,7 @@
 const users = require('express').Router();
 const db = require('../db/index');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+//const jwt = require('jsonwebtoken');
 const jwtTokens = require('../utils/jwt-helpers');
 
 users.get('/', async (req, res) => res.json(await db.any('SELECT * FROM users')))
@@ -41,7 +41,7 @@ users.post('/', async (req, res) => {
             [name, email.toLowerCase(), hashedPassword, pic]);
 
         if(user){ //if user properly created, generate JWT Token
-            let data = jwtTokens(user);
+            let data = jwtTokens(user); //data constains {refreshtoken, accesstoken}
             res.json(data);
         }
 
