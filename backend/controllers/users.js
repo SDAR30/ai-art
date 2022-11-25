@@ -27,9 +27,9 @@ users.get('/:id', async (req, res) => {
 
 users.post('/', async (req, res) => {
     try {
-        let { name, email, password, pic } = req.body;
+        let { username, email, password, pic } = req.body;
 
-        if (name.length < 4) {
+        if (username.length < 4) {
             throw { message: 'username must be 4 or more characters' }
         }
 
@@ -37,8 +37,8 @@ users.post('/', async (req, res) => {
 
         pic = pic || 'https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png'
 
-        const user = await db.oneOrNone('INSERT INTO users (name, email, password, pic) VALUES ($1, $2, $3, $4) RETURNING id, name, email',
-            [name, email.toLowerCase(), hashedPassword, pic]);
+        const user = await db.oneOrNone('INSERT INTO users (username, email, password, pic) VALUES ($1, $2, $3, $4) RETURNING id, username, email',
+            [username, email.toLowerCase(), hashedPassword, pic]);
 
         if(user){ //if user properly created, generate JWT Token
             let data = jwtTokens(user); //data constains {refreshtoken, accesstoken}
@@ -46,9 +46,8 @@ users.post('/', async (req, res) => {
         }
 
     } catch (err) {
-        res.status(500).send("an error occured")
+        res.status(500).send(err)
     }
 })
-
 
 module.exports = users;

@@ -9,10 +9,10 @@ import Button from '@mui/material/Button';
 
 function LoginModal({ openLoginModal, setOpenLoginModal, setLoggedIn }) {
 
-    const [name, setName] = useState('')
+    const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [nameError, setNameError] = useState(false)
+    const [usernameError, setUsernameError] = useState(false)
     const [emailError, setEmailError] = useState(false)
     const [passwordError, setPasswordError] = useState(false)
 
@@ -24,30 +24,28 @@ function LoginModal({ openLoginModal, setOpenLoginModal, setLoggedIn }) {
     const createUser = () => {
         const reqOptions = {
             method: 'POST',
-            body: JSON.stringify({ name, email, password }),
+            body: JSON.stringify({ username, email, password }),
             headers: { 'Content-Type': 'application/json', }
         }
 
-        fetch('http://localhost:3333/users', reqOptions).then(res => res.json())
+        fetch('https://ai-art-backend.adaptable.app/users', reqOptions).then(res => res.json())
             .then(data => {
-                setName('')
+                setUsername('')
                 setEmail('')
                 setPassword('')
                 setOpenLoginModal(false)
                 localStorage.setItem('accessToken', data.accessToken);
                 setLoggedIn(true)
-                //show toast that user was created.
             }).catch(err => {
                 console.log(err)
-                //handle err
             })
     }
 
-    const validateName = () => {
-        if (name.length < 4) {
-            setNameError(true)
+    const validateUsername = () => {
+        if (username.length < 4) {
+            setUsernameError(true)
         } else {
-            setNameError(false)
+            setUsernameError(false)
         }
     }
 
@@ -101,9 +99,9 @@ function LoginModal({ openLoginModal, setOpenLoginModal, setLoggedIn }) {
 
                 <TextField className='loginModal__textfield' id="outlined-basic-username"
                     label="Username" variant="outlined" required
-                    onChange={(e) => setName(e.target.value)} value={name}
-                    error={nameError} helperText={nameError && "username must be at least 4 characters long"}
-                    onBlur={validateName} />
+                    onChange={(e) => setUsername(e.target.value)} value={username}
+                    error={usernameError} helperText={usernameError && "username must be at least 4 characters long"}
+                    onBlur={validateUsername} />
 
                 <TextField className='loginModal__textfield' id="outlined-basic-email"
                     label="Email" variant="outlined" required

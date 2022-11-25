@@ -3,13 +3,14 @@ const cors = require("cors");
 
 const app = express();
 
-// if(process.env.NODE_ENV !== 'production'){
-//   require('dotenv').config()
-// } 
+app.use(cors());
+
+if(process.env.NODE_ENV !== 'production'){
+  require('dotenv').config();
+}
 
 // MIDDLEWARE
 app.use(express.json())
-app.use(cors());
 
 const imagesController = require('./controllers/images')
 const usersController = require('./controllers/users')

@@ -1,6 +1,6 @@
 \c ai_art;
 
-INSERT INTO users (name, email, password, pic)
+INSERT INTO users (username, email, password, pic)
 VALUES ('Adam Z', 'adam01@gmail.com', 'ghj678','https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png'),
 		('Brian Kindo', 'bjkindo@gmail.com', 'jkl890','https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png'),
 		('Casmen Joike', 'casguuh@gmail.com', 'hjk789','https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png');
