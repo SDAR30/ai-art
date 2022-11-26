@@ -3,6 +3,7 @@ const db = require('../db/index');
 const bcrypt = require('bcrypt');
 //const jwt = require('jsonwebtoken');
 const jwtTokens = require('../utils/jwt-helpers');
+const { Router } = require('express');
 
 users.get('/', async (req, res) => res.json(await db.any('SELECT * FROM users')))
 
@@ -25,6 +26,38 @@ users.get('/:id', async (req, res) => {
     }
 })
 
+users.post('/login', async (req, res) => {
+    try {
+        let {username, password} = req.body;
+        const user = await db.one('SELECT * FROM users WHERE username = $1', [username])
+
+        console.log('new user object:')
+        console.log(user)
+
+        if(!user){
+            res.status(401).send({error: 'username is not correct'})
+            return;
+        }
+
+        //compare given password used to log in, with hashed password in stored database
+        const validPassword = await bcrypt.compare(password, user.password)
+
+        if(!validPassword){
+            res.status(401).send({error: 'invalid password'})
+            return;
+        }
+
+        if(user && validPassword){
+            let data = jwtTokens(user);
+            res.json(data)
+        }
+
+    } catch (error) {
+        console.log(error)
+        res.send({status: 'error', message: error.message})
+    }
+})
+
 users.post('/', async (req, res) => {
     try {
         let { username, email, password, pic } = req.body;
@@ -40,7 +73,9 @@ users.post('/', async (req, res) => {
         const user = await db.oneOrNone('INSERT INTO users (username, email, password, pic) VALUES ($1, $2, $3, $4) RETURNING id, username, email',
             [username, email.toLowerCase(), hashedPassword, pic]);
 
-        if(user){ //if user properly created, generate JWT Token
+        console.log(user)
+
+        if (user) { //if user properly created, generate JWT Token
             let data = jwtTokens(user); //data constains {refreshtoken, accesstoken}
             res.json(data);
         }

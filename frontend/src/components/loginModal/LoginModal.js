@@ -1,82 +1,63 @@
-import React, { useState } from 'react';
+import React from 'react'
 import './LoginModal.scss'
 import Modal from '@mui/material/Modal';
-import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+
+import LoginAccountForm from "../loginAccountForm/LoginAccountForm";
+import CreateAccountForm from '../createAccountForm/CreateAccountForm';
 
 
-function LoginModal({ openLoginModal, setOpenLoginModal, setLoggedIn }) {
+function TabPanel(props) {
+    const { children, value, index, ...other } = props;
 
-    const [username, setUsername] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [usernameError, setUsernameError] = useState(false)
-    const [emailError, setEmailError] = useState(false)
-    const [passwordError, setPasswordError] = useState(false)
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <>{children}</>
+            )}
+        </div>
+    );
+}
 
 
-    const handleClose = () => {
-        setOpenLoginModal(false)
-    }
+function a11yProps(index) {
+    return {
+        id: `simple-tab-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`,
+    };
+}
 
-    const createUser = () => {
-        const reqOptions = {
-            method: 'POST',
-            body: JSON.stringify({ username, email, password }),
-            headers: { 'Content-Type': 'application/json', }
-        }
-
-        fetch('https://ai-art-backend.adaptable.app/users', reqOptions).then(res => res.json())
-            .then(data => {
-                setUsername('')
-                setEmail('')
-                setPassword('')
-                setOpenLoginModal(false)
-                localStorage.setItem('accessToken', data.accessToken);
-                setLoggedIn(true)
-            }).catch(err => {
-                console.log(err)
-            })
-    }
-
-    const validateUsername = () => {
-        if (username.length < 4) {
-            setUsernameError(true)
-        } else {
-            setUsernameError(false)
-        }
-    }
-
-    const validateEmail = () => {
-        if (/^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-            setEmailError(false);
-        } else {
-            setEmailError(true);
-        }
-    }
-
-    const validatePassword = () => {
-        if (password.length < 6) {
-            setPasswordError(true)
-        } else {
-            setPasswordError(false)
-        }
-    }
+function LoginModal({ openLoginModal, setOpenLoginModal, setLoggedIn, ...props }) {
+    const [value, setValue] = React.useState(1);
 
     const style = {
         position: 'absolute',
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: 400,
         bgcolor: 'background.paper',
         border: '2px solid #000',
         boxShadow: 24,
-        p: 4,
-    };
-    //https://mui.com/system/getting-started/the-sx-prop/
+        p: 4, 
+        width: '30ch'
+      }; //https://mui.com/system/getting-started/the-sx-prop/
+
+    const handleClose = () => {
+        setOpenLoginModal(false);
+    }
+
+    const handleChange = (e) => {
+        setValue(Number(e.target.id[e.target.id.length-1]));
+      };
+
 
     return (
         <Modal
@@ -93,31 +74,17 @@ function LoginModal({ openLoginModal, setOpenLoginModal, setLoggedIn }) {
                 noValidate
                 autoComplete="off"
             >
-                <Typography className='loginModal__title' id="modal-modal-title" variant="h6" component="h2">
-                    Create an account:
-                </Typography>
-
-                <TextField className='loginModal__textfield' id="outlined-basic-username"
-                    label="Username" variant="outlined" required
-                    onChange={(e) => setUsername(e.target.value)} value={username}
-                    error={usernameError} helperText={usernameError && "username must be at least 4 characters long"}
-                    onBlur={validateUsername} />
-
-                <TextField className='loginModal__textfield' id="outlined-basic-email"
-                    label="Email" variant="outlined" required
-                    onChange={(e) => setEmail(e.target.value)} value={email}
-                    error={emailError} helperText={emailError ? "Please enter a valid email" : ""}
-                    onBlur={validateEmail} />
-
-                <TextField className='loginModal__textfield' id="outlined-basic-password"
-                    label="Password" type='password' variant="outlined" required
-                    onChange={(e) => setPassword(e.target.value)} value={password} 
-                    error={passwordError} helperText={passwordError && "Password must be at least 6 characters"}
-                    onBlur={validatePassword}/>
-
-                <Button variant="contained" onClick={e => createUser(e)}>Create account</Button>
+                <Tabs value={value} onChange={handleChange} aria-label="Log in and create account tabs">
+                    <Tab label="Log In"  {...a11yProps(0)} />
+                    <Tab label="Create Account" {...a11yProps(1)} />
+                </Tabs>
+                <TabPanel value={value} index={0}>
+                    <LoginAccountForm setOpenLoginModal={setOpenLoginModal} setLoggedIn={setLoggedIn} />
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                    <CreateAccountForm setOpenLoginModal={setOpenLoginModal} setLoggedIn={setLoggedIn} />
+                </TabPanel>
             </Stack>
-
         </Modal>
     );
 }
