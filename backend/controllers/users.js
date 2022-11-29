@@ -70,7 +70,7 @@ users.post('/', async (req, res) => {
 
         pic = pic || 'https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png'
 
-        const user = await db.oneOrNone('INSERT INTO users (username, email, password, pic) VALUES ($1, $2, $3, $4) RETURNING id, username, email',
+        const user = await db.one('INSERT INTO users (username, email, password, pic) VALUES ($1, $2, $3, $4) RETURNING id, username, email',
             [username, email.toLowerCase(), hashedPassword, pic]);
 
         console.log(user)

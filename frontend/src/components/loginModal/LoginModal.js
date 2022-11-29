@@ -1,63 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './LoginModal.scss'
 import Modal from '@mui/material/Modal';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
 
 import LoginAccountForm from "../loginAccountForm/LoginAccountForm";
 import CreateAccountForm from '../createAccountForm/CreateAccountForm';
 
 
-function TabPanel(props) {
-    const { children, value, index, ...other } = props;
-
-    return (
-        <div
-            role="tabpanel"
-            hidden={value !== index}
-            id={`simple-tabpanel-${index}`}
-            aria-labelledby={`simple-tab-${index}`}
-            {...other}
-        >
-            {value === index && (
-                <>{children}</>
-            )}
-        </div>
-    );
-}
-
-
-function a11yProps(index) {
-    return {
-        id: `simple-tab-${index}`,
-        'aria-controls': `simple-tabpanel-${index}`,
-    };
-}
-
-function LoginModal({ openLoginModal, setOpenLoginModal, setLoggedIn, ...props }) {
-    const [value, setValue] = React.useState(1);
-
-    const style = {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        bgcolor: 'background.paper',
-        border: '2px solid #000',
-        boxShadow: 24,
-        p: 4, 
-        width: '30ch'
-      }; //https://mui.com/system/getting-started/the-sx-prop/
+function LoginModal({ openLoginModal, setOpenLoginModal, setLoggedIn }) {
+    const [login, setLogin] = useState(true);
 
     const handleClose = () => {
         setOpenLoginModal(false);
     }
-
-    const handleChange = (e) => {
-        setValue(Number(e.target.id[e.target.id.length-1]));
-      };
-
 
     return (
         <Modal
@@ -67,24 +22,17 @@ function LoginModal({ openLoginModal, setOpenLoginModal, setLoggedIn, ...props }
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
-            <Stack
+            <Box
+                className="loginModal__box"
                 component="form"
-                sx={style}
-                spacing={2}
+                sx={{ '& .MuiTextField-root': { my: 1, width: '30ch' }, }}
                 noValidate
                 autoComplete="off"
             >
-                <Tabs value={value} onChange={handleChange} aria-label="Log in and create account tabs">
-                    <Tab label="Log In"  {...a11yProps(0)} />
-                    <Tab label="Create Account" {...a11yProps(1)} />
-                </Tabs>
-                <TabPanel value={value} index={0}>
-                    <LoginAccountForm setOpenLoginModal={setOpenLoginModal} setLoggedIn={setLoggedIn} />
-                </TabPanel>
-                <TabPanel value={value} index={1}>
-                    <CreateAccountForm setOpenLoginModal={setOpenLoginModal} setLoggedIn={setLoggedIn} />
-                </TabPanel>
-            </Stack>
+                {login ? <LoginAccountForm setOpenLoginModal={setOpenLoginModal} setLoggedIn={setLoggedIn} /> :
+                    <CreateAccountForm setOpenLoginModal={setOpenLoginModal} setLoggedIn={setLoggedIn} />}
+                <div onClick={() => setLogin(!login)}>{login ? "Don't have an Account? Sign up Instead" : "Already a member? Log in"}</div>
+            </Box>
         </Modal>
     );
 }

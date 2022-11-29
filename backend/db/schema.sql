@@ -6,8 +6,8 @@ CREATE DATABASE ai_art;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY, 
-    username TEXT NOT NULL,
-    email TEXT NOT NULL,
+    username TEXT NOT NULL UNIQUE,
+    email TEXT NOT NULL UNIQUE,
     password TEXT NOT NULL,
     pic TEXT NOT NULL
 );

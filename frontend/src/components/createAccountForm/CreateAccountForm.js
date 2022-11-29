@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import './CreateAccountForm.scss'
 
@@ -60,12 +59,7 @@ function CreateAccountForm({ setOpenLoginModal, setLoggedIn }) {
     }
 
     return (
-        <Box
-            component="form"
-            sx={{ '& .MuiTextField-root': { my: 1, width: '30ch' }, }}
-            noValidate
-            autoComplete="off"
-        >
+        <div>
             <Typography className='loginModal__title' id="modal-modal-title" variant="h6" component="h2">
                 Create an account:
             </Typography>
@@ -89,7 +83,7 @@ function CreateAccountForm({ setOpenLoginModal, setLoggedIn }) {
                 onBlur={validatePassword} />
 
             <Button variant="contained" onClick={e => createUser(e)}>Create account</Button>
-        </Box>
+        </div>
     );
 }
 
