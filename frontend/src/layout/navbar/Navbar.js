@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import './Navbar.scss'
+import Cookies from 'universal-cookie';
 
 function Navbar({ setOpenLoginModal, loggedIn, setLoggedIn }) {
     const [active, setActive] = useState(false)
 
     const logOut = ()=>{
         console.log('Logged out')
-        //delete accessToken from localStorage
-        localStorage.removeItem('accessToken')
+        const cookies = new Cookies();
+        cookies.remove('accessToken')
+        //document.cookie = "accessToken=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         setLoggedIn(false);
     }
 

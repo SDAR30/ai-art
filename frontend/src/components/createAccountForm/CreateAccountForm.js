@@ -4,13 +4,14 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import './CreateAccountForm.scss'
 
-function CreateAccountForm({ setOpenLoginModal, setLoggedIn }) {
+function CreateAccountForm({ setOpenLoginModal, setLoggedIn, setLoginMessage}) {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('');
     const [usernameError, setUsernameError] = useState(false)
     const [emailError, setEmailError] = useState(false)
     const [passwordError, setPasswordError] = useState(false)
+    const [formMessage, setFormMessage] = useState('');
 
     const validateUsername = () => {
         if (username.length < 4) {
@@ -46,11 +47,25 @@ function CreateAccountForm({ setOpenLoginModal, setLoggedIn }) {
         fetch('http://localhost:3333/users', reqOptions).then(res => res.json())
             .then(data => {
                 console.log('IN CreateUser fetch, data:', data)
+
+                if(data.status === 'error'){
+                    // rough way to do this
+                    if(data.message.includes('users_username_key')){
+                        setFormMessage('Please choose another username. This one is already taken.');
+                    } else if (data.message.includes('users_email_key')){
+                        setFormMessage('Please choose another email. This one is already taken.');
+                    } else if (data.message.includes('Password must be')){
+                        setFormMessage(data.message);
+                    }
+                    throw data.message;
+                } 
+
+                setLoginMessage('Your account has been created!')
                 setUsername('')
                 setEmail('')
                 setPassword('')
                 setOpenLoginModal(false)
-                localStorage.setItem('accessToken', data.accessToken);
+                document.cookie = 'accessToken=' + data.accessToken;
                 setLoggedIn(true)
             }).catch(err => {
                 console.log('catching error in createUser in CreateAccountForm')
@@ -59,10 +74,15 @@ function CreateAccountForm({ setOpenLoginModal, setLoggedIn }) {
     }
 
     return (
-        <div>
+        <>
             <Typography className='loginModal__title' id="modal-modal-title" variant="h6" component="h2">
                 Create an account:
             </Typography>
+            {formMessage && 
+            <div className="form__errorText" style={{"color" : "red"}}>
+                {formMessage}
+            </div>
+            }
 
             <TextField className='loginModal__textfield' id="outlined-basic-username"
                 label="Username" variant="outlined" required
@@ -70,7 +90,7 @@ function CreateAccountForm({ setOpenLoginModal, setLoggedIn }) {
                 error={usernameError} helperText={usernameError && "username must be at least 4 characters long"}
                 onBlur={validateUsername} />
 
-            <TextField className='loginModal__textfield' id="outlined-basic-email"
+            <TextField className='loginModal__textfield' id="outddddlined-basic-email"
                 label="Email" variant="outlined" required
                 onChange={(e) => setEmail(e.target.value)} value={email}
                 error={emailError} helperText={emailError ? "Please enter a valid email" : ""}
@@ -83,7 +103,7 @@ function CreateAccountForm({ setOpenLoginModal, setLoggedIn }) {
                 onBlur={validatePassword} />
 
             <Button variant="contained" onClick={e => createUser(e)}>Create account</Button>
-        </div>
+        </>
     );
 }
 

@@ -28,33 +28,33 @@ users.get('/:id', async (req, res) => {
 
 users.post('/login', async (req, res) => {
     try {
-        let {username, password} = req.body;
-        const user = await db.one('SELECT * FROM users WHERE username = $1', [username])
+        let { username, password } = req.body;
+        const user = await db.oneOrNone('SELECT * FROM users WHERE username = $1', [username])
 
         console.log('new user object:')
         console.log(user)
 
-        if(!user){
-            res.status(401).send({error: 'username is not correct'})
+        if (!user) {
+            res.status(401).send({ success: false, error: true, message: "No such user exists" })
             return;
         }
 
         //compare given password used to log in, with hashed password in stored database
         const validPassword = await bcrypt.compare(password, user.password)
 
-        if(!validPassword){
-            res.status(401).send({error: 'invalid password'})
+        if (!validPassword) {
+            res.status(401).send({ success: false, error: true, message: "Incorrect password" })
             return;
         }
 
-        if(user && validPassword){
+        if (user && validPassword) {
             let data = jwtTokens(user);
             res.json(data)
         }
 
     } catch (error) {
         console.log(error)
-        res.send({status: 'error', message: error.message})
+        res.send({ status: 'error', message: error.message })
     }
 })
 
@@ -64,6 +64,10 @@ users.post('/', async (req, res) => {
 
         if (username.length < 4) {
             throw { message: 'username must be 4 or more characters' }
+        }
+
+        if (password.length < 6) {
+            throw { message: 'password must be at least 6 characters' }
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -76,12 +80,12 @@ users.post('/', async (req, res) => {
         console.log(user)
 
         if (user) { //if user properly created, generate JWT Token
-            let data = jwtTokens(user); //data constains {refreshtoken, accesstoken}
+            let data = jwtTokens(user); //data constains {refreshtoken: 'eyfeafasdfa...', accesstoken: 'eafsdfae...'}
             res.json(data);
         }
 
     } catch (err) {
-        res.status(500).send(err)
+        res.status(500).send({ status: 'error', message: err.message })
     }
 })
 

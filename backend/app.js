@@ -14,6 +14,8 @@ app.use(express.json())
 
 const imagesController = require('./controllers/images')
 const usersController = require('./controllers/users')
+const accountsController = require('./controllers/accounts')
+
 
 // ROUTES
 app.get("/", (req, res) => {
@@ -22,6 +24,7 @@ app.get("/", (req, res) => {
 
 //CONTROLLERS
 app.use('/images', imagesController);
-app.use('/users', usersController)
+app.use('/users', usersController);
+app.use('/accounts', accountsController);
 
 module.exports = app;

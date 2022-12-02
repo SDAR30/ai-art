@@ -3,11 +3,12 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-function LoginAccountForm({setOpenLoginModal, setLoggedIn}) {
+function LoginAccountForm({setOpenLoginModal, setLoggedIn, setLoginMessage}) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('');
     const [usernameError, setUsernameError] = useState(false)
     const [passwordError, setPasswordError] = useState(false)
+    const [formMessage, setFormMessage] = useState('');
 
     const validateUsername = () => {
         if (username.length < 4) {
@@ -35,19 +36,25 @@ function LoginAccountForm({setOpenLoginModal, setLoggedIn}) {
         fetch('http://localhost:3333/users/login', reqOptions)
         .then(response => response.json())
         .then(data => {
+            
+            if(data.error){
+                console.log('login NOT succesful')
+                setFormMessage(data.message)
+                throw data.message;
+            } 
 
             console.log('login succesful')
-            if(!data) console.log('no access token')
-
+            setLoginMessage('You have logged in!')
             setUsername('');
             setPassword('');
             setOpenLoginModal(false);
             
-            // save token to local storage
-            localStorage.setItem('accessToken', data.accessToken);
+            // save token to cookie
+            document.cookie = 'accessToken=' + data.accessToken;
             setLoggedIn(true);
             
         }).catch(error => {
+            console.log('inside catch of loginAccountForm')
             console.log(error);
         })
 
@@ -58,6 +65,9 @@ function LoginAccountForm({setOpenLoginModal, setLoggedIn}) {
             <Typography className='loginModal__title' id="modal-modal-title" variant="h6" component="h2">
                 Log In:
             </Typography>
+            <div className="form__errorText" style={{"color" : "red"}}>
+                {formMessage}
+            </div>
 
             <TextField className='loginModal__textfield' id="outlined-basic-username"
                 label="Username" variant="outlined" required

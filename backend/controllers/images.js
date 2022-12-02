@@ -2,6 +2,15 @@ const images = require('express').Router();
 
 const db = require('../db/index');
 
+images.get('/authenticate', async (req, res) => {
+    try {
+        console.log(req.headers.authorization);
+        res.send({});
+    } catch (error) {
+        res.send('error')
+    }
+})
+
 images.get('/', async (req, res) => {
     let { min = 1, max = 999999999, limit = 27 } = req.query;
     limit = Number(limit)
@@ -23,5 +32,7 @@ images.get('/:id', async (req, res) => {
         res.status(500).send('Error occured: ', error)
     }
 })
+
+
 
 module.exports = images;
