@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import { apiURL } from "../../utils/apiURL"
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -7,6 +8,7 @@ import UserContext from '../../UserContext';
 import { useCookies } from "react-cookie";
 
 function CreateAccountForm({ setOpenLoginModal, setLoginMessage }) {
+    const URL = apiURL();
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('');
@@ -14,8 +16,8 @@ function CreateAccountForm({ setOpenLoginModal, setLoginMessage }) {
     const [emailError, setEmailError] = useState(false)
     const [passwordError, setPasswordError] = useState(false)
     const [formMessage, setFormMessage] = useState('');
-    const [, setCookie] = useCookies('token'); 
-    const {setUser} = useContext(UserContext)
+    const [, setCookie] = useCookies('token');
+    const { setUser } = useContext(UserContext)
 
     const validateUsername = () => {
         if (username.length < 4) {
@@ -48,7 +50,7 @@ function CreateAccountForm({ setOpenLoginModal, setLoginMessage }) {
             headers: { 'Content-Type': 'application/json', }
         }
 
-        fetch('http://localhost:3333/users', reqOptions).then(res => res.json())
+        fetch(`${URL}/users`, reqOptions).then(res => res.json())
             .then(data => {
                 console.log('IN CreateUser fetch, data:', data)
 
@@ -75,8 +77,9 @@ function CreateAccountForm({ setOpenLoginModal, setLoginMessage }) {
                 //useContext
                 setCookie('token', data.accessToken);
                 setUser({
-                    username: 'test2 new CreatedUsernamee',
-                    email: 'test2 email@email.com',
+                    username: data.user.username,
+                    email: data.user.email,
+                    id: data.user.id,
                     token: data.accessToken
                 })
 

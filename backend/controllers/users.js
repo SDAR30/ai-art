@@ -48,8 +48,8 @@ users.post('/login', async (req, res) => {
         }
 
         if (user && validPassword) {
-            let data = jwtTokens(user);
-            res.json(data)
+            const {accessToken, refreshToken} = jwtTokens(user);
+            res.json({user, accessToken, refreshToken})
         }
 
     } catch (error) {
@@ -80,8 +80,8 @@ users.post('/', async (req, res) => {
         console.log(user)
 
         if (user) { //if user properly created, generate JWT Token
-            let data = jwtTokens(user); //data constains {refreshtoken: 'eyfeafasdfa...', accesstoken: 'eafsdfae...'}
-            res.json(data);
+            const {accessToken, refreshToken} = jwtTokens(user);
+            res.json({user, accessToken, refreshToken});
         }
 
     } catch (err) {

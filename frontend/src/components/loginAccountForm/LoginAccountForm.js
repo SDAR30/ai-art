@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import { apiURL } from "../../utils/apiURL"
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -6,6 +7,7 @@ import UserContext from '../../UserContext';
 import { useCookies } from "react-cookie";
 
 function LoginAccountForm({setOpenLoginModal, setLoginMessage}) {
+    const URL = apiURL();
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('');
     const [usernameError, setUsernameError] = useState(false)
@@ -36,8 +38,7 @@ function LoginAccountForm({setOpenLoginModal, setLoginMessage}) {
             headers: { 'Content-Type': 'application/json',},
             body: JSON.stringify({username, password})
         }
-
-        fetch('http://localhost:3333/users/login', reqOptions)
+        fetch(`${URL}/users/login`, reqOptions)
         .then(response => response.json())
         .then(data => {
             
@@ -56,8 +57,9 @@ function LoginAccountForm({setOpenLoginModal, setLoginMessage}) {
             //useContext
             setCookie('token', data.accessToken);
             setUser({
-                username: 'test2 LoggedIn usernamee',
-                email: 'test2 login@email.com',
+                username: data.user.username,
+                email: data.user.email,
+                id: data.user.id,
                 token: data.accessToken
             })
             

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from "react-router-dom";
+import { apiURL } from "../../utils/apiURL"
 import './ImageView.scss'
 
 function ImageView(props) {
+    const URL = apiURL();
     let params = useParams();
     const location = useLocation();
     const [image, setImage] = useState({});
@@ -13,13 +15,13 @@ function ImageView(props) {
             console.log("already have image, no need to fetch")
             setImage(location.state?.image)
         } else {
-            const imageURL = 'https://ai-art-backend.adaptable.app/images/' + imageID
+            const imageURL = `${URL}/images/${imageID}`
             console.log("don't have image, go fetch image")
             fetch(imageURL).then(res => res.json())
                 .then(data => setImage(data))
         }
 
-    }, [location.state?.image, imageID])
+    }, [location.state?.image, imageID, URL])
 
 
     return (

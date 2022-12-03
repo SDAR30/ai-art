@@ -3,18 +3,19 @@ import FilterBar from '../filterBar/FilterBar';
 import ImageCard from '../imageCard/ImageCard';
 import SearchBar from '../searchBar/SearchBar';
 import './ImageList.scss'
+import { apiURL } from "../../utils/apiURL"
 
 const ImageList = () => {
+    const URL = apiURL();
     const [images, setImages] = useState([])
     const [searchTerm, setSearchTerm] = useState('')
 
     useEffect(() => {
-        const URL = 'https://ai-art-backend.adaptable.app/images'
-        fetch(URL).then(res => res.json())
+        fetch(`${URL}/images`).then(res => res.json())
             .then(data => {
                 setImages(data)
             })
-    }, [])
+    }, [URL])
 
     let filteredImages = images;
     if (searchTerm) {
