@@ -7,7 +7,7 @@ import LoginAccountForm from "../loginAccountForm/LoginAccountForm";
 import CreateAccountForm from '../createAccountForm/CreateAccountForm';
 
 
-function LoginModal({ openLoginModal, setOpenLoginModal, setLoggedIn, setLoginMessage }) {
+function LoginModal({ openLoginModal, setOpenLoginModal, setLoginMessage }) {
     const [login, setLogin] = useState(true);
 
     const handleClose = () => {
@@ -29,8 +29,8 @@ function LoginModal({ openLoginModal, setOpenLoginModal, setLoggedIn, setLoginMe
                 noValidate
                 autoComplete="off"
             >
-                {login ? <LoginAccountForm setOpenLoginModal={setOpenLoginModal} setLoggedIn={setLoggedIn} setLoginMessage={setLoginMessage}/> :
-                    <CreateAccountForm setOpenLoginModal={setOpenLoginModal} setLoggedIn={setLoggedIn}  setLoginMessage={setLoginMessage}/>}
+                {login ? <LoginAccountForm setOpenLoginModal={setOpenLoginModal} setLoginMessage={setLoginMessage}/> :
+                    <CreateAccountForm setOpenLoginModal={setOpenLoginModal}  setLoginMessage={setLoginMessage}/>}
                 <div onClick={() => setLogin(!login)}>{login ? "Don't have an Account? Sign up Instead" : "Already a member? Log in"}</div>
             </Box>
         </Modal>

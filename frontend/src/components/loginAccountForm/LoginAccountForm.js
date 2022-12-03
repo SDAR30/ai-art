@@ -1,14 +1,18 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import UserContext from '../../UserContext';
+import { useCookies } from "react-cookie";
 
-function LoginAccountForm({setOpenLoginModal, setLoggedIn, setLoginMessage}) {
+function LoginAccountForm({setOpenLoginModal, setLoginMessage}) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('');
     const [usernameError, setUsernameError] = useState(false)
     const [passwordError, setPasswordError] = useState(false)
     const [formMessage, setFormMessage] = useState('');
+    const [, setCookie] = useCookies('token');
+    const {setUser} = useContext(UserContext);
 
     const validateUsername = () => {
         if (username.length < 4) {
@@ -48,10 +52,18 @@ function LoginAccountForm({setOpenLoginModal, setLoggedIn, setLoginMessage}) {
             setUsername('');
             setPassword('');
             setOpenLoginModal(false);
+
+            //useContext
+            setCookie('token', data.accessToken);
+            setUser({
+                username: 'test2 LoggedIn usernamee',
+                email: 'test2 login@email.com',
+                token: data.accessToken
+            })
             
             // save token to cookie
-            document.cookie = 'accessToken=' + data.accessToken;
-            setLoggedIn(true);
+            //document.cookie = 'accessToken=' + data.accessToken;
+            //setLoggedIn(true);
             
         }).catch(error => {
             console.log('inside catch of loginAccountForm')

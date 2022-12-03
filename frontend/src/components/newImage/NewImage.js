@@ -1,36 +1,45 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './NewImage.scss'
 import { useNavigate } from 'react-router-dom';
-import { getCookie } from '../../utils/cookieUtils';
+import UserContext from '../../UserContext';
 
-function NewImage({ loggedIn }) {
+
+function NewImage() {
     let navigate = useNavigate();
+    const {user} = useContext(UserContext)
 
-    useEffect(() => {
-        const cookie = getCookie('accessToken');
-        console.log('cookie: ', cookie)
-        const requestOptions = {
-            method: 'GET',
-            headers: { 'Authorization': `Bearer ${cookie}` }
+    useEffect(() => {//check if user is logged in or not
+      debugger
+        if (user === null) {
+          navigate('/');
         }
+      }, [navigate, user]);
 
-        fetch('http://localhost:3333/images/authenticate', requestOptions)
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    console.log('date . error')
-                    navigate('/');
-                } else {
-                    console.log('Youre logged in')
-                }
-            }).catch(error => {
-                console.log('inside catch: ')
-                console.log(error);
-                navigate('/')
-            })
+    // useEffect(() => {
+    //     const cookie = getCookie('accessToken');
+    //     console.log('cookie: ', cookie)
+    //     const requestOptions = {
+    //         method: 'GET',
+    //         headers: { 'Authorization': `Bearer ${cookie}` }
+    //     }
+
+    //     fetch('http://localhost:3333/images/authenticate', requestOptions)
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             if (data.error) {
+    //                 console.log('date . error')
+    //                 navigate('/');
+    //             } else {
+    //                 console.log('Youre logged in')
+    //             }
+    //         }).catch(error => {
+    //             console.log('inside catch: ')
+    //             console.log(error);
+    //             navigate('/')
+    //         })
 
 
-    }, [navigate])
+    // }, [navigate])
 
     return (
         <div>

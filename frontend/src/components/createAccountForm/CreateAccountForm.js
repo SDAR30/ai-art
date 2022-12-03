@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import './CreateAccountForm.scss'
+import UserContext from '../../UserContext';
+import { useCookies } from "react-cookie";
 
-function CreateAccountForm({ setOpenLoginModal, setLoggedIn, setLoginMessage}) {
+function CreateAccountForm({ setOpenLoginModal, setLoginMessage }) {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('');
@@ -12,6 +14,8 @@ function CreateAccountForm({ setOpenLoginModal, setLoggedIn, setLoginMessage}) {
     const [emailError, setEmailError] = useState(false)
     const [passwordError, setPasswordError] = useState(false)
     const [formMessage, setFormMessage] = useState('');
+    const [, setCookie] = useCookies('token'); 
+    const {setUser} = useContext(UserContext)
 
     const validateUsername = () => {
         if (username.length < 4) {
@@ -48,25 +52,34 @@ function CreateAccountForm({ setOpenLoginModal, setLoggedIn, setLoginMessage}) {
             .then(data => {
                 console.log('IN CreateUser fetch, data:', data)
 
-                if(data.status === 'error'){
+                if (data.status === 'error') {
                     // rough way to do this
-                    if(data.message.includes('users_username_key')){
+                    if (data.message.includes('users_username_key')) {
                         setFormMessage('Please choose another username. This one is already taken.');
-                    } else if (data.message.includes('users_email_key')){
+                    } else if (data.message.includes('users_email_key')) {
                         setFormMessage('Please choose another email. This one is already taken.');
-                    } else if (data.message.includes('Password must be')){
+                    } else if (data.message.includes('Password must be')) {
                         setFormMessage(data.message);
                     }
                     throw data.message;
-                } 
+                }
 
                 setLoginMessage('Your account has been created!')
                 setUsername('')
                 setEmail('')
                 setPassword('')
                 setOpenLoginModal(false)
-                document.cookie = 'accessToken=' + data.accessToken;
-                setLoggedIn(true)
+                //document.cookie = 'accessToken=' + data.accessToken;
+                //setLoggedIn(true)
+
+                //useContext
+                setCookie('token', data.accessToken);
+                setUser({
+                    username: 'test2 new CreatedUsernamee',
+                    email: 'test2 email@email.com',
+                    token: data.accessToken
+                })
+
             }).catch(err => {
                 console.log('catching error in createUser in CreateAccountForm')
                 console.log(err)
@@ -78,10 +91,10 @@ function CreateAccountForm({ setOpenLoginModal, setLoggedIn, setLoginMessage}) {
             <Typography className='loginModal__title' id="modal-modal-title" variant="h6" component="h2">
                 Create an account:
             </Typography>
-            {formMessage && 
-            <div className="form__errorText" style={{"color" : "red"}}>
-                {formMessage}
-            </div>
+            {formMessage &&
+                <div className="form__errorText" style={{ "color": "red" }}>
+                    {formMessage}
+                </div>
             }
 
             <TextField className='loginModal__textfield' id="outlined-basic-username"
