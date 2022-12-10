@@ -9,7 +9,6 @@ function NewImage() {
     const {user} = useContext(UserContext)
 
     useEffect(() => {//check if user is logged in or not
-      debugger
         if (user === null) {
           navigate('/');
         }
