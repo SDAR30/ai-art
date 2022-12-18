@@ -54,8 +54,11 @@ function LoginAccountForm({setOpenLoginModal, setLoginMessage}) {
             setPassword('');
             setOpenLoginModal(false);
 
-            //useContext
+            
             setCookie('token', data.accessToken);
+            setCookie('user', data.user);
+            
+            //useContext
             setUser({
                 username: data.user.username,
                 email: data.user.email,

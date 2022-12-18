@@ -2,10 +2,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import './NewImage.scss'
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../../UserContext';
-
+import { useCookies } from 'react-cookie';
 
 function NewImage() {
   let navigate = useNavigate();
+  const [cookies] = useCookies('token');
   const { user } = useContext(UserContext)
   const date = new Date();
   const currentDate = date.getUTCFullYear() + '-' + (date.getUTCMonth() + 1) + '-' + date.getUTCDate()
@@ -16,7 +17,7 @@ function NewImage() {
     prompt: "",
     date: currentDate,
     url: '',
-    user_id: user ? user.id : null
+    user_id: cookies.token ? cookies.user.id : 0
   })
 
   const handleChange = (e) => {
@@ -25,6 +26,7 @@ function NewImage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(cookies.user)
     debugger
 
   }

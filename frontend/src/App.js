@@ -22,7 +22,7 @@ function App() {
   const [loginMessage, setLoginMessage] = useState('');
   const [cookies] = useCookies('token');
   const [user, setUser] = useState(cookies.token ? {token: cookies.token} : null);
-
+  console.log('user context in app: ', user)
   useEffect(() => {
 
     setTimeout(function () {
