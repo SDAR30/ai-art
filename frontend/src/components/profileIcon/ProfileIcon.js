@@ -35,7 +35,7 @@ export default function ProfileIcon({setActive}) {
         aria-controls={open ? 'demo-positioned-menu' : undefined} aria-haspopup="true" aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        <Avatar sx={{ bgcolor: 'lawngreen' }}>{user.username[0]}</Avatar>
+        <Avatar sx={{ bgcolor: 'lawngreen' }}>{user?.username ? user.username[0] : "?"}</Avatar>
       </Button>
       <Menu
         id="demo-positioned-menu"

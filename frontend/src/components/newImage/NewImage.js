@@ -1,50 +1,52 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './NewImage.scss'
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../../UserContext';
 
 
 function NewImage() {
-    let navigate = useNavigate();
-    const {user} = useContext(UserContext)
+  let navigate = useNavigate();
+  const { user } = useContext(UserContext)
+  const date = new Date();
+  const currentDate = date.getUTCFullYear() + '-' + (date.getUTCMonth() + 1) + '-' + date.getUTCDate()
+  const [image, setImage] = useState({
+    title: "",
+    ai: "",
+    instructions: "",
+    prompt: "",
+    date: currentDate,
+    url: '',
+    user_id: user ? user.id : null
+  })
 
-    useEffect(() => {//check if user is logged in or not
-        if (user === null) {
-          navigate('/');
-        }
-      }, [navigate, user]);
+  const handleChange = (e) => {
+    setImage({ ...image, [e.target.id]: e.target.value });
+  };
 
-    // useEffect(() => {
-    //     const cookie = getCookie('accessToken');
-    //     console.log('cookie: ', cookie)
-    //     const requestOptions = {
-    //         method: 'GET',
-    //         headers: { 'Authorization': `Bearer ${cookie}` }
-    //     }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    debugger
 
-    //     fetch('http://localhost:3333/images/authenticate', requestOptions)
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             if (data.error) {
-    //                 console.log('date . error')
-    //                 navigate('/');
-    //             } else {
-    //                 console.log('Youre logged in')
-    //             }
-    //         }).catch(error => {
-    //             console.log('inside catch: ')
-    //             console.log(error);
-    //             navigate('/')
-    //         })
+  }
 
+  useEffect(() => {//check if user is logged in or not
+    if (user === null) {
+      navigate('/');
+    }
+  }, [navigate, user]);
 
-    // }, [navigate])
-
-    return (
-        <div>
-            New Image
-        </div>
-    );
+  return (
+    <div>
+      <form onSubmit={handleSubmit} className='newImageform'>
+        <input id='title' placeholder='enter title' value={image.title} onChange={handleChange} maxLength="50" required />
+        <input id='ai' placeholder='AI' value={image.ai} onChange={handleChange} maxLength="50" required />
+        <textarea id='instructions' placeholder='instructions' value={image.instructions} onChange={handleChange} maxLength="50" required />
+        <textarea id='prompt' placeholder='prompt' value={image.prompt} onChange={handleChange} maxLength="50" required />
+        <input id='url' placeholder='url' value={image.url} onChange={handleChange} maxLength="50" required />
+        <button type='submit'>Submit</button>
+      </form>
+    </div>
+  );
 }
 
 export default NewImage;
