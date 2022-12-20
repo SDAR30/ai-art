@@ -14,6 +14,7 @@
   "author": "Shoaib Dar",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.1278.0",
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",

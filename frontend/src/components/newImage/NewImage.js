@@ -1,15 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './NewImage.scss'
+import { apiURL } from "../../utils/apiURL"
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../../UserContext';
 import { useCookies } from 'react-cookie';
 
 function NewImage() {
+  const URL = apiURL();
   let navigate = useNavigate();
   const [cookies] = useCookies('token');
   const { user } = useContext(UserContext)
   const date = new Date();
   const currentDate = date.getUTCFullYear() + '-' + (date.getUTCMonth() + 1) + '-' + date.getUTCDate()
+  const [file, setFile] = useState()
+  const [imageFile, setImageFile] = useState('')
   const [image, setImage] = useState({
     title: "",
     ai: "",
@@ -37,6 +41,28 @@ function NewImage() {
     }
   }, [navigate, user]);
 
+  const addPhoto = async event => {
+    event.preventDefault()
+
+    //get secure url from backend
+    fetch(`${URL}/s3url`, {}
+    ).then(res => res.json()).then(data => {
+      console.log('url taken from s3: ', data.url)
+
+      //post image directly to s3 bucket
+      fetch(data.url, {
+        method: "PUT",
+        body: file
+      }).then(res => {
+        console.log(res)
+      })
+
+      //post image to frontend
+      setImageFile(data.url.split('?')[0])
+      debugger
+    })
+  }
+
   return (
     <div>
       <form onSubmit={handleSubmit} className='newImageform'>
@@ -45,6 +71,11 @@ function NewImage() {
         <textarea id='instructions' placeholder='instructions' value={image.instructions} onChange={handleChange} maxLength="50" required />
         <textarea id='prompt' placeholder='prompt' value={image.prompt} onChange={handleChange} maxLength="50" required />
         <input id='url' placeholder='url' value={image.url} onChange={handleChange} maxLength="50" required />
+        <div>
+          <input onChange={e => setFile(e.target.files[0])} type="file" accept="image/*"></input>
+          <button onClick={addPhoto}>Add Photo</button>
+          <img src={imageFile ? imageFile : ''} alt="upoad to see"></img>
+        </div>
         <button type='submit'>Submit</button>
       </form>
     </div>
