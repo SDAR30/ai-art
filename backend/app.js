@@ -1,21 +1,19 @@
-const express = require('express');
 const cors = require("cors");
+const express = require('express');
+const imagesController = require('./controllers/images')
+const usersController = require('./controllers/users')
+const accountsController = require('./controllers/accounts')
 const { generateUploadURL } = require('./s3')
 
 const app = express();
 
+//MIDDLEWARE
 app.use(cors());
-
-if(process.env.NODE_ENV !== 'production'){
-  require('dotenv').config();
-}
-
-// MIDDLEWARE
 app.use(express.json())
 
-const imagesController = require('./controllers/images')
-const usersController = require('./controllers/users')
-const accountsController = require('./controllers/accounts')
+// if(process.env.NODE_ENV !== 'production'){
+//   require('dotenv').config();
+// }
 
 // ROUTES
 app.get("/", (req, res) => {

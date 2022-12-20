@@ -12,7 +12,6 @@ function NewImage() {
   const { user } = useContext(UserContext)
   const date = new Date();
   const currentDate = date.getUTCFullYear() + '-' + (date.getUTCMonth() + 1) + '-' + date.getUTCDate()
-  const [file, setFile] = useState()
   const [imageFile, setImageFile] = useState('')
   const [image, setImage] = useState({
     title: "",
@@ -42,7 +41,7 @@ function NewImage() {
   }, [navigate, user]);
 
   const addPhoto = async event => {
-    event.preventDefault()
+    const file = event.target.files[0]
 
     //get secure url from backend
     fetch(`${URL}/s3url`, {}
@@ -62,7 +61,7 @@ function NewImage() {
       })
 
       //post image to frontend
-      setImageFile(data.url.split('?')[0])
+      //setImageFile(data.url.split('?')[0])
       debugger
     })
   }
@@ -76,8 +75,7 @@ function NewImage() {
         <textarea id='prompt' placeholder='prompt' value={image.prompt} onChange={handleChange} maxLength="50" required />
         <input id='url' placeholder='url' value={image.url} onChange={handleChange} maxLength="50" required />
         <div>
-          <input onChange={e => setFile(e.target.files[0])} type="file" accept="image/*"></input>
-          <button onClick={addPhoto}>Add Photo</button>
+          <input onChange={addPhoto} type="file" accept="image/*"></input>
           <img src={imageFile ? imageFile : ''} alt="upoad to see"></img>
         </div>
         <button type='submit'>Submit</button>
