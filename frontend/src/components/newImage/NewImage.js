@@ -52,9 +52,13 @@ function NewImage() {
       //post image directly to s3 bucket
       fetch(data.url, {
         method: "PUT",
+        headers: {
+          "Content-Type": "multipart/form-data"
+        },
         body: file
       }).then(res => {
-        console.log(res)
+        setImageFile(data.url.split('?')[0])
+        console.log('res: ', res)
       })
 
       //post image to frontend
