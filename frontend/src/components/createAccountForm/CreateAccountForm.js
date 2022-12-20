@@ -75,8 +75,8 @@ function CreateAccountForm({ setOpenLoginModal, setLoginMessage }) {
                 //setLoggedIn(true)
 
                 //useContext
-                setCookie('token', data.accessToken);
-                setCookie('user', data.user);
+                setCookie('token', data.accessToken, { path: '/' });
+                setCookie('user', data.user, { path: '/' });
                 setUser({
                     username: data.user.username,
                     email: data.user.email,

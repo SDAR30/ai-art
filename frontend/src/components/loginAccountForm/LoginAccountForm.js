@@ -55,8 +55,8 @@ function LoginAccountForm({setOpenLoginModal, setLoginMessage}) {
             setOpenLoginModal(false);
 
             
-            setCookie('token', data.accessToken);
-            setCookie('user', data.user);
+            setCookie('token', data.accessToken, { path: '/' });
+            setCookie('user', data.user, { path: '/' });
             
             //useContext
             setUser({

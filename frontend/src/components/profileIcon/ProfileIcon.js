@@ -23,11 +23,10 @@ export default function ProfileIcon({ setActive }) {
 
   const logOut = () => {
     setUser(null);
-    
-    removeCookie('token');
-    removeCookie('user');
+
+    removeCookie('token', { path: '/' });
+    removeCookie('user', { path: '/' });
     console.log("Cookies removed: Current cookies: ", cookies)
-    //removeCookie('user'); //not sure if this is needed
     console.log('Logged out')
     //document.cookie = "accessToken=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     //setLoggedIn(false);
