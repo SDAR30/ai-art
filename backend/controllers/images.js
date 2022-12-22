@@ -12,11 +12,15 @@ images.get('/authenticate', async (req, res) => {
 })
 
 images.get('/', async (req, res) => {
-    let { min = 1, max = 999999999, limit = 27 } = req.query;
-    limit = Number(limit)
-    min = Number(min)
-    max = Number(max)
-    return res.json(await db.any('SELECT * FROM images WHERE id >= $1 AND id <= $2 LIMIT $3', [min, max, limit]))
+    try {
+        let { min = 1, max = 9999999, limit = 27 } = req.query;
+        limit = Number(limit)
+        min = Number(min)
+        max = Number(max)
+        return res.json(await db.any('SELECT * FROM images WHERE id >= $1 AND id <= $2 LIMIT $3', [min, max, limit]))
+    } catch (error) {
+        res.status(500).json({ success: false, error: true, message: error.message })
+    }
 })
 
 images.get('/:id', async (req, res) => {
@@ -27,12 +31,23 @@ images.get('/:id', async (req, res) => {
             return;
         }
         const image = await db.oneOrNone('SELECT * FROM images where id = $1', [imageID])
-        return image ? res.json(image) : res.status(422).send({success: false, error: true, message: "No image with that id"})
+        return image ? res.json(image) : res.status(422).send({ success: false, error: true, message: "No image with that id" })
     } catch (error) {
-        res.status(500).send('Error occured: ', error)
+        res.status(500).json({ success: false, error: true, message: error.message })
     }
 })
 
-
+images.post('/', async (req, res) => {
+    try {
+        console.log("req obj recieved: ", req.body)
+        const { title, ai, instructions, prompt, date, url, user_id } = req.body;
+        const newImage = await db.oneOrNone('INSERT INTO images (title, ai, instructions, prompt, date, url, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
+            [title, ai, instructions, prompt, date, url, user_id]);
+        console.log("new image created")
+        return newImage ? res.json(newImage) : res.status(422).send({ success: false, error: true, message: "failed to add image" })
+    } catch (error) {
+        res.status(500).json({ success: false, error: true, message: "missing some values" })
+    }
+})
 
 module.exports = images;

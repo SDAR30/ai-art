@@ -1,4 +1,4 @@
 node_modules
 .env
-sql_scripts.txt
 sql_scripts
+notes.txt

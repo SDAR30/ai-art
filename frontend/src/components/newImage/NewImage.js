@@ -29,8 +29,25 @@ function NewImage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(cookies.user)
-    debugger
+    console.log('user cookies: ', cookies.user)
+
+    //post image to backend
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(image)
+    }
+    fetch(`${URL}/images`, requestOptions).then(res => res.json()).then(data => {
+      //image posted to backend
+      //show success toast message
+      console.log('data: ', data)
+      navigate('/')
+    }).catch(err => {
+      //image failed to post to backend
+      //show error toast message
+      console.log(err)
+
+    })
 
   }
 
@@ -56,13 +73,13 @@ function NewImage() {
         },
         body: file
       }).then(res => {
-        setImageFile(data.url.split('?')[0])
+        //post image to appear on frontend
+        let url = data.url.split('?')[0];
+        setImageFile(url)
+        setImage({ ...image, url: url })
         console.log('res: ', res)
       })
-
-      //post image to frontend
-      //setImageFile(data.url.split('?')[0])
-      debugger
+     
     })
   }
 
@@ -73,9 +90,8 @@ function NewImage() {
         <input id='ai' placeholder='AI' value={image.ai} onChange={handleChange} maxLength="50" required />
         <textarea id='instructions' placeholder='instructions' value={image.instructions} onChange={handleChange} maxLength="50" required />
         <textarea id='prompt' placeholder='prompt' value={image.prompt} onChange={handleChange} maxLength="50" required />
-        <input id='url' placeholder='url' value={image.url} onChange={handleChange} maxLength="50" required />
         <div>
-          <input onChange={addPhoto} type="file" accept="image/*"></input>
+          <input onChange={addPhoto} type="file" accept="image/*" required></input>
           <img src={imageFile ? imageFile : ''} alt="upoad to see"></img>
         </div>
         <button type='submit'>Submit</button>
