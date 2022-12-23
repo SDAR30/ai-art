@@ -31,7 +31,7 @@ function ImageView(props) {
                 <div className='imageView'>
                     <div className='imageView__title'>{`Title: ${image.title}`}</div>
                     <div className='imageView__imageDiv'>
-                        <img src={image.url} alt="ai img" />
+                        <img className='imageView__image' src={image.url} alt="ai img" />
                     </div>
                     <div className='imageView__details'>
                         {`id: ${image.id}`} <br/>

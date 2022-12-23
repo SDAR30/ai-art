@@ -3,16 +3,13 @@ import './ImageCard.scss';
 import { Link } from "react-router-dom";
 
 function ImageCard({ image }) {
-    const { id, title, ai, url } = image;
+    const { id, title, url } = image;
 
     return (
         <div className='imageCard'>
             <Link className='imageCard__link' to={`/images/${id}`} state={{ image: image }}>
-                <div className='imageCard__title'>{`Title: ${title}`}</div>
-                {`ID: ${id} AI: ${ai}`}
-                <div className='imageCard__imageDiv'>
-                    <img src={url} alt="ai img" />
-                </div>
+                <img className="imageCard__image"src={url} alt="ai img" />
+                <div className="imageCard__overlay">{title}</div>
             </Link>
         </div>
     );

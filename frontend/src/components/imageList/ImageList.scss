@@ -8,5 +8,26 @@
     &__bar{
         display: flex;
     }
+
+    &__grid{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    &__column{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
     
 }
+@media only screen and (min-width: 420px) {
+    .imageList{
+        &__grid{
+            flex-direction: row;
+            
+        }
+
+    }
+  }
