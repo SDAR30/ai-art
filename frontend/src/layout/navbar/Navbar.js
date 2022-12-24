@@ -3,12 +3,46 @@ import { NavLink } from 'react-router-dom';
 import './Navbar.scss'
 import UserContext from '../../UserContext';
 import Button from '@mui/material/Button';
+import LoginIcon from '@mui/icons-material/Login';
 import ProfileIcon from '../../components/profileIcon/ProfileIcon';
+import AddCircle from '@mui/icons-material/AddCircle';
 
-
-function Navbar({ setOpenLoginModal }) {
+function Navbar({ setOpenLoginModal, isLoggedIn, setIsLoggedIn }) {
     const [active, setActive] = useState(false)
     const { user, setUser } = useContext(UserContext);
+    const styles ={
+        loginButton:{
+            borderRadius: '20px',
+            fontSize: '.8rem',
+            fontWeight: 'bold',
+            margin: '0 .5rem',
+            padding: '.2rem .5rem',
+            color: 'primary.contrastText',
+            '&:hover': {
+                backgroundColor: 'primary.main',
+                opacity: [0.9, 0.8, 0.7],
+            }
+        },
+        signupButton:{
+            borderRadius: '20px',
+            fontSize: '.8rem',
+            fontWeight: 'bold',
+            padding: '.2rem .5rem',
+            '&:hover': {
+                backgroundColor: 'background.paper',
+                opacity: [0.9, 0.8, 0.7],
+            }
+        }
+    }
+
+    const openLoginButton = () => {
+        setIsLoggedIn(false)
+        setOpenLoginModal(true)
+    }
+    const openSignupButton = () => {
+        setIsLoggedIn(true)
+        setOpenLoginModal(true)
+    }
 
     return (
         <div className="navbar">
@@ -25,8 +59,12 @@ function Navbar({ setOpenLoginModal }) {
             <div className="navbar__toggleIcon" onClick={() => setActive(!active)}>=</div>
 
             {!user ?
-                <Button className="navbar__loginButton" onClick={() => setOpenLoginModal(true)}> {"LOG IN"} </Button> :
-                <ProfileIcon setActive={setActive} setUser={setUser}/>
+                <div className="navbar__buttons">
+                    <Button  sx={styles.loginButton} className="navbar__loginButton" variant="contained" startIcon={<LoginIcon />} 
+                        onClick={openLoginButton}> {"LOG IN"} </Button>
+                    <Button sx={styles.signupButton} className="navbar__signupButton"  variant="outlined" endIcon={<AddCircle />} onClick={openSignupButton}> {"Sign up"} </Button>
+                </div> :
+                <ProfileIcon setActive={setActive} setUser={setUser} />
             }
 
         </div>

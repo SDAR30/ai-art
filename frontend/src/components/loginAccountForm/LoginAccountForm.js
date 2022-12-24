@@ -78,7 +78,7 @@ function LoginAccountForm({setOpenLoginModal, setLoginMessage}) {
     }
 
     return (
-        <div>
+        <>
             <Typography className='loginModal__title' id="modal-modal-title" variant="h6" component="h2">
                 Log In:
             </Typography>
@@ -99,7 +99,7 @@ function LoginAccountForm({setOpenLoginModal, setLoginMessage}) {
                 onBlur={validatePassword} />
 
             <Button variant="contained" onClick={e => loginUser(e)}>Log in</Button>
-        </div>
+        </>
     );
 }
 

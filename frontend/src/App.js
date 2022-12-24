@@ -20,6 +20,7 @@ function App() {
   const [openLoginModal, setOpenLoginModal] = useState(false)
   //const [loggedIn, setLoggedIn] = useState(getCookie('accessToken') ? true : false)
   const [loginMessage, setLoginMessage] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cookies] = useCookies('token');
   const [user, setUser] = useState(cookies.token ? {token: cookies.token} : null);
   console.log('user context in app: ', user)
@@ -35,8 +36,9 @@ function App() {
     <div className="App">
       <UserContext.Provider value={{ user, setUser }}>
         <Router>
-          <Navbar setOpenLoginModal={setOpenLoginModal} />
-          <LoginModal openLoginModal={openLoginModal} setOpenLoginModal={setOpenLoginModal} setLoginMessage={setLoginMessage} />
+          <Navbar setOpenLoginModal={setOpenLoginModal} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+          <LoginModal openLoginModal={openLoginModal} setOpenLoginModal={setOpenLoginModal} setLoginMessage={setLoginMessage} 
+            isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
           {loginMessage &&
             <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
               {loginMessage}

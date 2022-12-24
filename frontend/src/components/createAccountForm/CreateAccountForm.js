@@ -93,6 +93,7 @@ function CreateAccountForm({ setOpenLoginModal, setLoginMessage }) {
     return (
         <>
             <Typography className='loginModal__title' id="modal-modal-title" variant="h6" component="h2">
+                Join AI ART.  Explore incredible images made by AI and learn how they were generated.
                 Create an account:
             </Typography>
             {formMessage &&

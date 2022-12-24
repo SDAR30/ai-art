@@ -35,7 +35,7 @@ const ImageList = () => {
     const reOrderImages = images => {
         let reOrderedImages = [];
         for (let i = 0; i < numberOfColumns; i++) {
-            console.log(i)
+            //console.log(i)
             let j = i;
             while (images[j]) {
                 reOrderedImages.push(images[j]);
@@ -69,7 +69,7 @@ const ImageList = () => {
                 <FilterBar />
             </div>
             <div className='imageList__grid'>
-                {orderedImages.map(column => <div className='imageList__column'>{column.map(image => <ImageCard image={image} key={image.id} />)}</div>)}
+                {orderedImages.map((column,index) => <div className='imageList__column' key={index}>{column.map(image => <ImageCard image={image} key={image.id} />)}</div>)}
                 {/* {filteredorderedImages.map(image => <ImageCard image={image} key={image.id} />)} */}
             </div>
             {!orderedImages.length && <div className='imageList__noResults'>No results</div>}

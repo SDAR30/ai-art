@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './LoginModal.scss'
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
@@ -7,8 +7,8 @@ import LoginAccountForm from "../loginAccountForm/LoginAccountForm";
 import CreateAccountForm from '../createAccountForm/CreateAccountForm';
 
 
-function LoginModal({ openLoginModal, setOpenLoginModal, setLoginMessage }) {
-    const [login, setLogin] = useState(true);
+function LoginModal({ openLoginModal, setOpenLoginModal, setLoginMessage, isLoggedIn, setIsLoggedIn }) {
+    //const [login, setLogin] = useState(true);
 
     const handleClose = () => {
         setOpenLoginModal(false);
@@ -29,9 +29,9 @@ function LoginModal({ openLoginModal, setOpenLoginModal, setLoginMessage }) {
                 noValidate
                 autoComplete="off"
             >
-                {login ? <LoginAccountForm setOpenLoginModal={setOpenLoginModal} setLoginMessage={setLoginMessage}/> :
+                {!isLoggedIn ? <LoginAccountForm setOpenLoginModal={setOpenLoginModal} setLoginMessage={setLoginMessage}/> :
                     <CreateAccountForm setOpenLoginModal={setOpenLoginModal}  setLoginMessage={setLoginMessage}/>}
-                <div onClick={() => setLogin(!login)}>{login ? "Don't have an Account? Sign up Instead" : "Already a member? Log in"}</div>
+                <div onClick={() => setIsLoggedIn(!isLoggedIn)}>{isLoggedIn ? "Don't have an Account? Sign up Instead" : "Already a member? Log in"}</div>
             </Box>
         </Modal>
     );
