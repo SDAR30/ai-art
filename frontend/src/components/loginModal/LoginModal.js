@@ -29,9 +29,12 @@ function LoginModal({ openLoginModal, setOpenLoginModal, setLoginMessage, isLogg
                 noValidate
                 autoComplete="off"
             >
-                {!isLoggedIn ? <LoginAccountForm setOpenLoginModal={setOpenLoginModal} setLoginMessage={setLoginMessage}/> :
-                    <CreateAccountForm setOpenLoginModal={setOpenLoginModal}  setLoginMessage={setLoginMessage}/>}
-                <div onClick={() => setIsLoggedIn(!isLoggedIn)}>{isLoggedIn ? "Don't have an Account? Sign up Instead" : "Already a member? Log in"}</div>
+                {!isLoggedIn ? <LoginAccountForm setOpenLoginModal={setOpenLoginModal} setLoginMessage={setLoginMessage} /> :
+                    <CreateAccountForm setOpenLoginModal={setOpenLoginModal} setLoginMessage={setLoginMessage} />}
+                <div>{!isLoggedIn ?
+                    <p className='loginModal__para'>Don't have an Account? <span onClick={() => setIsLoggedIn(!isLoggedIn)}>Sign up here</span></p> :
+                    <p className='loginModal__para'>Already a member? <span  onClick={() => setIsLoggedIn(!isLoggedIn)}>Log in here</span></p>}
+                </div>
             </Box>
         </Modal>
     );

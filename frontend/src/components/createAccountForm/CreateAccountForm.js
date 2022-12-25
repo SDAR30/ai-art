@@ -93,9 +93,12 @@ function CreateAccountForm({ setOpenLoginModal, setLoginMessage }) {
     return (
         <>
             <Typography className='loginModal__title' id="modal-modal-title" variant="h6" component="h2">
-                Join AI ART.  Explore incredible images made by AI and learn how they were generated.
-                Create an account:
+                Create an account       
             </Typography>
+            <Typography className='loginModal__title' id="modal-modal-title" variant="caption" component="h2">
+                Explore incredible images made by AI and learn how they were generated.      
+            </Typography>
+            
             {formMessage &&
                 <div className="form__errorText" style={{ "color": "red" }}>
                     {formMessage}

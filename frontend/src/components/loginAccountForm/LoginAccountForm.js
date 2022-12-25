@@ -80,7 +80,7 @@ function LoginAccountForm({setOpenLoginModal, setLoginMessage}) {
     return (
         <>
             <Typography className='loginModal__title' id="modal-modal-title" variant="h6" component="h2">
-                Log In:
+                Log In
             </Typography>
             <div className="form__errorText" style={{"color" : "red"}}>
                 {formMessage}
