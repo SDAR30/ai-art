@@ -70,7 +70,6 @@ const ImageList = () => {
             </div>
             <div className='imageList__grid'>
                 {orderedImages.map((column,index) => <div className='imageList__column' key={index}>{column.map(image => <ImageCard image={image} key={image.id} />)}</div>)}
-                {/* {filteredorderedImages.map(image => <ImageCard image={image} key={image.id} />)} */}
             </div>
             {!orderedImages.length && <div className='imageList__noResults'>No results</div>}
         </div>
