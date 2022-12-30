@@ -1,14 +1,14 @@
 import {useState, useEffect} from 'react';
 
 const GetElementDimension = myRef => {
-  const getDimensions = () => ({
-    width: myRef.current.offsetWidth,
-    height: myRef.current.offsetHeight
-  })
-
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
 
   useEffect(() => {
+    const getDimensions = () => ({
+      width: myRef.current.offsetWidth,
+      height: myRef.current.offsetHeight
+    })
+
     const handleResize = () => {
       setDimensions(getDimensions())
     }
