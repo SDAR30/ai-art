@@ -1,10 +1,18 @@
+@import './../../designUtils/dimensions.scss';
+
 .navbar {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 16px;
 
-    line-height: 4rem;
-    padding: 0 5%;
-    border-bottom: 2px solid rgb(80, 80, 80);
+    &__buttons{
+        display: flex;
+        justify-content: space-between;
+        > * {
+            padding: 0 5px;
+        }
+    }
 
     a {
         text-decoration: none;
@@ -20,14 +28,11 @@
         display: flex;
         justify-content: space-between;
         list-style: none;
-
-        width: 35%; //take 35% of width of page
     }
 
     &__menuItem {
-        border: 1px solid green;
         font-size: 14px;
-        padding: 0px 5px;
+        padding: 0px 8px;
         font-weight: 500;
 
         position: relative;
@@ -38,21 +43,20 @@
         display: none;
     }
 
-    &__button {
+    &__logButton {
         background: #5E5DF0;
         border-radius: 999px;
         box-shadow: #5E5DF0 0 10px 20px -10px;
         color: #FFFFFF;
         cursor: pointer;
         font-family: Inter, Helvetica, "Apple Color Emoji", "Segoe UI Emoji", NotoColorEmoji, "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", EmojiSymbols, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", sans-serif;
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 700;
         line-height: 22px;
-        padding: 4px 8px;
+        padding: 3px 5px;
         user-select: none;
         -webkit-user-select: none;
         touch-action: manipulation;
-        width: fit-content;
         word-break: break-word;
         border: 0;
 
@@ -80,7 +84,7 @@
         color: #001d85;
     }
 
-    @media only screen and (max-width: 420px) {
+    @media only screen and (max-width: $minimum-navbar-dimensions) {
         &__menuItems {
             display: none;
 
