@@ -1,19 +1,46 @@
 @import '../../designUtils/colors.scss';
 
-.searchBar {
-    width: 80%; 
-    margin: 1% 10%;
-    border: none;
-    border-bottom: 2px solid $unfocus-silver;
-    color: $unfocus-silver;
-    height: 30px;
-    padding: 5px 10px;
-    font-size: 16px;
+// .searchBar {
+//     width: 80%; 
+//     margin: 1% 10%;
+//     border: none;
+//     border-bottom: 2px solid $unfocus-silver;
+//     color: $unfocus-silver;
+//     height: 30px;
+//     padding: 5px 10px;
+//     font-size: 16px;
 
-    &:focus {
-        font-size: 18px;
-        outline: none;
-        color: black;
-        border-bottom: 2px solid black;
+
+//     &:focus {
+//         font-size: 18px;
+//         outline: none;
+//         color: black;
+//         border-bottom: 2px solid black;
+//     }
+// }
+
+.searchBar {
+    
+    font-size: 16px;
+    border-radius: 12px;
+    line-height: 1.5;
+    padding: 5px 10px;
+    transition: box-shadow 100ms ease-in, border 100ms ease-in, background-color 100ms ease-in;
+    border: 2px solid #dee1e2;
+    color: rgb(14, 14, 16);
+    background: #dee1e2;
+    display: block;
+    height: 30px;
+    width: 60%;
+    margin: 0 1%;
+    &:hover {
+        border-color: #ccc;
     }
+    &:focus{
+        border-color: #9147ff;
+        background: #fff;
+    }
+    
+    
+
 }

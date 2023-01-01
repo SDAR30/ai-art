@@ -23,7 +23,6 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cookies] = useCookies('token');
   const [user, setUser] = useState(cookies.token ? {token: cookies.token} : null);
-  console.log('user context in app: ', user)
   useEffect(() => {
 
     setTimeout(function () {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import FilterBar from '../filterBar/FilterBar';
+import SelectBar from '../selectBar/SelectBar';
 import ImageCard from '../imageCard/ImageCard';
 import SearchBar from '../searchBar/SearchBar';
 import './ImageList.scss'
@@ -10,8 +10,8 @@ const ImageList = () => {
     const URL = apiURL();
     const [images, setImages] = useState([])
     const [searchTerm, setSearchTerm] = useState('')
-    const { width, height } = useWindowDimensions();
-    const numberOfColumns = Math.ceil(width / 420);
+    const { width  } = useWindowDimensions();
+    let numberOfColumns = Math.ceil(width / 420);
 
     useEffect(() => {
         fetch(`${URL}/images`).then(res => res.json())
@@ -29,6 +29,7 @@ const ImageList = () => {
                 return title.split(' ').some(word => word.startsWith(search)) ? title : null;
             })
         }
+        numberOfColumns = filteredImages.length < numberOfColumns ? filteredImages.length : numberOfColumns;
         return filteredImages;
     }
 
@@ -62,11 +63,11 @@ const ImageList = () => {
     return (
         <div className="imageList">
             <div className='imageList__bar'>
-                <p>width: {width}</p>
+                {/* <p>width: {width}</p>
                 <p>height: {height}</p>
-                <p>number of columns: {numberOfColumns}</p>
+                <p>number of columns: {numberOfColumns}</p> */}
                 <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-                <FilterBar />
+                <SelectBar />
             </div>
             <div className='imageList__grid'>
                 {orderedImages.map((column,index) => <div className='imageList__column' key={index}>{column.map(image => <ImageCard image={image} key={image.id} width={width} numberOfColumns={numberOfColumns} />)}</div>)}

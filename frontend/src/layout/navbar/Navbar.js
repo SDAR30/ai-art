@@ -2,9 +2,7 @@ import React, { useState, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import './Navbar.scss'
 import UserContext from '../../UserContext';
-import LoginIcon from '@mui/icons-material/Login';
 import ProfileIcon from '../../components/profileIcon/ProfileIcon';
-import AddCircle from '@mui/icons-material/AddCircle';
 
 function Navbar({ setOpenLoginModal, isLoggedIn, setIsLoggedIn }) {
     const [active, setActive] = useState(false)
@@ -36,8 +34,8 @@ function Navbar({ setOpenLoginModal, isLoggedIn, setIsLoggedIn }) {
 
                 {!user ?
                     <div className="navbar__logButtons">
-                        <button className="navbar__loginButton navbar__logButton" onClick={openLoginButton}><LoginIcon /><span>LOG IN</span></button>
-                        <button className="navbar__signupButton navbar__logButton" onClick={openSignupButton}><span>SIGN UP</span> <AddCircle /></button>
+                        <button className="navbar__loginButton navbar__logButton" onClick={openLoginButton}><span>LOG IN</span></button>
+                        <button className="navbar__signupButton navbar__logButton" onClick={openSignupButton}><span>SIGN UP</span></button>
                     </div> :
                     <ProfileIcon setActive={setActive} setUser={setUser} />
                 }

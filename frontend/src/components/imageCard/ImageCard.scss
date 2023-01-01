@@ -1,6 +1,9 @@
+@import './../../designUtils/dimensions.scss';
+
 .imageCard{
         position: relative;
         cursor: pointer;
+        max-width: $image-card-max-width;
 
     &__link{
         text-decoration: none;
