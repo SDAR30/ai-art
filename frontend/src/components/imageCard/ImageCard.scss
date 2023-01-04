@@ -4,6 +4,8 @@
         position: relative;
         cursor: pointer;
         max-width: $image-card-max-width;
+        max-height: $image-card-max-height;
+        min-height: $image-card-min-height;
 
     &__link{
         text-decoration: none;
