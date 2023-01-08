@@ -4,6 +4,7 @@ const imagesController = require('./controllers/images')
 const usersController = require('./controllers/users')
 const accountsController = require('./controllers/accounts')
 const { generateUploadURL } = require('./s3')
+const { generate_DALLE_Image } = require('./dalle');
 
 const app = express();
 
@@ -29,6 +30,14 @@ app.use('/accounts', accountsController);
 app.get('/s3url', async (req, res) => {
   const url = await generateUploadURL()
   res.send({ url })
+})
+
+app.post('/dalle', async (req, res) => {
+
+  let {prompt, number, size} = req.body;
+
+  const response = await generate_DALLE_Image(prompt)
+  res.send(response);
 })
 
 module.exports = app;
