@@ -9,10 +9,11 @@ import Navbar from './layout/navbar/Navbar';
 import ImageView from './components/imageView/ImageView';
 import Home from './pages/Home';
 import LoginModal from './components/loginModal/LoginModal';
-import NewImage from './components/newImage/NewImage';
+import ImageUpload from './components/imageUpload/ImageUpload';
 //import { getCookie } from './utils/cookieUtils';
 import UserContext from './UserContext';
 import {useCookies} from 'react-cookie';
+import CreateImage from './components/createImage/CreateImage';
 
 
 
@@ -45,7 +46,8 @@ function App() {
           }
           <Routes>
             <Route path="/images/:imageID" element={<ImageView />} />
-            <Route path="images/new" element={<NewImage/>} />
+            <Route path="images/new" element={<ImageUpload/>} />
+            <Route path='images/create' element={<CreateImage/>}/>
             <Route path="/" element={<Home />} />
           </Routes>
         </Router>

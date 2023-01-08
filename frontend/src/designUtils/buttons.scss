@@ -1,9 +1,25 @@
-%card-shadow {
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+//https://copy-paste-css.com/
+%button-bnb{
+    display: inline-block;
+        outline: none;
+        cursor: pointer;
+        font-size: .8rem;
+        line-height: 10px;
+        font-weight: 600;
+        border-radius: 50px;
+        margin: 1px;
+        padding: 9px 16px;
+        border: none;
+        transition: box-shadow 0.2s ease 0s, -ms-transform 0.1s ease 0s, -webkit-transform 0.1s ease 0s, transform 0.1s ease 0s;
+        background: linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%);
+        color: #fff;
+        &:hover {
+            opacity: .5;
+            cursor: pointer;
+        }
 }
 
-//#30 https://getcssscan.com/css-box-shadow-examples
-
+//#17 https://getcssscan.com/css-buttons-examples
 %button-17 {
     align-items: center;
     appearance: none;

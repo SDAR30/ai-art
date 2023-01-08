@@ -1,8 +1,9 @@
-@import './../../designUtils/layouts.scss';
+@import './../../designUtils/buttons.scss';
+@import './../../designUtils/cards.scss';
+@import './../../designUtils/textfields.scss';
 
 .newImageForm {
     background-color: rgb(169, 169, 169);
-    border-radius: 12px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 5fr 1fr;
@@ -10,7 +11,7 @@
     width: 70vw;
     max-width: 800px;
     height: 80vh;
-    @extend %card-shadow;
+    @extend %card-outline;
 
     >* {
         margin: 10px;
@@ -26,17 +27,8 @@
         flex-direction: column;
 
         >* {
-            font-size: 16px;
-            border-radius: 12px;
-            line-height: 1.5;
-            padding: 5px 10px;
-            transition: box-shadow 100ms ease-in, border 100ms ease-in, background-color 100ms ease-in;
-            border: 2px solid #dee1e2;
-            color: rgb(14, 14, 16);
-            background: #dee1e2;
-            display: block;
-            height: 30px;
-            margin: 2% 1%;
+             font-size: 16px;
+            @extend %text-input;
 
             &:hover {
                 border-color: #ccc;

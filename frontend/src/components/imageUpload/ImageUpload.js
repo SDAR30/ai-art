@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import './NewImage.scss'
+import './ImageUpload.scss'
 import { apiURL } from "../../utils/apiURL"
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../../UserContext';
@@ -92,7 +92,7 @@ function NewImage() {
   return (
     <form onSubmit={handleSubmit} className='newImageForm'>
 
-      <h1 className='newImageForm__header'> New Image</h1>
+      <h1 className='newImageForm__header'> Upload Image</h1>
 
       <div className='newImageForm__details'>
         <input id='title' placeholder='Title' value={image.title} onChange={handleChange} maxLength="50" required />

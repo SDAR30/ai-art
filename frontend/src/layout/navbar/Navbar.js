@@ -28,6 +28,7 @@ function Navbar({ setOpenLoginModal, isLoggedIn, setIsLoggedIn }) {
                     <li className="navbar__menuItem"> <NavLink to="/">Gallery</NavLink ></li>
                     <li className="navbar__menuItem"><NavLink to="/about">About</NavLink></li>
                     <li className="navbar__menuItem"><NavLink to="/contact">Contact</NavLink></li>
+                    <li className="navbar__menuItem"><NavLink to="images/create">Create</NavLink></li>
                     {user && <li className="navbar__menuItem"><NavLink to="/images/new">Upload</NavLink ></li>}
 
                 </div>

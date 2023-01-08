@@ -1,15 +1,10 @@
+@import './../../designUtils/textfields.scss';
+
 .selectBar {
+    @extend %text-input;
     width: 30%;
     margin: 0 1%;
-    height: 30px;
-    font-size: 16px;
-    color: #1c87c9;
-    background-color: rgb(236, 235, 235);
-    font-size: 16px;
-    border-radius: 12px;
-    padding: 5px 5px;
+    padding: 5px 10px;
     max-height: calc(1.2em + 24.9px);
     height: calc(1.2em + 24.9px);
-    border:0px;
-   outline:0px;
   }
