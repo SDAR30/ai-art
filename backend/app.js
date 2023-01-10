@@ -37,7 +37,9 @@ app.post('/dalle', async (req, res) => {
   let {prompt, number, size} = req.body;
 
   const response = await generate_DALLE_Image(prompt)
-  res.send(response);
+  console.log('response: ', response)
+  res.send(response)
+  //res.send(response);
 })
 
 module.exports = app;
