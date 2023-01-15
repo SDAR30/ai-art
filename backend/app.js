@@ -4,7 +4,7 @@ const imagesController = require('./controllers/images')
 const usersController = require('./controllers/users')
 const accountsController = require('./controllers/accounts')
 const { generateUploadURL } = require('./s3')
-const { generateDALLEImage } = require('./dalle');
+const { generateOpenAIImage } = require('./openai');
 const { generateStableImage } = require('./stability');
 
 const app = express();
@@ -33,17 +33,14 @@ app.get('/s3url', async (req, res) => {
   res.send({ url })
 })
 
-app.post('/dalle', async (req, res) => {
-
+app.post('/openai', async (req, res) => {
   let {prompt, number, size} = req.body;
-
-  const response = await generateDALLEImage(prompt)
-  console.log('response from app.post/dalle: ', response)
+  const response = await generateOpenAIImage(prompt)
+  console.log('response from app.post/openai: ', response)
   res.send(response)
 })
 
 app.post('/stability', async (req, res) => {
-
   let {prompt} = req.body;
   const response = await generateStableImage(prompt)
   res.send(response)

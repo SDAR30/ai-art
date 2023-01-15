@@ -17,7 +17,7 @@ const apiKey = process.env.STABILITY_API_KEY
 if (!apiKey) throw new Error("Missing Stability API key.");
 
 const generateStableImage = async (prompt = 'apple') => {
-	console.log('inside generateStableImage', prompt);
+	console.log('inside generateStableImage, generating: ', prompt);
 
 	const response = await fetch(
 		url,

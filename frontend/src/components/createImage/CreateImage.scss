@@ -1,0 +1,52 @@
+@import './../../designUtils/buttons.scss';
+@import './../../designUtils/cards.scss';
+@import './../../designUtils/textfields.scss';
+@import './../../designUtils/container.scss';
+@import './../../designUtils/dimensions.scss';
+
+.createImageForm {
+    @extend %form-container;
+    @extend %card-outline;
+
+    &__details {
+
+        >#ai {
+            width: 50%;
+        }
+
+        > #prompt {
+            height: 25%;
+        }
+
+        >#title {}
+
+        > #info{
+            margin: 10px 0 0 16px;
+            text-indent: -5px;
+        }
+
+    }
+
+    &__image {
+        border: 2px dashed black;
+        border-radius: 12px;
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+        display: grid;
+        justify-items: center;
+        align-items: center;
+
+        >img {
+            width: 280px;
+            @extend %card-outline;
+            margin: auto;
+        }
+    }
+
+    @media only screen and (max-width: $mobile-form-container) {
+        grid-template-columns: 1fr;
+        grid-template-rows: .8fr 1.7fr 3fr .7fr;
+        height: 120vh;
+    }
+}

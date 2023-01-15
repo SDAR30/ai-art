@@ -95,25 +95,22 @@ function NewImage() {
       <h1 className='newImageForm__header'> Upload Image</h1>
 
       <div className='newImageForm__details'>
-        <input id='title' placeholder='Title' value={image.title} onChange={handleChange} maxLength="50" required />
+        <input id='title' placeholder='Title' value={image.title} onChange={handleChange} maxLength="30" required />
         <select id='ai' onChange={handleChange} required defaultValue={0}>
           <option value="">AI</option>
           <option value="DALL-E">DALL-E</option>
           <option value="DeepAI">DeepAI</option>
           <option value="Midjourney">Midjourney</option>
         </select>
-        <textarea id='prompt' placeholder='prompt' value={image.prompt} onChange={handleChange} maxLength="50" required />
-        <textarea id='instructions' placeholder='instructions' value={image.instructions} onChange={handleChange} maxLength="50" required />
+        <textarea id='prompt' placeholder='prompt' value={image.prompt} onChange={handleChange} maxLength="90" required />
+        <textarea id='instructions' placeholder='(optional) instructions used to get this image' value={image.instructions} onChange={handleChange} maxLength="90" />
       </div>
 
       <div className='newImageForm__image'>
-       <button >Upload image file</button>
-       <input className='newImageForm__input' onChange={addPhoto} type="file" accept="image/*" required></input>
-       {imageFile ? <img src={imageFile} alt="" /> : null}
+        <button >Upload image file</button>
+        <input className='newImageForm__input' onChange={addPhoto} type="file" accept="image/*" required></input>
+        {imageFile ? <img src={imageFile} alt="" /> : null}
       </div>
-      {/* <input onChange={addPhoto} type="file" accept="image/*" required></input> */}
-        {/* {imageFile ? <img src={imageFile} alt="" /> : null} */}
-        {/* <div onClick={addPhoto} className='newImageForm__para'>Choose file to Upload</div> */}
 
       <button className='newImageForm__submit' type='submit'>Submit</button>
 
