@@ -95,15 +95,15 @@ function NewImage() {
       <h1 className='newImageForm__header'> Upload Image</h1>
 
       <div className='newImageForm__details'>
-        <input id='title' placeholder='Title' value={image.title} onChange={handleChange} maxLength="30" required />
+        <input id='title' placeholder='Title of your image' value={image.title} onChange={handleChange} maxLength="30" required />
         <select id='ai' onChange={handleChange} required defaultValue={0}>
           <option value="">AI</option>
           <option value="DALL-E">DALL-E</option>
           <option value="DeepAI">DeepAI</option>
           <option value="Midjourney">Midjourney</option>
         </select>
-        <textarea id='prompt' placeholder='prompt' value={image.prompt} onChange={handleChange} maxLength="90" required />
-        <textarea id='instructions' placeholder='(optional) instructions used to get this image' value={image.instructions} onChange={handleChange} maxLength="90" />
+        <textarea id='prompt' placeholder=' what prompt did you use to get this image?' value={image.prompt} onChange={handleChange} maxLength="90" required />
+        <textarea id='instructions' placeholder='(optional) any additional instructions used to get this image' value={image.instructions} onChange={handleChange} maxLength="90" />
       </div>
 
       <div className='newImageForm__image'>

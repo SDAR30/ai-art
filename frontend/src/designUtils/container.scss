@@ -6,7 +6,7 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 5fr 1fr;
     margin: 0 auto;
-    width: 70vw;
+    width: 80vw;
     max-width: 800px;
     height: 85vh;
 
@@ -36,6 +36,14 @@
                    background: #fff;
                }
            }
+    }
+
+    > :nth-child(3){
+        border: 2px dashed black;
+        border-radius: 12px;
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
     }
 
     > :last-child{ //button

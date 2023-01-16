@@ -1,45 +1,13 @@
 @import './../../designUtils/buttons.scss';
 @import './../../designUtils/cards.scss';
 @import './../../designUtils/textfields.scss';
+@import './../../designUtils/container.scss';
 
 .newImageForm {
-    background-color: rgb(169, 169, 169);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 5fr 1fr;
-    margin: 0 auto;
-    width: 70vw;
-    max-width: 800px;
-    height: 80vh;
+    @extend %form-container;
     @extend %card-outline;
 
-    >* {
-        margin: 10px;
-    }
-
-    &__header {
-        margin-left: 20px;
-        grid-column: 1 / 3;
-    }
-
     &__details {
-        display: flex;
-        flex-direction: column;
-
-        >* {
-            font-size: 16px;
-            @extend %text-input;
-
-            &:hover {
-                border-color: #ccc;
-            }
-
-            &:focus {
-                border-color: #9147ff;
-                background: #fff;
-            }
-        }
-
         >#title {}
 
         >#ai {
@@ -56,19 +24,7 @@
 
     }
 
-    &__submit {
-        grid-column: 1/3;
-        width: 50%;
-        margin: 10px auto;
-        @extend %button-17;
-    }
-
     &__image {
-        border: 2px dashed black;
-        border-radius: 12px;
-        position: relative;
-        overflow: hidden;
-        display: inline-block;
 
         &>button {
             border: 2px solid grey;
@@ -107,33 +63,13 @@
             left: 0;
             right: 0;
             bottom: 0;
+            @extend %card-outline;
         }
 
     }
-
-    &__para {
-        position: relative;
-        top: -50%;
-        text-align: center;
-    }
-}
-
-@media only screen and (max-width: 780px) {
-    .newImageForm {
-        grid-template-columns: 1fr;
-        grid-template-rows: .7fr 3fr 3fr .7fr;
-        width: 85vw;
-        height: 125vh;
-        margin: auto;
-
-        &__header {
-            grid-column: 1;
-        }
-
-        &__submit {
-            grid-column: 1;
-        }
-
-
-    }
+    // &__para {
+    //     position: relative;
+    //     top: -50%;
+    //     text-align: center;
+    // }
 }

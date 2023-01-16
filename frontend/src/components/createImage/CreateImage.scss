@@ -28,11 +28,6 @@
     }
 
     &__image {
-        border: 2px dashed black;
-        border-radius: 12px;
-        position: relative;
-        overflow: hidden;
-        display: inline-block;
         display: grid;
         justify-items: center;
         align-items: center;

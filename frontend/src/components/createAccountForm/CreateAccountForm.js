@@ -96,7 +96,7 @@ function CreateAccountForm({ setOpenLoginModal, setLoginMessage }) {
                 Create an account       
             </Typography>
             <Typography className='loginModal__title' id="modal-modal-title" variant="caption" component="h2">
-                Explore and create incredible images made by AI, and learn how they were generated.      
+                Explore, create and share incredible images made by AI, and learn how they were generated.      
             </Typography>
             
             {formMessage &&
