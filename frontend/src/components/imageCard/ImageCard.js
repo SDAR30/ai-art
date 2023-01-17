@@ -36,7 +36,7 @@ function ImageCard({ image, width = 420, numberOfColumns }) {
           <p className='imageCard__overlay__date' style={styles.date}>{timeSince(date)}</p>
           <p className='imageCard__overlay__prompt' style={styles.prompt}>{removeExtraWords(prompt, 80)}</p>
           <p className='imageCard__overlay__ai' style={styles.ai}>made with {ai}</p>
-          <p className='imageCard__overlay__dimensions' style={styles.ai}>{width} : {widthPerImage}</p>
+          {/* <p className='imageCard__overlay__dimensions' style={styles.ai}>{width} : {widthPerImage}</p> */}
         </div>
       </Link>
     </div>

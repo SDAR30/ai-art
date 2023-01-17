@@ -25,10 +25,10 @@ function Navbar({ setOpenLoginModal, isLoggedIn, setIsLoggedIn }) {
             <div className='navbar__buttons'>
 
                 <div className={active ? "navbar__menuItems-active" : "navbar__menuItems"} onClick={() => setActive(false)}>
-                    <li className="navbar__menuItem"> <NavLink to="/">Gallery</NavLink ></li>
-                    <li className="navbar__menuItem"><NavLink to="/about">About</NavLink></li>
-                    <li className="navbar__menuItem"><NavLink to="/contact">Contact</NavLink></li>
-                    <li className="navbar__menuItem"><NavLink to="images/create">Create</NavLink></li>
+                    <li className="navbar__menuItem"> <NavLink style={({ isActive }) => ({ color: isActive ? "grey" : "black", cursor: isActive ? 'default' : 'pointer' })} to="/">Gallery</NavLink ></li>
+                    <li className="navbar__menuItem"><NavLink style={({ isActive }) => ({ color: isActive ? "grey" : "black", cursor: isActive ? 'default' : 'pointer' })}  to="/about">About</NavLink></li>
+                    <li className="navbar__menuItem"><NavLink style={({ isActive }) => ({ color: isActive ? "grey" : "black", cursor: isActive ? 'default' : 'pointer' })} to="/contact">Contact</NavLink></li>
+                    <li className="navbar__menuItem"><NavLink style={({ isActive }) => ({ color: isActive ? "grey" : "black", cursor: isActive ? 'default' : 'pointer' })}   to="images/create">Create</NavLink></li>
                     {user && <li className="navbar__menuItem"><NavLink to="/images/new">Upload</NavLink ></li>}
 
                 </div>

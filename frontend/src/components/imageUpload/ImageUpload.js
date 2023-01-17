@@ -92,7 +92,7 @@ function NewImage() {
   return (
     <form onSubmit={handleSubmit} className='newImageForm'>
 
-      <h1 className='newImageForm__header'> Upload Image</h1>
+      <h1 className='newImageForm__header'> Upload an image</h1>
 
       <div className='newImageForm__details'>
         <input id='title' placeholder='Title of your image' value={image.title} onChange={handleChange} maxLength="30" required />

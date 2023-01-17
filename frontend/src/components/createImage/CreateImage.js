@@ -96,7 +96,7 @@ function CreateImage() {
     return (
         <form className='createImageForm' onSubmit={generateImage} >
 
-            <h1 className='createImageForm__header'> Generate Image Using AI</h1>
+            <h1 className='createImageForm__header'> Generate an image using AI</h1>
 
             <div className='createImageForm__details'>
                 <select id='ai' onChange={handleChange} required defaultValue={0}>
@@ -105,8 +105,8 @@ function CreateImage() {
                     <option value="Stable Diffusion">Stable Diffusion</option>
                 </select>
                 <textarea id='prompt' placeholder='Enter a detailed description of an image to generate' value={image.prompt} onChange={handleChange} maxLength="90" required />
-                {!imageFile && <input id='title' placeholder='choose a title for this image' value={image.title} onChange={handleChange} maxLength="30" required />}
-                {!imageFile && <div id='info' className='info'><InfoOutlinedIcon /> {infoLink}</div>}
+                {imageFile && <input id='title' placeholder='choose a title for this image' value={image.title} onChange={handleChange} maxLength="30" required />}
+                {imageFile && <div id='info' className='info'><InfoOutlinedIcon /> {infoLink}</div>}
             </div>
 
             <div className='createImageForm__image'>
