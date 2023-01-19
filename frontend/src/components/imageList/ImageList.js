@@ -11,11 +11,11 @@ const ImageList = () => {
     const URL = apiURL();
     const [images, setImages] = useState([])
     const [searchTerm, setSearchTerm] = useState('')
-    const { width  } = useWindowDimensions();
+    const { width } = useWindowDimensions();
     let numberOfColumns = Math.ceil(width / 420);
 
     useEffect(() => {
-        fetch(`${URL}/images`).then(res => res.json())
+        fetch(`${URL}/ratings/average/all`).then(res => res.json())
             .then(data => {
                 setImages(data)
             })

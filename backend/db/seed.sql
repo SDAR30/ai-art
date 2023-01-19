@@ -32,3 +32,9 @@ VALUES ('Mechanical Skull', 'Midjourney','https://imgur.com/c5fgeoH.png','', 'bi
 ('underground hidden car', 'DALL-E','https://imgur.com/fnyT97Q.png','i used a picture of car and edited it with this prompt','background, underground room made from black steel, dark, black, minimal light, factory, shelter, abandonned','2022-12-05',3),
 ('Town by Hundertwasser','Stable Diffusion','https://imgur.com/zcNQmRO.png','dont remember all the details, just played around with different settings with this prompt','Stunning Surreal Colorful Silhouette Art by Hundertwasser', '2022-11-22',7),
 ('Palace telephone', 'Midjourney','https://imgur.com/sv4iWhE.png','','majestic classic retro telephone, classic dial telephone, misty floor, large zoomed in, macro angle view, super close, high octane render, hyper-realistic, carved in white stone, luminescent neon colors, pink hues, white detailed elements, white. Realistic render, cinematic lighting, 8k','2022-12-29',5);
+
+INSERT INTO ratings (image_id, user_id, rating, created_at)
+VALUES (1, 2, 4, NOW()),
+       (1, 3, 5, NOW()),
+       (2, 1, 3, NOW()),
+       (2, 4, 2, NOW());

@@ -23,3 +23,11 @@ CREATE TABLE images (
     user_id INTEGER REFERENCES users (id) ON DELETE CASCADE
 );
 
+CREATE TABLE ratings (
+  id SERIAL PRIMARY KEY,
+  rating INT CHECK (rating >= 1 AND rating <= 5),
+  created_at TIMESTAMP DEFAULT NOW(),
+  image_id INT REFERENCES images(id) ON DELETE CASCADE,
+  user_id INT REFERENCES users(id) ON DELETE CASCADE
+);
+

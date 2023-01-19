@@ -1,6 +1,7 @@
+$image-grid-gap: 12px;
+
 .imageList{
     
-
     &__noResults{
         margin: 30% auto;
         display: table;
@@ -14,14 +15,14 @@
         display: flex;
         justify-content: center;
         flex-direction: row;
-        gap: 10px;
+        gap: $image-grid-gap;
         padding: .5em;
     }
 
     &__column{
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: $image-grid-gap;
     }
     
 }

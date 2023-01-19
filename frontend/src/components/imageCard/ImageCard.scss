@@ -25,7 +25,6 @@
         bottom: 2%;
         left: 5%;
         width: 92%;
-        height: 30%;
         background-color: rgba(4, 4, 4);
         border-radius: 5%;
         display: grid;
@@ -47,6 +46,9 @@
         }
         &__date{
             grid-column: 4 / 5;
+            position: absolute;
+            top: 1px;
+            right: 2px;
         }
         &__prompt{
             grid-column: 1 / 5;
@@ -54,6 +56,16 @@
         &__ai{
             grid-column: 1 / 4;
             color: rgb(151, 151, 151);
+            position: absolute;
+            bottom: 2px;
+            left: 0px;
+        }
+
+        &__rating{
+            grid-column: 4 / 5;
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
         }
         
     }

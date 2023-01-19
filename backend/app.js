@@ -2,6 +2,7 @@ const cors = require("cors");
 const express = require('express');
 const imagesController = require('./controllers/images')
 const usersController = require('./controllers/users')
+const ratingsController = require('./controllers/ratings')
 const accountsController = require('./controllers/accounts')
 const { generateUploadURL } = require('./s3')
 const { generateOpenAIImage } = require('./openai');
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 //CONTROLLERS
 app.use('/images', imagesController);
 app.use('/users', usersController);
+app.use('/ratings', ratingsController);
 app.use('/accounts', accountsController);
 
 //AWS s3 URL route
