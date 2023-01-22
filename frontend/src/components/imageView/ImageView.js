@@ -23,6 +23,7 @@ function ImageView(props) {
             return alert('Please log in to submit an image')
         console.log("submit rating ", e.target.href.slice(-1))
         const rating = e.target.href.slice(-1) //get last character of href
+        setImageRating(convertRatingToPercent(rating))
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -42,7 +43,6 @@ function ImageView(props) {
         const ratingsURL = `${URL}/ratings/${imageID}`
         fetch(ratingsURL).then(res => res.json())
             .then(data => {
-                console.log(data.avg_rating)
                 setImageRating(convertRatingToPercent(data.avg_rating))
             })
     }, [URL, imageID])

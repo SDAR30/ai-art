@@ -9,4 +9,9 @@ function roundToOneDecimal(num) {
     return Math.round(num * 10) / 10;
 }   // so 4 will turn into 4.0, 4.5 will turn into 4.5, 4.6 will turn into 4.6, etc
 
-module.exports = { convertRatingToPercent, roundToOneDecimal };
+// take a number between 0 to 5.0 and round it to the nearest 0.5
+function roundToHalf(num) {
+    return Math.round(num * 2) / 2;
+}
+
+module.exports = { convertRatingToPercent, roundToOneDecimal, roundToHalf };

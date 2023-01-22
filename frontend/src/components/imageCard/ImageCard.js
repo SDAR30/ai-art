@@ -1,14 +1,21 @@
 import React, { useState, useRef } from 'react';
 import './ImageCard.scss';
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { capitalizeFirstLetterOfEachWord, removeExtraWords } from '../../utils/stringUtils';
 import { timeSince } from '../../utils/dateUtils';
-import { roundToOneDecimal } from '../../utils/mathUtils';
+import ImageCardModal from '../imageCardModal/ImageCardModal';
+// import MyModal from '../MyModal';
 
-function ImageCard({ image, width = 420, numberOfColumns }) {
-  const { id, ai, prompt, title, url, date, avg_rating } = image;
+
+function ImageCard({ image, width = 420, numberOfColumns}) {
+  const { ai, prompt, title, url, date } = image;
+  const [openCardModal, setOpenCardModal] = useState(false);
   const [height, setHeight] = useState(0);
   const divRef = useRef(null);
+
+  const openModalForImage = () => {
+    setOpenCardModal(true);
+  }
 
   const handleMouseEnter = () => {
     setHeight(divRef.current.clientHeight);
@@ -44,21 +51,35 @@ function ImageCard({ image, width = 420, numberOfColumns }) {
     }
   }
 
-  const image_rating = roundToOneDecimal(avg_rating) ? roundToOneDecimal(avg_rating) + ' / 5.0' : 'Not rated';
+  // const starIcons = (avg_rating) =>{
+  //   let avg = roundToOneDecimal(avg_rating);
+  //   if(!avg) return 'not rated'
+  //   let output;
+  //   for(let i = 0; i < avg; i++){
+  //     output += <StarIcon />
+  //   }
+  //   return output;
+  // }
+
+  //const image_rating = roundToOneDecimal(avg_rating) ? roundToOneDecimal(avg_rating) + ' / 5 🔥' : 'Not rated';
 
   return (
-    <div className='imageCard' ref={divRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      <Link className='imageCard__link' to={`/images/${id}`} state={{ image: image }}>
+    <div>
+      {/* {isOpen && <MyModal  openCardModal={openCardModal} setOpenCardModal={setOpenCardModal} image={image} onClose={handleClose}/> } */}
+      <ImageCardModal openCardModal={openCardModal} setOpenCardModal={setOpenCardModal} image={image}/>
+      <div className='imageCard' ref={divRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={openModalForImage} >
+        {/* <Link className='imageCard__link' to={`/images/${id}`} state={{ image: image }}> */}
         <img className="imageCard__image" src={url} alt="ai img" />
         <div className="imageCard__overlay" style={styles.overlay}>
           <p className='imageCard__overlay__title' style={styles.title}>{capitalizeFirstLetterOfEachWord(removeExtraWords(title, 28))}</p>
           <p className='imageCard__overlay__date' style={styles.date}>{timeSince(date)}</p>
           <p className='imageCard__overlay__prompt' style={styles.prompt}>{removeExtraWords(prompt, 80)}</p>
           <p className='imageCard__overlay__ai' style={styles.ai}>made with {ai}</p>
-          <p className='imageCard__overlay__rating' style={styles.rating}>{image_rating}</p>
+          {/* <p className='imageCard__overlay__rating' style={styles.rating}><CardStarRating value={Number(avg_rating)} text={"rating"} color="orange" /></p> */}
           {/* <p className='imageCard__overlay__dimensions' style={styles.ai}>Height: {height}</p> */}
         </div>
-      </Link>
+        {/* </Link> */}
+      </div>
     </div>
   );
 }

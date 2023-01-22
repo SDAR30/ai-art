@@ -34,7 +34,10 @@ VALUES ('Mechanical Skull', 'Midjourney','https://imgur.com/c5fgeoH.png','', 'bi
 ('Palace telephone', 'Midjourney','https://imgur.com/sv4iWhE.png','','majestic classic retro telephone, classic dial telephone, misty floor, large zoomed in, macro angle view, super close, high octane render, hyper-realistic, carved in white stone, luminescent neon colors, pink hues, white detailed elements, white. Realistic render, cinematic lighting, 8k','2022-12-29',5);
 
 INSERT INTO ratings (image_id, user_id, rating, created_at)
-VALUES (1, 2, 4, NOW()),
-       (1, 3, 5, NOW()),
-       (2, 1, 3, NOW()),
-       (2, 4, 2, NOW());
+VALUES (1, 2, 4.0, NOW()),
+       (1, 3, 5.0, NOW()),
+       (2, 1, 3.5, NOW()),
+	   (3, 4, 2.0, NOW()),
+       (4, 5, 1.5, NOW()),
+       (4, 1, 3.5, NOW()),
+       (2, 4, 2.5, NOW());
