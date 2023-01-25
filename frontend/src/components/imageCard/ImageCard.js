@@ -12,6 +12,8 @@ function ImageCard({ image, width = 420, numberOfColumns}) {
   const [openCardModal, setOpenCardModal] = useState(false);
   const [height, setHeight] = useState(0);
   const divRef = useRef(null);
+  const imgObj = new Image();
+  imgObj.src = image.url;
 
   const openModalForImage = () => {
     setOpenCardModal(true);
@@ -66,7 +68,7 @@ function ImageCard({ image, width = 420, numberOfColumns}) {
   return (
     <div>
       {/* {isOpen && <MyModal  openCardModal={openCardModal} setOpenCardModal={setOpenCardModal} image={image} onClose={handleClose}/> } */}
-      <ImageCardModal openCardModal={openCardModal} setOpenCardModal={setOpenCardModal} image={image}/>
+      <ImageCardModal openCardModal={openCardModal} setOpenCardModal={setOpenCardModal} image={image} imgObj={imgObj} />
       <div className='imageCard' ref={divRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={openModalForImage} >
         {/* <Link className='imageCard__link' to={`/images/${id}`} state={{ image: image }}> */}
         <img className="imageCard__image" src={url} alt="ai img" />

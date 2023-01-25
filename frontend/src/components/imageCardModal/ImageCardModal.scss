@@ -1,13 +1,13 @@
 @import './../../designUtils/cards.scss';
 
-.imageCardBox{
+.imageCardBox {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #F9FBFF;
     border: '2px solid #000';
-    padding: 32px;
+    padding: 20px;
     border-radius: 12px;
     box-shadow: 0px 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%);
     margin: 32px;
@@ -18,18 +18,17 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
 
-    > * {
-       
-    }
-    
-    &__title{
+    >* {}
+
+    &__title {
         //take 2 columns
         grid-column: 1 / 3;
         margin-top: -10px;
+        font-size: 2rem;
         text-align: center;
     }
 
-    &__img{
+    &__img {
         display: block;
         margin: auto;
         min-height: 20vh;
@@ -39,24 +38,144 @@
         @extend %card-outline;
     }
 
-    &__details{
+    &__details {
         margin-left: 5px;
+        max-height: 50vh;
     }
 
-    &__artist{
+    &__artist {
         display: flex;
         align-items: center;
-         > img{
+
+        >img {
             width: 25px;
             height: 25px;
-            border-top:5px;
+            border-top: 5px;
             border-radius: 50%;
             border: 1px solid black;
             margin: 1px;
-         }
+        }
     }
-    &__rating{
+
+    &__prompt, &__instructions {
+        width: 100%;
+        overflow-y: auto;
+        font-size: 1rem;
+
+        > :first-child { // unable to select
+            -webkit-user-select: none;
+            /* Chrome all / Safari all */
+            -moz-user-select: none;
+            /* Firefox all */
+            -ms-user-select: none;
+            /* IE 10+ */
+            user-select: none;
+            /* Likely future */
+        }
+        > :last-child { //one click to select all
+            cursor: cell; //copy
+            -webkit-user-select: all;
+            /* Chrome all / Safari all */
+            -moz-user-select: all;
+            /* Firefox all */
+            -ms-user-select: all;
+            /* IE 10+ */
+            user-select: all;
+            /* Likely future */
+        }
+    }
+
+    &__prompt{
+        max-height: 15vh;
+        margin: .3rem 0 .5rem;
+    }
+
+    &__instructions {
+        max-height: 10vh;
+        margin: .3rem 0 .3rem;
+    }
+
+    &__dimensions {
+        display: flex;
+        justify-content: flex-end;
+        margin: 2px 0;
+        font-size: .9rem;
+        
+        > :first-child {
+            cursor: pointer;
+            display: flex;
+            flex-direction: row;
+            border: 1px solid black;
+            border-radius: 20px;
+            cursor: pointer;
+            margin: 0 2px;
+            padding: 1px;
+            > :last-child {
+                margin-top: 3px;
+            }
+        }
+        > :last-child {
+            margin-top: 5px;
+        }
+    }
+
+
+    &__date {
+        font-size: .8rem;
+        margin: 2px 0;
+    }
+
+    &__rating {
         grid-column: 1 / 3;
-        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        margin: 10px auto -10px;
+        border: 2px solid rgb(59, 59, 59);
+        border-radius: 20px;
+        padding: 0 23px;
+
+        > :first-child {
+            color: rgb(53, 53, 53);
+        }
+    }
+
+
+}
+
+@media only screen and (max-width: 720px) {
+    .imageCardBox {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin: auto;
+        max-height: 88vh;
+
+        &__title {
+            grid-column: 1;
+            font-size: 1.5rem;
+        }
+
+        &__img {
+            max-height: 40vh;
+        }
+
+        &__details {
+            margin: 0;
+        }
+
+        &__prompt, &__instructions {
+            font-size: .8rem;
+            max-height: 9vh;
+        }
+        &__instructions{
+            max-height: 7vh;
+        }
+
+        &__rating {
+            margin: 3px auto -10px;
+            grid-column: 1;
+        }
     }
 }
