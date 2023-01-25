@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import './ImageCardModal.scss'
@@ -9,6 +9,7 @@ import { roundToHalf } from '../../utils/mathUtils';
 import { useCookies } from 'react-cookie';
 import { saveAs } from 'file-saver';
 import DownloadIcon from '@mui/icons-material/Download';
+import Tooltip from '@mui/material/Tooltip';
 
 function ImageCardModal({ openCardModal, setOpenCardModal, image, imgObj }) {
     const { id, ai, date, prompt, title, instructions, url, avg_rating } = image;
@@ -18,8 +19,20 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, imgObj }) {
     const [cookies] = useCookies('token');
     const user_id = cookies.token ? cookies.user.id : 0;
     const [imageDimensions, setImageDimensions] = useState({});
+    const textRef = useRef(null);
 
-    //if(url.includes('imgur')) return alert('images from this source cant be downloaded')
+    //to copy text to clipboard, create a textarea element, set its value to the text, select it, and copy it
+    //then remove the textarea element
+    const copyText = () => {
+        const text = textRef.current.textContent;
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        textArea.remove();
+        alert("Text copied to clipboard!");
+      }
 
     useEffect(() => {
         imgObj.onload = () => {
@@ -87,19 +100,19 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, imgObj }) {
                     <div className='imageCardBox__artist'>
                         <img src={artist.pic} alt='profile'></img> <div>by {artist.username}</div>
                     </div>
-                    <div className='imageCardBox__prompt'><span>prompt: </span><span title='copy'>{prompt}</span></div>
+                    <div className='imageCardBox__prompt'>
+                        <span>prompt: </span><span title='copy' ref={textRef} onClick={copyText}>{prompt}</span>
+                        </div>
                     {instructions && <div className='imageCardBox__instructions'>-- {instructions}</div>}
-                    
+
                     <div className='imageCardBox__date' >created {timeSince(date)} using {ai}</div>
 
                     <div className='imageCardBox__dimensions' >
-                        <div className='dimensions__download' onClick={downloadImage} ><DownloadIcon />
-                            <div >Download Image</div>
-                        </div>
+                            <Tooltip title="Download Image"><DownloadIcon onClick={downloadImage} /></Tooltip>
                         <div>{imageDimensions.width} x {imageDimensions.height}</div>
                     </div>
 
-                    
+
 
                 </div>
                 <div className='imageCardBox__rating'>

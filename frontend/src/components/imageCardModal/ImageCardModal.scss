@@ -13,7 +13,7 @@
     margin: 32px;
     min-width: 60vw;
     max-width: 70vw;
-    min-height: 50vh;
+    min-height: 60vh;
     max-height: 70vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -41,6 +41,8 @@
     &__details {
         margin-left: 5px;
         max-height: 50vh;
+        display: flex;
+        flex-direction: column;
     }
 
     &__artist {
@@ -95,34 +97,29 @@
         margin: .3rem 0 .3rem;
     }
 
+    &__date {
+        font-size: .75rem;
+        margin: 3px 0 0;
+        
+    }
+
     &__dimensions {
         display: flex;
         justify-content: flex-end;
         margin: 2px 0;
         font-size: .9rem;
+        margin-top: auto;
         
         > :first-child {
             cursor: pointer;
-            display: flex;
-            flex-direction: row;
             border: 1px solid black;
             border-radius: 20px;
-            cursor: pointer;
             margin: 0 2px;
             padding: 1px;
-            > :last-child {
-                margin-top: 3px;
-            }
         }
         > :last-child {
             margin-top: 5px;
         }
-    }
-
-
-    &__date {
-        font-size: .8rem;
-        margin: 2px 0;
     }
 
     &__rating {
