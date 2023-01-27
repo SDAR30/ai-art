@@ -9,6 +9,7 @@ $image-grid-gap: 12px;
 
     &__bar{
         display: flex;
+        justify-content: space-between;
     }
 
     &__grid{

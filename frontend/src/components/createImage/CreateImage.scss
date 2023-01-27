@@ -14,13 +14,13 @@
             width: 50%;
         }
 
-        > #prompt {
+        >#prompt {
             height: 25%;
         }
 
         >#title {}
 
-        > #info{
+        >#info {
             margin: 10px 0 0 16px;
             text-indent: -5px;
         }
@@ -33,15 +33,16 @@
         align-items: center;
 
         >img {
+            
             width: 280px;
             @extend %card-outline;
             margin: auto;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
         }
     }
 
-    @media only screen and (max-width: $mobile-form-container) {
-        grid-template-columns: 1fr;
-        grid-template-rows: .8fr 1.7fr 3fr .7fr;
-        height: 120vh;
-    }
 }

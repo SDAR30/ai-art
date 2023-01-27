@@ -64,9 +64,6 @@ const ImageList = () => {
     return (
         <div className="imageList">
             <div className='imageList__bar'>
-                {/* <p>width: {width}</p>
-                <p>height: {height}</p>
-                <p>number of columns: {numberOfColumns}</p> */}
                 <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
                 <SelectBar />
             </div>

@@ -14,7 +14,7 @@
     min-width: 60vw;
     max-width: 70vw;
     min-height: 60vh;
-    max-height: 70vh;
+    max-height: 80vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
 
@@ -32,7 +32,7 @@
         display: block;
         margin: auto;
         min-height: 20vh;
-        max-height: 50vh;
+        max-height: 55vh;
         min-width: 10vw;
         max-width: 30vw;
         @extend %card-outline;
@@ -59,12 +59,14 @@
         }
     }
 
-    &__prompt, &__instructions {
+    &__prompt,
+    &__instructions {
         width: 100%;
         overflow-y: auto;
         font-size: 1rem;
 
-        > :first-child { // unable to select
+        > :first-child {
+            // unable to select
             -webkit-user-select: none;
             /* Chrome all / Safari all */
             -moz-user-select: none;
@@ -74,7 +76,9 @@
             user-select: none;
             /* Likely future */
         }
-        > :last-child { //one click to select all
+
+        > :last-child {
+            //one click to select all
             cursor: cell; //copy
             -webkit-user-select: all;
             /* Chrome all / Safari all */
@@ -87,7 +91,7 @@
         }
     }
 
-    &__prompt{
+    &__prompt {
         max-height: 15vh;
         margin: .3rem 0 .5rem;
     }
@@ -100,7 +104,7 @@
     &__date {
         font-size: .75rem;
         margin: 3px 0 0;
-        
+
     }
 
     &__dimensions {
@@ -109,7 +113,7 @@
         margin: 2px 0;
         font-size: .9rem;
         margin-top: auto;
-        
+
         > :first-child {
             cursor: pointer;
             border: 1px solid black;
@@ -117,6 +121,7 @@
             margin: 0 2px;
             padding: 1px;
         }
+
         > :last-child {
             margin-top: 5px;
         }
@@ -143,11 +148,24 @@
 }
 
 @media only screen and (max-width: 720px) {
+    .imageCardModal {
+        overflow: scroll;
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
     .imageCardBox {
         display: grid;
         grid-template-columns: 1fr;
         margin: auto;
-        max-height: 88vh;
+        max-width: 80vw;
+        max-height: unset;
+
 
         &__title {
             grid-column: 1;
@@ -155,18 +173,20 @@
         }
 
         &__img {
-            max-height: 40vh;
+            max-width: 60vw;
         }
 
         &__details {
             margin: 0;
         }
 
-        &__prompt, &__instructions {
+        &__prompt,
+        &__instructions {
             font-size: .8rem;
             max-height: 9vh;
         }
-        &__instructions{
+
+        &__instructions {
             max-height: 7vh;
         }
 

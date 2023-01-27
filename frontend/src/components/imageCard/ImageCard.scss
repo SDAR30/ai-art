@@ -1,5 +1,6 @@
 @import './../../designUtils/dimensions.scss';
 @import './../../designUtils/cards.scss';
+@import './../../designUtils/fonts.scss';
 
 .imageCard{
         position: relative;
@@ -52,6 +53,7 @@
         }
         &__prompt{
             grid-column: 1 / 5;
+            
         }
         &__ai{
             grid-column: 1 / 4;

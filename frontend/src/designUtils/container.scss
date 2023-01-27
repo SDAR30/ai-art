@@ -1,7 +1,9 @@
 @import './dimensions.scss';
+@import './colors.scss';
+@import './fonts.scss';
 
 %form-container {
-    background-color: rgb(169, 169, 169);
+    background-color: $steel;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 5fr 1fr;
@@ -10,35 +12,44 @@
     max-width: 800px;
     height: 85vh;
 
-    > * {
+    >* {
         margin: 10px;
     }
 
-    > :first-child { //header
+    > :first-child {
+        //header
+        @extend %roboto;
         margin-left: 20px;
         grid-column: 1 / 3;
     }
 
-    > :nth-child(2){ //details
-            display: flex;
-            flex-direction: column;
+    > :nth-child(2) {
+        //details
+        display: flex;
+        flex-direction: column;
 
-            > *:not(.info) {
-                font-size: 16px;
-               @extend %text-input;
-    
-               &:hover {
-                   border-color: #ccc;
-               }
-    
-               &:focus {
-                   border-color: #9147ff;
-                   background: #fff;
-               }
-           }
+        >#ai {
+            height: 9%;
+            width: 50%;
+        }
+
+        >*:not(.info) {
+            font-size: 16px;
+            @extend %text-input;
+
+            &:hover {
+                border-color: $background-dark;
+            }
+
+            &:focus {
+                //    border-color: #9147ff;
+                //    background: #fff;
+                outline: none;
+            }
+        }
     }
 
-    > :nth-child(3){
+    > :nth-child(3) {
         border: 2px dashed black;
         border-radius: 12px;
         position: relative;
@@ -46,9 +57,10 @@
         display: inline-block;
     }
 
-    > :last-child{ //button
+    > :last-child {
+        //button
         grid-column: 1/3;
-        width: 50%;
+        width: 40%;
         margin: 10px auto;
         @extend %button-17;
     }
@@ -60,20 +72,27 @@
         height: 125vh;
         margin: auto;
 
-        > :first-child { //header
+        > :first-child {
+            //header
             grid-column: 1;
         }
-        > :nth-child(2){//details
-            > #ai{
-                width: 30%;
+
+        > :nth-child(2) {
+
+            //details
+            >#ai {
+                height: 12%;
+                width: 50%;
             }
-            > #title{
+
+            >#title {
                 width: 50%;
             }
 
         }
 
-        > :last-child { //button
+        > :last-child {
+            //button
             grid-column: 1;
         }
 

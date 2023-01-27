@@ -1,6 +1,9 @@
 //#30 https://getcssscan.com/css-box-shadow-examples
 %card-outline {
     border-radius: 12px;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
-    //box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px; //lighter
+    //box-shadow: rgba(198, 210, 218, 0.2) 0px 1px 2px 0px, rgba(159, 171, 181, 0.1) 0px 2px 6px 2px;
+    box-shadow: rgba(12, 9, 9, 0.45) 1px 1px 3px, rgba(0, 0, 0, 0.79) 5px 8px 10px;
+    
+    &:hover{
+    }
 }

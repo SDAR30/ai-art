@@ -2,9 +2,10 @@
 
 .selectBar {
     @extend %text-input;
-    width: 30%;
-    margin: 0 1%;
-    padding: 5px 10px;
-    max-height: calc(1.2em + 24.9px);
+    min-width: 110px;
+    width: 20%;
+    margin: 0 5px;
+    // padding: 5px 10px;
+    // max-height: calc(1.2em + 24.9px);
     height: calc(1.2em + 24.9px);
   }

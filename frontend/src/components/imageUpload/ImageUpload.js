@@ -102,8 +102,8 @@ function NewImage() {
           <option value="DeepAI">DeepAI</option>
           <option value="Midjourney">Midjourney</option>
         </select>
-        <textarea id='prompt' placeholder=' what prompt did you use to get this image?' value={image.prompt} onChange={handleChange} maxLength="600" required />
-        <textarea id='instructions' placeholder='(optional) any additional instructions used to get this image' value={image.instructions} onChange={handleChange} maxLength="600" />
+        <textarea id='prompt' placeholder='what prompt did you use to get this image?' value={image.prompt} onChange={handleChange} maxLength="600" required />
+        <textarea id='instructions' placeholder='(optional) any additional steps used to get this image?' value={image.instructions} onChange={handleChange} maxLength="600" />
       </div>
 
       <div className='newImageForm__image'>
