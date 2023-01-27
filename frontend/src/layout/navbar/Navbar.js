@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import './Navbar.scss'
 import UserContext from '../../UserContext';
 import ProfileIcon from '../../components/profileIcon/ProfileIcon';
+import MenuIcon from '@mui/icons-material/Menu';
 
 function Navbar({ setOpenLoginModal, isLoggedIn, setIsLoggedIn }) {
     const [active, setActive] = useState(false)
@@ -21,7 +22,7 @@ function Navbar({ setOpenLoginModal, isLoggedIn, setIsLoggedIn }) {
         <div className="navbar">
 
             <div className="navbar__logo"><NavLink to="/">AI ART</NavLink ></div>
-            <div className="navbar__toggleIcon" onClick={() => setActive(!active)}>=</div>
+            <div className="navbar__toggleIcon" onClick={() => setActive(!active)}> <MenuIcon fontSize='large' style={{ color: 'white' }}/> </div>
             <div className='navbar__buttons'>
 
                 <div className={active ? "navbar__menuItems-active" : "navbar__menuItems"} onClick={() => setActive(false)}>
