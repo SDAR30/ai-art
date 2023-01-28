@@ -24,7 +24,7 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, imgObj }) {
     const textRef = useRef(null);
     const [expanded, setExpanded] = useState(false);
 
-    const toggleImageSize = () =>{
+    const toggleImageSize = () => {
         //imgRef.current.style.width = '100%';
         setExpanded(!expanded);
 
@@ -106,34 +106,46 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, imgObj }) {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description">
             <div>
-            <Tooltip title="close image"><CloseIcon className='imageCardModal__close' onClick={handleClose} fontSize='large' /></Tooltip>
-                <div className={expanded ? 'imageCardBox-expanded imageCardBox' : 'imageCardBox'}>
-                <Tooltip title="expand image"><FullscreenIcon className='imageCardBox__fullscreen' onClick={toggleImageSize}  /></Tooltip>
-                    <h2 className='imageCardBox__title'> {title} </h2>
-                    <img className={expanded ? 'imageCardBox__img-expanded imageCardBox__img' : 'imageCardBox__img'}  src={url} alt="modal view" />
+                <Tooltip title="close image"><CloseIcon className='imageCardModal__close' onClick={handleClose} fontSize='large' /></Tooltip>
+                <div className='imageCardBox'>
+
+                    <div className='imageCardBox__image'>
+                        <Tooltip title="expand image"><FullscreenIcon className='imageCardBox__image__fullscreen' onClick={toggleImageSize} /></Tooltip>
+
+                        <img className={expanded ? 'imageCardBox__image__img-expanded imageCardBox__image__img' : 'imageCardBox__image__img'} onClick={toggleImageSize} src={url} alt="modal view" />
+                    </div>
+
                     <div className='imageCardBox__details'>
-                        <div className='imageCardBox__artist'>
-                            <img src={artist.pic} alt='profile'></img> <div>by {artist.username}</div>
+
+                        <div className='imageCardBox__details__header'>
+                            <h2 className='imageCardBox__details__header__title'> {title} </h2>
+                            <div className='imageCardBox__details__header__artist'>
+                                <img src={artist.pic} alt='profile'></img>
+                                <div>by {artist.username}</div>
+                            </div>
                         </div>
-                        <div className='imageCardBox__prompt'>
+
+                        <div className='imageCardBox__details__prompt'>
                             <span>prompt: </span><span title='copy' ref={textRef} onClick={copyText}>{prompt}</span>
                         </div>
-                        {instructions && <div className='imageCardBox__instructions'>-- {instructions}</div>}
 
-                        <div className='imageCardBox__date' >created {timeSince(date)} using {ai}</div>
+                        {instructions && <div className='imageCardBox__details__instructions'>-- {instructions}</div>}
 
-                        <div className='imageCardBox__dimensions' >
-                            <Tooltip title="Download Image"><DownloadIcon onClick={downloadImage} /></Tooltip>
+                        <div className='imageCardBox__details__date' >created {timeSince(date)} using {ai}</div>
+
+                        <div className='imageCardBox__details__dimensions' >
+                            <Tooltip title="Download Image"><DownloadIcon onClick={downloadImage} fontSize='large'/></Tooltip>
                             <div>{imageDimensions.width} x {imageDimensions.height}</div>
                         </div>
 
-
+                        <div className='imageCardBox__details__rating'>
+                            <div>Rating</div>
+                            <HoverRating rating={currentAvgRating} submitRating={submitRating} />
+                        </div>
 
                     </div>
-                    <div className='imageCardBox__rating'>
-                        <div>Rating</div>
-                        <HoverRating rating={currentAvgRating} submitRating={submitRating} />
-                    </div>
+
+
                 </div>
             </div>
         </Modal>
