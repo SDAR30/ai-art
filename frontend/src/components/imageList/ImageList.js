@@ -58,6 +58,24 @@ const ImageList = () => {
     let filteredImages = filterImages(images);
     let orderedImages = reOrderImages(filteredImages);
 
+    const findNextImage = (currentImage, goForward = true) => {
+        console.log(currentImage.id)
+        let allImages = orderedImages.flat();
+        let currentIndex = allImages.findIndex(image => image.id === currentImage.id);
+        if (goForward)
+            currentIndex++;
+        else
+            currentIndex--;
+        
+        if (currentIndex < 0)
+            currentIndex = allImages.length - 1;
+
+        let nextImage = allImages[currentIndex];
+        if (!nextImage)
+            nextImage = allImages[0];
+        console.log(nextImage.id)
+        return nextImage;
+    }
 
 
 
@@ -68,7 +86,11 @@ const ImageList = () => {
                 <SelectBar />
             </div>
             <div className='imageList__grid'>
-                {orderedImages.map((column,index) => <div className='imageList__column' key={index}>{column.map(image => <ImageCard image={image} key={image.id} width={width} numberOfColumns={numberOfColumns} />)}</div>)}
+                {orderedImages.map((column, index) =>
+                    <div className='imageList__column' key={index}>{column.map(image =>
+                        <ImageCard image={image} key={image.id} width={width} 
+                            numberOfColumns={numberOfColumns} findNextImage={findNextImage}/>)}
+                    </div>)}
             </div>
             {!orderedImages.length && <div className='imageList__noResults'>No results</div>}
         </div>

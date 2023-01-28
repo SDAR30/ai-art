@@ -14,8 +14,8 @@
         display: none;
     }
 
-    &__close {
-        position: absolute;
+    &__close, &__next, &__prev {
+        position: fixed;
         top: 20px;
         right: 20px;
         z-index: 2;
@@ -32,6 +32,10 @@
             color: $steel;
         }
     }
+
+    &__next{
+        top: 50%;
+    }
 }
 
 .imageCardBox {
@@ -44,7 +48,7 @@
     border-radius: 12px;
     width: 70%;
     min-height: 70vh;
-    color: $steel;
+    color: white;
     border: 2px solid $background-light;
     @extend %card-outline;
     outline: none;
@@ -77,7 +81,6 @@
     
 
     &__details {
-        border: 1px solid black;
         margin-left: 5px;
         display: flex;
         flex-direction: column;
@@ -151,10 +154,8 @@
             }
         }
 
-        &__prompt {
-        }
-
         &__instructions {
+            color: $steel;
         }
 
         &__date {
@@ -203,40 +204,5 @@
 
 @media only screen and (max-width: 720px) {
 
-    .imageCardBox {
-        display: grid;
-        grid-template-columns: 1fr;
-        margin: auto;
-        max-width: 80vw;
-        max-height: unset;
-
-
-        &__title {
-            grid-column: 1;
-            font-size: 1.5rem;
-        }
-
-        &__img {
-            max-width: 60vw;
-        }
-
-        &__details {
-            margin: 0;
-        }
-
-        &__prompt,
-        &__instructions {
-            font-size: .8rem;
-            max-height: 9vh;
-        }
-
-        &__instructions {
-            max-height: 7vh;
-        }
-
-        &__rating {
-            margin: 3px auto -10px;
-            grid-column: 1;
-        }
-    }
+   
 }

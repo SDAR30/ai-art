@@ -12,9 +12,10 @@ import DownloadIcon from '@mui/icons-material/Download';
 import Tooltip from '@mui/material/Tooltip';
 import CloseIcon from '@mui/icons-material/Close';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
-function ImageCardModal({ openCardModal, setOpenCardModal, image, imgObj }) {
-    const { id, ai, date, prompt, title, instructions, url, avg_rating } = image;
+function ImageCardModal({ openCardModal, setOpenCardModal, image, imgObj, showNextImage }) {
+    let { id, ai, date, prompt, title, instructions, url, avg_rating } = image;
     const [currentAvgRating, setCurrentAvgRating] = useState(roundToHalf(avg_rating));
     const [artist, setArtist] = useState({});
     const URL = apiURL();
@@ -98,6 +99,11 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, imgObj }) {
         setExpanded(false);
     }
 
+    const nextImageModal = () => {
+        //setExpanded(false);
+        showNextImage(image);
+    }
+
     return (
         <Modal
             className='imageCardModal'
@@ -107,6 +113,7 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, imgObj }) {
             aria-describedby="modal-modal-description">
             <div>
                 <Tooltip title="close image"><CloseIcon className='imageCardModal__close' onClick={handleClose} fontSize='large' /></Tooltip>
+                <Tooltip title="next image"><NavigateNextIcon className='imageCardModal__next' onClick={nextImageModal} fontSize='large'/></Tooltip>
                 <div className='imageCardBox'>
 
                     <div className='imageCardBox__image'>
@@ -129,7 +136,7 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, imgObj }) {
                             <span>prompt: </span><span title='copy' ref={textRef} onClick={copyText}>{prompt}</span>
                         </div>
 
-                        {instructions && <div className='imageCardBox__details__instructions'>-- {instructions}</div>}
+                        {instructions && <div className='imageCardBox__details__instructions'>Extra steps: {instructions}</div>}
 
                         <div className='imageCardBox__details__date' >created {timeSince(date)} using {ai}</div>
 

@@ -7,13 +7,18 @@ import ImageCardModal from '../imageCardModal/ImageCardModal';
 // import MyModal from '../MyModal';
 
 
-function ImageCard({ image, width = 420, numberOfColumns}) {
+function ImageCard({ image, width = 420, numberOfColumns, findNextImage}) {
   const { ai, prompt, title, url, date } = image;
+  const [newImage, setNewImage] = useState(false);
   const [openCardModal, setOpenCardModal] = useState(false);
   const [height, setHeight] = useState(0);
   const divRef = useRef(null);
   const imgObj = new Image();
   imgObj.src = image.url;
+
+  const showNextImage = (image, goForward) => {
+    setNewImage(findNextImage(image, goForward));
+  }
 
   const openModalForImage = () => {
     setOpenCardModal(true);
@@ -67,8 +72,7 @@ function ImageCard({ image, width = 420, numberOfColumns}) {
 
   return (
     <div>
-      {/* {isOpen && <MyModal  openCardModal={openCardModal} setOpenCardModal={setOpenCardModal} image={image} onClose={handleClose}/> } */}
-      <ImageCardModal openCardModal={openCardModal} setOpenCardModal={setOpenCardModal} image={image} imgObj={imgObj} />
+      <ImageCardModal openCardModal={openCardModal} setOpenCardModal={setOpenCardModal} image={newImage || image} imgObj={imgObj} findNextImage={findNextImage} showNextImage={showNextImage}/>
       <div className='imageCard' ref={divRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={openModalForImage} >
         {/* <Link className='imageCard__link' to={`/images/${id}`} state={{ image: image }}> */}
         <img className="imageCard__image" src={url} alt="ai img" />
