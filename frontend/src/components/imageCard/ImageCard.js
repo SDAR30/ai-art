@@ -16,7 +16,11 @@ function ImageCard({ image, width = 420, numberOfColumns, findNextImage}) {
   const imgObj = new Image();
   imgObj.src = image.url;
 
-  const showNextImage = (image, goForward) => {
+  const showNextImage = (image, goForward, resetImage = false) => {
+    if (resetImage) {
+      setNewImage(false);
+      return;
+    }
     setNewImage(findNextImage(image, goForward));
   }
 

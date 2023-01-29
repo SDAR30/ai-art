@@ -99,6 +99,8 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, imgObj, showNe
     const handleClose = () => {
         setOpenCardModal(false);
         setExpanded(false);
+        //reset image 
+        showNextImage(image, false, true);
     }
 
     const nextImageModal = (goForward = true) => {
@@ -154,7 +156,6 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, imgObj, showNe
                         </div>
 
                     </div>
-
 
                 </div>
             </div>
