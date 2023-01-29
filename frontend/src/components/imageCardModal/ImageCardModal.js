@@ -116,9 +116,11 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, imgObj, showNe
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description">
             <div>
-                <Tooltip title="close image"><CloseIcon className='imageCardModal__close' onClick={handleClose} fontSize='large' /></Tooltip>
-                <Tooltip title="next image"><NavigateNextIcon className='imageCardModal__next' onClick={nextImageModal} fontSize='large'/></Tooltip>
-                <Tooltip title="previous image"><NavigateBeforeIcon className='imageCardModal__prev' onClick={() => nextImageModal(false)} fontSize='large'/></Tooltip>
+                <div className='imageCardModal__navigation'>
+                    <Tooltip title="previous image"><NavigateBeforeIcon className='imageCardModal__prev' onClick={() => nextImageModal(false)} fontSize='large' /></Tooltip>
+                    <Tooltip title="close image"><CloseIcon className='imageCardModal__close' onClick={handleClose} fontSize='large' /></Tooltip>
+                    <Tooltip title="next image"><NavigateNextIcon className='imageCardModal__next' onClick={nextImageModal} fontSize='large' /></Tooltip>
+                </div>
                 <div className='imageCardBox'>
 
                     <div className='imageCardBox__image'>
@@ -146,7 +148,7 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, imgObj, showNe
                         <div className='imageCardBox__details__date' >created {timeSince(date)} using {ai}</div>
 
                         <div className='imageCardBox__details__dimensions' >
-                            <Tooltip title="Download Image"><DownloadIcon onClick={downloadImage} fontSize='large'/></Tooltip>
+                            <Tooltip title="Download Image"><DownloadIcon onClick={downloadImage} fontSize='large' /></Tooltip>
                             <div>{imageDimensions.width} x {imageDimensions.height}</div>
                         </div>
 
@@ -154,7 +156,7 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, imgObj, showNe
                             <div>Rating</div>
                             <HoverRating rating={currentAvgRating} submitRating={submitRating} />
                         </div>
-
+                        
                     </div>
 
                 </div>
