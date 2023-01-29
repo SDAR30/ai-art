@@ -13,6 +13,8 @@ import Tooltip from '@mui/material/Tooltip';
 import CloseIcon from '@mui/icons-material/Close';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+
 
 function ImageCardModal({ openCardModal, setOpenCardModal, image, imgObj, showNextImage }) {
     let { id, ai, date, prompt, title, instructions, url, avg_rating } = image;
@@ -99,9 +101,9 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, imgObj, showNe
         setExpanded(false);
     }
 
-    const nextImageModal = () => {
+    const nextImageModal = (goForward = true) => {
         //setExpanded(false);
-        showNextImage(image);
+        showNextImage(image, goForward);
     }
 
     return (
@@ -114,6 +116,7 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, imgObj, showNe
             <div>
                 <Tooltip title="close image"><CloseIcon className='imageCardModal__close' onClick={handleClose} fontSize='large' /></Tooltip>
                 <Tooltip title="next image"><NavigateNextIcon className='imageCardModal__next' onClick={nextImageModal} fontSize='large'/></Tooltip>
+                <Tooltip title="previous image"><NavigateBeforeIcon className='imageCardModal__prev' onClick={() => nextImageModal(false)} fontSize='large'/></Tooltip>
                 <div className='imageCardBox'>
 
                     <div className='imageCardBox__image'>

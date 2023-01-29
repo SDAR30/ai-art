@@ -58,8 +58,7 @@ const ImageList = () => {
     let filteredImages = filterImages(images);
     let orderedImages = reOrderImages(filteredImages);
 
-    const findNextImage = (currentImage, goForward = true) => {
-        console.log(currentImage.id)
+    const findNextImage = (currentImage, goForward) => {
         let allImages = orderedImages.flat();
         let currentIndex = allImages.findIndex(image => image.id === currentImage.id);
         if (goForward)
@@ -73,7 +72,6 @@ const ImageList = () => {
         let nextImage = allImages[currentIndex];
         if (!nextImage)
             nextImage = allImages[0];
-        console.log(nextImage.id)
         return nextImage;
     }
 
