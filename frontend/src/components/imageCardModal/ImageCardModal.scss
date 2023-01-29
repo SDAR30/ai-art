@@ -1,6 +1,7 @@
 @import './../../designUtils/cards.scss';
 @import './../../designUtils/colors.scss';
 @import './../../designUtils/fonts.scss';
+@import './../../designUtils/dimensions.scss';
 
 .imageCardModal {
     background-color: rgba(0, 0, 0, 0.7);
@@ -93,20 +94,14 @@
 
     }
 
-
-
     &__details {
         margin-left: 5px;
         display: flex;
         flex-direction: column;
 
-
-
         &__header {
             display: flex;
             align-items: center;
-            // justify-content: space-between;
-            // padding: 0 10px;
 
             &__title {
                 font-size: 1.3rem;
@@ -137,8 +132,6 @@
 
         &__prompt,
         &__instructions {
-            // width: 100%;
-            // overflow-y: auto;
             font-size: 1rem;
             font-weight: 500;
             margin: .4rem;
@@ -210,7 +203,7 @@
 
             > :first-child {
                 color: rgb(53, 53, 53);
-            }
+            }  
         }
 
         &__navigation {
@@ -219,11 +212,9 @@
 
     }
 
-    //details
-
 }
 
-@media only screen and (max-width: 620px) {
+@media only screen and (max-width: $minimum-navbar-width) {
 
     .imageCardModal {
 

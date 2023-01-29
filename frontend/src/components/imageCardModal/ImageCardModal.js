@@ -16,21 +16,18 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 
 
-function ImageCardModal({ openCardModal, setOpenCardModal, image, imgObj, showNextImage }) {
+function ImageCardModal({ openCardModal, setOpenCardModal, image, showNextImage, imageDimensions }) {
     let { id, ai, date, prompt, title, instructions, url, avg_rating } = image;
     const [currentAvgRating, setCurrentAvgRating] = useState(roundToHalf(avg_rating));
     const [artist, setArtist] = useState({});
     const URL = apiURL();
     const [cookies] = useCookies('token');
     const user_id = cookies.token ? cookies.user.id : 0;
-    const [imageDimensions, setImageDimensions] = useState({});
     const textRef = useRef(null);
     const [expanded, setExpanded] = useState(false);
 
     const toggleImageSize = () => {
-        //imgRef.current.style.width = '100%';
         setExpanded(!expanded);
-
         //open image in new tab
         //onClick={() => window.open(image.url)} 
     }
@@ -47,12 +44,6 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, imgObj, showNe
         textArea.remove();
         alert("Text copied to clipboard!");
     }
-
-    useEffect(() => {
-        imgObj.onload = () => {
-            setImageDimensions({ width: imgObj.width, height: imgObj.height });
-        }
-    }, [imgObj])
 
     const downloadImage = () => {
         let imageURL = image.url;
@@ -104,7 +95,6 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, imgObj, showNe
     }
 
     const nextImageModal = (goForward = true) => {
-        //setExpanded(false);
         showNextImage(image, goForward);
     }
 
@@ -156,7 +146,7 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, imgObj, showNe
                             <div>Rating</div>
                             <HoverRating rating={currentAvgRating} submitRating={submitRating} />
                         </div>
-                        
+
                     </div>
 
                 </div>

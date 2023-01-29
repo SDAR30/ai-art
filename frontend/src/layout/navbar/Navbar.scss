@@ -70,7 +70,7 @@
     
     }
 
-    @media only screen and (max-width: $minimum-navbar-dimensions) {
+    @media only screen and (max-width: $minimum-navbar-width) {
         &__menuItems {
             display: none;
 

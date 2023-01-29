@@ -1,27 +1,40 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './ImageCard.scss';
-// import { Link } from "react-router-dom";
 import { capitalizeFirstLetterOfEachWord, removeExtraWords } from '../../utils/stringUtils';
 import { timeSince } from '../../utils/dateUtils';
 import ImageCardModal from '../imageCardModal/ImageCardModal';
-// import MyModal from '../MyModal';
 
 
-function ImageCard({ image, width = 420, numberOfColumns, findNextImage}) {
+function ImageCard({ image, width = 420, numberOfColumns, findNextImage }) {
   const { ai, prompt, title, url, date } = image;
   const [newImage, setNewImage] = useState(false);
   const [openCardModal, setOpenCardModal] = useState(false);
+  const [imageDimensions, setImageDimensions] = useState({width: 0, height: 0});
   const [height, setHeight] = useState(0);
   const divRef = useRef(null);
-  const imgObj = new Image();
-  imgObj.src = image.url;
+
+  useEffect(() => {
+    const imgObj = new Image();
+    imgObj.src = image.url;
+    imgObj.onload = () => {
+      setImageDimensions({ width: imgObj.width, height: imgObj.height });
+    }
+  }, [image.url, image])
+
 
   const showNextImage = (image, goForward, resetImage = false) => {
     if (resetImage) {
       setNewImage(false);
       return;
     }
-    setNewImage(findNextImage(image, goForward));
+    let nextImage = findNextImage(image, goForward);
+    setNewImage(nextImage);
+    //get dimensions of next image
+    const imgObj = new Image();
+    imgObj.src = nextImage.url;
+    imgObj.onload = () => {
+      setImageDimensions({ width: imgObj.width, height: imgObj.height });
+    }
   }
 
   const openModalForImage = () => {
@@ -76,7 +89,7 @@ function ImageCard({ image, width = 420, numberOfColumns, findNextImage}) {
 
   return (
     <div>
-      <ImageCardModal openCardModal={openCardModal} setOpenCardModal={setOpenCardModal} image={newImage || image} imgObj={imgObj} findNextImage={findNextImage} showNextImage={showNextImage}/>
+      <ImageCardModal openCardModal={openCardModal} setOpenCardModal={setOpenCardModal} image={newImage || image} imageDimensions={imageDimensions} findNextImage={findNextImage} showNextImage={showNextImage} />
       <div className='imageCard' ref={divRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={openModalForImage} >
         {/* <Link className='imageCard__link' to={`/images/${id}`} state={{ image: image }}> */}
         <img className="imageCard__image" src={url} alt="ai img" />
