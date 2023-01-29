@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import './ImageCard.scss';
 import { capitalizeFirstLetterOfEachWord, removeExtraWords } from '../../utils/stringUtils';
 import { timeSince } from '../../utils/dateUtils';
+import { ratingText } from '../../utils/mathUtils';
 import ImageCardModal from '../imageCardModal/ImageCardModal';
 
-
 function ImageCard({ image, width = 420, numberOfColumns, findNextImage }) {
-  const { ai, prompt, title, url, date } = image;
+  const { ai, prompt, title, url, date, avg_rating} = image;
   const [newImage, setNewImage] = useState(false);
   const [openCardModal, setOpenCardModal] = useState(false);
   const [imageDimensions, setImageDimensions] = useState({width: 0, height: 0});
@@ -75,18 +75,6 @@ function ImageCard({ image, width = 420, numberOfColumns, findNextImage }) {
     }
   }
 
-  // const starIcons = (avg_rating) =>{
-  //   let avg = roundToOneDecimal(avg_rating);
-  //   if(!avg) return 'not rated'
-  //   let output;
-  //   for(let i = 0; i < avg; i++){
-  //     output += <StarIcon />
-  //   }
-  //   return output;
-  // }
-
-  //const image_rating = roundToOneDecimal(avg_rating) ? roundToOneDecimal(avg_rating) + ' / 5 🔥' : 'Not rated';
-
   return (
     <div>
       <ImageCardModal openCardModal={openCardModal} setOpenCardModal={setOpenCardModal} image={newImage || image} imageDimensions={imageDimensions} findNextImage={findNextImage} showNextImage={showNextImage} />
@@ -98,7 +86,7 @@ function ImageCard({ image, width = 420, numberOfColumns, findNextImage }) {
           <p className='imageCard__overlay__date' style={styles.date}>{timeSince(date)}</p>
           <p className='imageCard__overlay__prompt' style={styles.prompt}>{removeExtraWords(prompt, 80)}</p>
           <p className='imageCard__overlay__ai' style={styles.ai}>made with {ai}</p>
-          {/* <p className='imageCard__overlay__rating' style={styles.rating}><CardStarRating value={Number(avg_rating)} text={"rating"} color="orange" /></p> */}
+          <p className='imageCard__overlay__rating' style={styles.rating}>{ratingText(avg_rating)}</p>
           {/* <p className='imageCard__overlay__dimensions' style={styles.ai}>Height: {height}</p> */}
         </div>
         {/* </Link> */}

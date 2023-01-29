@@ -14,4 +14,34 @@ function roundToHalf(num) {
     return Math.round(num * 2) / 2;
 }
 
-module.exports = { convertRatingToPercent, roundToOneDecimal, roundToHalf };
+//convert rating and show text with emoji
+function ratingText(avg) {
+    if (!avg) return 'Not rated';
+    avg = roundToOneDecimal(parseFloat(avg));
+    if (!avg) return 'Not rated';
+    let text = '';
+    //let emojis = '🤮🤢😠😒 💔😐 👌🙂 ✨⚡⭐🌶🔥🥉🥈🥇'
+
+    if (avg > 4.6)
+        text += '🔥';
+    else if (avg > 4.2)
+        text += '🌶';
+    else if (avg > 3.7)
+        text += '⭐';
+    else if (avg > 3.3)
+        text += '✨';
+    else if (avg > 2.7)
+        text += '🙂';
+    else if (avg > 2.3)
+        text += '😐';
+    else if (avg > 1.8)
+        text += '😒';
+    else if (avg > 1.3)
+        text += '😠';
+    else
+        text += '🤮';
+
+    return text + ' ' + avg + ' / 5';
+}
+
+module.exports = { convertRatingToPercent, roundToOneDecimal, roundToHalf, ratingText };

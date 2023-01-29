@@ -7,7 +7,7 @@ import { apiURL } from "../../utils/apiURL"
 import HoverRating from '../hoverRating/HoverRating';
 import { roundToHalf } from '../../utils/mathUtils';
 import { useCookies } from 'react-cookie';
-import { saveAs } from 'file-saver';
+//import { saveAs } from 'file-saver';
 import DownloadIcon from '@mui/icons-material/Download';
 import Tooltip from '@mui/material/Tooltip';
 import CloseIcon from '@mui/icons-material/Close';
@@ -45,17 +45,40 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, showNextImage,
         alert("Text copied to clipboard!");
     }
 
-    const downloadImage = () => {
+    // const downloadImage = () => {
+    //     let imageURL = image.url;
+    //     console.log('imageURL: ', imageURL)
+    //     if (!imageURL.includes('ai-art'))
+    //         imageURL = 'https://cors-anywhere.herokuapp.com/' + image.url;
+    //     fetch(imageURL)
+    //         .then(res => res.blob())
+    //         .then(blob => {
+    //             saveAs(blob, `${title}.png`);
+    //         })
+    // }
+
+    const download = e => {
         let imageURL = image.url;
-        console.log('imageURL: ', imageURL)
         if (!imageURL.includes('ai-art'))
             imageURL = 'https://cors-anywhere.herokuapp.com/' + image.url;
-        fetch(imageURL)
-            .then(res => res.blob())
-            .then(blob => {
-                saveAs(blob, `${title}.png`);
+        fetch(imageURL, {
+            method: "GET",
+            headers: {}
+        })
+            .then(response => {
+                response.arrayBuffer().then(function (buffer) {
+                    const url = window.URL.createObjectURL(new Blob([buffer]));
+                    const link = document.createElement("a");
+                    link.href = url;
+                    link.setAttribute("download", "image.png"); //or any other extension
+                    document.body.appendChild(link);
+                    link.click();
+                });
             })
-    }
+            .catch(err => {
+                console.log(err);
+            });
+    };
 
     const submitRating = (rating) => {
         if (!user_id)
@@ -138,7 +161,7 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, showNextImage,
                         <div className='imageCardBox__details__date' >created {timeSince(date)} using {ai}</div>
 
                         <div className='imageCardBox__details__dimensions' >
-                            <Tooltip title="Download Image"><DownloadIcon onClick={downloadImage} fontSize='large' /></Tooltip>
+                            <Tooltip title="Download Image"><DownloadIcon onClick={download} fontSize='large' /></Tooltip>
                             <div>{imageDimensions.width} x {imageDimensions.height}</div>
                         </div>
 
