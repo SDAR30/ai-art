@@ -72,7 +72,7 @@ users.post('/', async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        pic = pic || 'https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png'
+        pic = pic || 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/2048px-Circle-icons-profile.svg.png';
 
         const user = await db.one('INSERT INTO users (username, email, password, pic) VALUES ($1, $2, $3, $4) RETURNING id, username, email',
             [username, email.toLowerCase(), hashedPassword, pic]);

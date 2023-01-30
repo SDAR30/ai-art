@@ -6,6 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Avatar from '@mui/material/Avatar';
 import { useCookies } from "react-cookie";
 import UserContext from '../../UserContext';
+import './ProfileIcon.scss'
 
 export default function ProfileIcon({ setActive }) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -34,24 +35,27 @@ export default function ProfileIcon({ setActive }) {
 
   return (
     <div>
-      <Button id="demo-positioned-button"
-        aria-controls={open ? 'demo-positioned-menu' : undefined} aria-haspopup="true" aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-      >
-        <Avatar sx={{ bgcolor: 'grey' }}>{cookies?.user ? cookies.user.username[0] : "?"}</Avatar>
+      <Button id="demo-positioned-button" aria-controls={open ? 'demo-positioned-menu' : undefined} 
+      aria-haspopup="true" aria-expanded={open ? 'true' : undefined} onClick={handleClick}>
+        <Avatar alt={cookies?.user ? cookies?.user?.username[0] : '?'} 
+         src={cookies?.user ? cookies?.user?.pic : 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/2048px-Circle-icons-profile.svg.png'} 
+         style={{
+          border: '2px solid white' }}
+       />
       </Button>
       <Menu
         id="demo-positioned-menu"
         aria-labelledby="demo-positioned-button"
         anchorEl={anchorEl}
         open={open}
+        className='profileIconMenu'
         onClose={handleClose}
-        anchorOrigin={{ vertical: 'top', horizontal: 'left', }}
-        transformOrigin={{ vertical: 'top', horizontal: 'left', }}
+        // anchorOrigin={{ vertical: 'top', horizontal: 'left', }}
+        // transformOrigin={{ vertical: 'middle', horizontal: 'right', }}
       >
-        <MenuItem onClick={handleClose}><NavLink to="/profile">Profile</NavLink></MenuItem>
-        <MenuItem onClick={handleClose}>Settings</MenuItem>
-        <MenuItem onClick={logOut}>Logout</MenuItem>
+        <MenuItem className='profileIconMenu__item' onClick={handleClose}><NavLink to="/profile">Profile</NavLink></MenuItem>
+        <MenuItem className='profileIconMenu__item' onClick={handleClose}>Settings</MenuItem>
+        <MenuItem  className='profileIconMenu__item' onClick={logOut}>Logout</MenuItem>
       </Menu>
     </div>
   );
