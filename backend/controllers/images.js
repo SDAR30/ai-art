@@ -23,6 +23,22 @@ images.get('/', async (req, res) => {
     }
 })
 
+//get all images of a particular user:
+images.get('/user/:id', async (req, res) => {
+    try {
+        const userID = req.params.id;
+        if (!/[0-9]/.test(userID)) {
+            res.send("user id is not a number")
+            return;
+        }
+        const userImages = await db.any('SELECT * FROM images where user_id = $1', [userID])
+        return userImages ? res.json(userImages) : res.status(422).send({ success: false, error: true, message: "No images for that user" })
+    } catch (error) {
+        res.status(500).json({ success: false, error: true, message: error.message })
+    }
+})
+
+
 images.get('/:id', async (req, res) => {
     try {
         const imageID = req.params.id;

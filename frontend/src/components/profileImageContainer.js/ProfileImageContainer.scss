@@ -1,0 +1,10 @@
+.profileImageContainer{
+    border: 3px solid rgb(253, 252, 252);
+    color: white;
+    width: 100%;
+    margin: 0 20px;
+    &__images{
+        display:flex;
+    }
+    
+}

@@ -1,13 +1,13 @@
 \c ai_art;
 
 INSERT INTO users (username, email, password, pic)
-VALUES ('Adam Z', 'adam01@gmail.com', 'ghj678','https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png'),
-		('Brian Kindo', 'bjkindo@gmail.com', 'jkl890','https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png'),
-		('Casmen', 'casguuh@gmail.com', 'hjk789','https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png'),
-		('DylanStranger', 'dhizeeni@yahoo.com', 'dfgnji','https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png'),
-		('qwerty', 'quincyk@gmail.com','qwerty','https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png'),
-		('voltorn','volto@gmail.com','voltorn','https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png'),
-		('PartyAnimal','berka@gmail.com','berka4','https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png');
+VALUES ('Adam Z', 'adam01@gmail.com', 'ghj678','https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/2048px-Circle-icons-profile.svg.png'),
+		('Brian Kindo', 'bjkindo@gmail.com', 'jkl890','https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/2048px-Circle-icons-profile.svg.png'),
+		('Casmen', 'casguuh@gmail.com', 'hjk789','https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/2048px-Circle-icons-profile.svg.png'),
+		('DylanStranger', 'dhizeeni@yahoo.com', 'dfgnji','https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/2048px-Circle-icons-profile.svg.png'),
+		('qwerty', 'quincyk@gmail.com','qwerty','https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/2048px-Circle-icons-profile.svg.png'),
+		('voltorn','volto@gmail.com','voltorn','https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/2048px-Circle-icons-profile.svg.png'),
+		('PartyAnimal','berka@gmail.com','berka4','https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/2048px-Circle-icons-profile.svg.png');
 
 INSERT INTO images (title, ai, url, instructions, prompt, date, user_id)
 VALUES ('Mechanical Skull', 'Midjourney','https://imgur.com/c5fgeoH.png','', 'biomechancial filament skull','2022-03-20', 6),

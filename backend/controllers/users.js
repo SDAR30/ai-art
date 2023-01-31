@@ -26,6 +26,33 @@ users.get('/:id', async (req, res) => {
     }
 })
 
+//get all user information of a particular user along with all images data for that user:
+// SELECT users.*, images.*
+// FROM users
+// JOIN images ON users.id = images.user_id
+//WHERE users.username = 'YOUR_USERNAME_HERE';
+
+users.get('/:id/images', async (req, res) => {
+    try {
+        const userID = req.params.id;
+
+        if (!/[0-9]/.test(userID)) {
+            res.send('user ID must be a number')
+            return;
+        }
+        const query = 'SELECT users.*, images.* FROM users JOIN images ON users.id = images.user_id WHERE users.id = $1';
+        const userImages = await db.any(query, [userID])
+        if (userImages) {
+            res.json(userImages)
+        } else {
+            res.send('user not found')
+        }
+
+    } catch (err) {
+        res.status(500).send("an error occured")
+    }
+})
+
 users.post('/login', async (req, res) => {
     try {
         let { username, password } = req.body;
@@ -48,8 +75,8 @@ users.post('/login', async (req, res) => {
         }
 
         if (user && validPassword) {
-            const {accessToken, refreshToken} = jwtTokens(user);
-            res.json({user, accessToken, refreshToken})
+            const { accessToken, refreshToken } = jwtTokens(user);
+            res.json({ user, accessToken, refreshToken })
         }
 
     } catch (error) {
@@ -80,8 +107,8 @@ users.post('/', async (req, res) => {
         console.log(user)
 
         if (user) { //if user properly created, generate JWT Token
-            const {accessToken, refreshToken} = jwtTokens(user);
-            res.json({user, accessToken, refreshToken});
+            const { accessToken, refreshToken } = jwtTokens(user);
+            res.json({ user, accessToken, refreshToken });
         }
 
     } catch (err) {

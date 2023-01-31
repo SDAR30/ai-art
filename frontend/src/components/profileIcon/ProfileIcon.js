@@ -38,7 +38,7 @@ export default function ProfileIcon({ setActive }) {
       <Button id="demo-positioned-button" aria-controls={open ? 'demo-positioned-menu' : undefined} 
       aria-haspopup="true" aria-expanded={open ? 'true' : undefined} onClick={handleClick}>
         <Avatar alt={cookies?.user ? cookies?.user?.username[0] : '?'} 
-         src={cookies?.user ? cookies?.user?.pic : 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/2048px-Circle-icons-profile.svg.png'} 
+         src={cookies?.user ? cookies?.user?.pic : null} 
          style={{
           border: '2px solid white' }}
        />

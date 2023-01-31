@@ -14,6 +14,7 @@ import ImageUpload from './components/imageUpload/ImageUpload';
 import UserContext from './UserContext';
 import {useCookies} from 'react-cookie';
 import CreateImage from './components/createImage/CreateImage';
+import Profile from './components/profile/Profile';
 
 
 
@@ -48,6 +49,7 @@ function App() {
             <Route path="/images/:imageID" element={<ImageView />} />
             <Route path="images/new" element={<ImageUpload/>} />
             <Route path='images/create' element={<CreateImage/>}/>
+            <Route path="/profile" element={<Profile />} />
             <Route path="/" element={<Home />} />
           </Routes>
         </Router>
