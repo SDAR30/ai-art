@@ -4,7 +4,10 @@ import './ProfileImageCard.scss';
 function ProfileImageCard({image}) {
     return (
         <div className='profileImageCard'>
-            <img src={image.url} alt='user made'/>
+            <img src={image.url} alt='user ai generated'/>
+            <div className='profileImageCard__overlay'>
+                <p className='profileImageCard__overlay__title'>{image.title}</p>
+            </div>
         </div>
     );
 }

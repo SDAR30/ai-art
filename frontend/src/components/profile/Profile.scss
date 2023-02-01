@@ -1,6 +1,27 @@
-.profile{
-    display: flex;
-    > * {
-        margin: 10px 10px;
+@import './../../designUtils/dimensions.scss';
+
+.profile {
+    &__section {
+        display: flex;
+
+        >* {
+            margin: 20px 10px;
+        }
+    }
+
+    //media queries 
+    @media (max-width: $minimum-navbar-width) {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 20px;
+
+        &__section {
+            flex-direction: column;
+
+            >* {
+                margin: 10px;
+            }
+        }
     }
 }

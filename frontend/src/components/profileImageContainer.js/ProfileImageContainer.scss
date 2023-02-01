@@ -1,10 +1,44 @@
+@import './../../designUtils/cards.scss';
+@import './../../designUtils/colors.scss';
+@import './../../designUtils/fonts.scss';
+@import './../../designUtils/dimensions.scss';
+
 .profileImageContainer{
-    border: 3px solid rgb(253, 252, 252);
+    //border: 3px solid rgb(253, 252, 252);
     color: white;
-    width: 100%;
-    margin: 0 20px;
+    width: 80%;
+    //max-height: 40vh;
+    overflow-x: scroll;
+    background-color: $background-light;
+    border: 1px solid rgb(57, 57, 90);
+    text-align: center;
+    @extend %card-outline;
+
+    > h3{
+        @extend %roboto;
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin: 0;
+        padding: 10px;
+    }
+
+    &::-webkit-scrollbar {
+        display: none;
+      }
     &__images{
         display:flex;
+        > * {
+            margin: 2px 5px;
+        }
+    }
+
+    @media (max-width: $minimum-navbar-width) {
+        width: 300px;
+        &__images{
+            display:flex;
+            flex-direction: column;
+        }
+
     }
     
 }

@@ -8,7 +8,6 @@ import ProfileImageContainer from '../profileImageContainer.js/ProfileImageConta
 function Profile(props) {
     const [userImages, setUserImages] = useState([]);
     const URL = apiURL();
-    // get user from provider context
     const { user } = useContext(UserContext);
 
     useEffect(() => {
@@ -26,9 +25,15 @@ function Profile(props) {
 
     return (
         <div className='profile'>
+            <div className='profile__section'>
             <ProfileUserCard username={user.username} email={user.email}/>
             <ProfileImageContainer images={userImages}/>
-            
+            </div>
+            <div className='profile__section'>
+            <ProfileUserCard username={user.username} email={user.email}/>
+            <ProfileImageContainer images={userImages}/>
+
+            </div>
         </div>
     );
 }
