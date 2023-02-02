@@ -2,10 +2,10 @@ import React from 'react';
 import ProfileImageCard from '../profileImageCard/ProfileImageCard';
 import './ProfileImageContainer.scss';
 
-function ProfileImageContainer({ images }) {
+function ProfileImageContainer({ title, images }) {
     return (
         <div className='profileImageContainer'>
-            <h3>{images.length ? 'My Images' : 'No Images Made Yet'} </h3>
+            <h3 className='profileImageContainer__title'>{title} </h3>
             <div className='profileImageContainer__images'>
                 {images.map(image => {
                     return (

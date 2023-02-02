@@ -31,8 +31,14 @@ CREATE TABLE ratings (
   user_id INT REFERENCES users(id) ON DELETE CASCADE
 );
 
-CREATE TABLE favorites (
+CREATE TABLE bookmarks (
   id SERIAL PRIMARY KEY,
   user_id INTEGER REFERENCES users (id) ON DELETE CASCADE,
   image_id INTEGER REFERENCES images (id) ON DELETE CASCADE
+);
+
+CREATE TABLE follows (
+  id SERIAL PRIMARY KEY,
+  following_id INTEGER REFERENCES users (id) ON DELETE CASCADE,
+  followed_id INTEGER REFERENCES users (id) ON DELETE CASCADE
 );

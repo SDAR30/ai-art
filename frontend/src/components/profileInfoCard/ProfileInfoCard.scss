@@ -1,0 +1,24 @@
+@import './../../designUtils/cards.scss';
+@import './../../designUtils/colors.scss';
+@import './../../designUtils/fonts.scss';
+
+.profileInfoCard{
+    width: 300px;
+    height: 270px;
+    color: white;
+    background-color: $background-light;
+    border: 1px solid rgb(57, 57, 90);
+    border-radius: 12px;
+    @extend %card-outline;
+
+    > * {
+        margin: 17px;
+    }
+
+    &__title{
+        text-align: center;
+        @extend %slab;
+        text-shadow: 3px 4px 3px rgba(0,0,0,0.7), 4px 8px 13px rgba(0,0,0,0.7), 12px 18px 23px rgba(0,0,0,0.3);
+    }
+    
+}

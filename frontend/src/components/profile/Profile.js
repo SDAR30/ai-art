@@ -27,11 +27,11 @@ function Profile(props) {
         <div className='profile'>
             <div className='profile__section'>
             <ProfileUserCard username={user.username} email={user.email}/>
-            <ProfileImageContainer images={userImages}/>
+            <ProfileImageContainer title={'My Images'} images={userImages}/>
             </div>
             <div className='profile__section'>
             <ProfileUserCard username={user.username} email={user.email}/>
-            <ProfileImageContainer images={userImages}/>
+            <ProfileImageContainer title={'Bookmarked Images'} images={userImages}/>
 
             </div>
         </div>
