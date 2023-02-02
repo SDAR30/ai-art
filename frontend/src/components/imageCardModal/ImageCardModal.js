@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 //import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import './ImageCardModal.scss'
@@ -14,10 +14,14 @@ import CloseIcon from '@mui/icons-material/Close';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import UserContext from '../../UserContext';
 
 
 function ImageCardModal({ openCardModal, setOpenCardModal, image, showNextImage, imageDimensions }) {
     let { id, ai, date, prompt, title, instructions, url, avg_rating } = image;
+    const { user } = useContext(UserContext);
     const [currentAvgRating, setCurrentAvgRating] = useState(roundToHalf(avg_rating));
     const [artist, setArtist] = useState({});
     const URL = apiURL();
@@ -25,6 +29,7 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, showNextImage,
     const user_id = cookies.token ? cookies.user.id : 0;
     const textRef = useRef(null);
     const [expanded, setExpanded] = useState(false);
+    const [bookmark, setBookmark] = useState(false);
 
     const toggleImageSize = () => {
         setExpanded(!expanded);
@@ -100,6 +105,23 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, showNextImage,
         })
     }
 
+    const toggleBookmark = async () => {
+        if (!user) return alert('Log in to bookmark images');
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ image_id: id, user_id: user.id })
+        }
+        const response = await fetch(`${URL}/bookmarks`, requestOptions);
+        const data = await response.json();
+        if (data.error) {
+            alert('error: ' + data.message);
+        }
+        else {
+            setBookmark(!bookmark);
+        }
+    }
+
 
     useEffect(() => {
         const getArtist = async () => {
@@ -107,8 +129,19 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, showNextImage,
             const data = await response.json();
             setArtist(data);
         }
+
+        const isBookmarked = async () => {
+            if (!user) return; //if user is not logged in, return
+            const response = await fetch(`${URL}/bookmarks/${user.id}/${image.id}`);
+            return await response.json();
+        }
+
+        isBookmarked();
         getArtist();
-    }, [image.user_id, URL])
+
+
+
+    }, [image.user_id, URL, image.id, user])
 
     const handleClose = () => {
         setOpenCardModal(false);
@@ -149,6 +182,9 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, showNextImage,
                             <div className='imageCardBox__details__header__artist'>
                                 <img src={artist.pic} alt='profile'></img>
                                 <div>by {artist.username}</div>
+                            </div>
+                            <div className='imageCardBox__details__header__bookmark' onClick={toggleBookmark}>
+                                <Tooltip title="bookmark">{bookmark ? <BookmarkIcon /> : <BookmarkBorderIcon />}</Tooltip>
                             </div>
                         </div>
 
