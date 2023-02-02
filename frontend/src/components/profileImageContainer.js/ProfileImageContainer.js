@@ -5,7 +5,7 @@ import './ProfileImageContainer.scss';
 function ProfileImageContainer({ images }) {
     return (
         <div className='profileImageContainer'>
-            <h3>My Images</h3>
+            <h3>{images.length ? 'My Images' : 'No Images Made Yet'} </h3>
             <div className='profileImageContainer__images'>
                 {images.map(image => {
                     return (
