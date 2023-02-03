@@ -1,48 +1,59 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Profile.scss';
 import { apiURL } from "../../utils/apiURL";
-import axios from "axios";
-import UserContext from '../../UserContext';
 import ProfileUserCard from '../profileUserCard/ProfileUserCard';
 import ProfileImageContainer from '../profileImageContainer.js/ProfileImageContainer';
+import { useCookies } from 'react-cookie';
 
 function Profile(props) {
     const [userImages, setUserImages] = useState([]);
+    const [bookmarkImages, setBookmarkImages] = useState([]);
     const URL = apiURL();
-    const { user } = useContext(UserContext);
+    const [cookies] = useCookies('token');
+    const user = cookies.token ? cookies.user : null;
 
     useEffect(() => {
-
-
         const getYourImages = async () => {
-            if(!user) return;
+            if(!user) {
+                console.log('not logged in')
+                return;
+            }
             try {
-                let res = axios.get(`${URL}/images/user/${user?.id}`);
-                if(res.data)
-                console.log(res.data)
-                setUserImages(res.data);
+                const response = await fetch(`${URL}/images/user/${user.id}`);
+                const data = await response.json();
+                setUserImages(data);
             } catch (error) {
                 console.log('inside catch of Profile: getYourImages, error: ', error)
             }
         }
+
+        const getBookmarkedImages = async () => {
+            if(!user) {
+                return;
+            }
+            try {
+                const response = await fetch(`${URL}/bookmarks/${user.id}`);
+                const data = await response.json();
+                setBookmarkImages(data);
+            } catch (error) {
+                console.log('inside catch of Profile: getBookmarkedImages, error: ', error)
+            }
+        }
+
         getYourImages();
-        // fetch(`${URL}/images/user/${user?.id}`)
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         setUserImages(data);
-        //     })
+        getBookmarkedImages();
 
     }, [URL, user])
 
     return (
         <div className='profile'>
             <div className='profile__section'>
-                <ProfileUserCard username={user.username} email={user.email} />
+                <ProfileUserCard username={user?.username} email={user?.email} />
                 <ProfileImageContainer title={'My Images'} images={userImages} />
             </div>
             <div className='profile__section'>
-                <ProfileUserCard username={user.username} email={user.email} />
-                <ProfileImageContainer title={'Bookmarked Images'} images={userImages} />
+                <ProfileUserCard username={user?.username} email={user?.email} />
+                <ProfileImageContainer title={'Bookmarked Images'} images={bookmarkImages} />
 
             </div>
         </div>
