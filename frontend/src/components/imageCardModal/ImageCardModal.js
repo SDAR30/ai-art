@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 //import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import './ImageCardModal.scss'
@@ -16,12 +16,10 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
-import UserContext from '../../UserContext';
 
 
 function ImageCardModal({ openCardModal, setOpenCardModal, image, showNextImage, imageDimensions }) {
     let { id, ai, date, prompt, title, instructions, url, avg_rating } = image;
-    const { user } = useContext(UserContext);
     const [currentAvgRating, setCurrentAvgRating] = useState(roundToHalf(avg_rating));
     const [artist, setArtist] = useState({});
     const URL = apiURL();
@@ -106,11 +104,11 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, showNextImage,
     }
 
     const toggleBookmark = async () => {
-        if (!user) return alert('Log in to bookmark images');
+        if (!user_id) return alert('Log in to bookmark images');
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ image_id: id, user_id: user.id })
+            body: JSON.stringify({ image_id: id, user_id: user_id })
         }
         const response = await fetch(`${URL}/bookmarks`, requestOptions);
         const data = await response.json();
@@ -131,9 +129,12 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, showNextImage,
         }
 
         const isBookmarked = async () => {
-            if (!user) return; //if user is not logged in, return
-            const response = await fetch(`${URL}/bookmarks/${user.id}/${image.id}`);
-            return await response.json();
+            if (!user_id) return; //if user is not logged in, return
+            const response = await fetch(`${URL}/bookmarks/${user_id}/${image.id}`);
+            const data = await response.json();
+            if(data)
+                setBookmark(true);
+            return;
         }
 
         isBookmarked();
@@ -141,7 +142,7 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, showNextImage,
 
 
 
-    }, [image.user_id, URL, image.id, user])
+    }, [image.user_id, URL, image.id, user_id])
 
     const handleClose = () => {
         setOpenCardModal(false);
