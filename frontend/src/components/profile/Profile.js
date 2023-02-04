@@ -3,6 +3,7 @@ import './Profile.scss';
 import { apiURL } from "../../utils/apiURL";
 import ProfileUserCard from '../profileUserCard/ProfileUserCard';
 import ProfileImageContainer from '../profileImageContainer.js/ProfileImageContainer';
+import ProfileInfoCard from '../profileInfoCard/ProfileInfoCard';
 import { useCookies } from 'react-cookie';
 
 function Profile(props) {
@@ -14,7 +15,7 @@ function Profile(props) {
 
     useEffect(() => {
         const getYourImages = async () => {
-            if(!user) {
+            if (!user) {
                 console.log('not logged in')
                 return;
             }
@@ -28,7 +29,7 @@ function Profile(props) {
         }
 
         const getBookmarkedImages = async () => {
-            if(!user) {
+            if (!user) {
                 return;
             }
             try {
@@ -52,7 +53,7 @@ function Profile(props) {
                 <ProfileImageContainer title={'My Images'} images={userImages} />
             </div>
             <div className='profile__section'>
-                <ProfileUserCard username={user?.username} email={user?.email} />
+                <ProfileInfoCard images={userImages} />
                 <ProfileImageContainer title={'Bookmarked Images'} images={bookmarkImages} />
 
             </div>

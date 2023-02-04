@@ -132,8 +132,8 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, showNextImage,
             if (!user_id) return; //if user is not logged in, return
             const response = await fetch(`${URL}/bookmarks/${user_id}/${image.id}`);
             const data = await response.json();
-            if(data)
-                setBookmark(true);
+            if (data) { setBookmark(true); }
+            else { setBookmark(false); }
             return;
         }
 
@@ -185,7 +185,7 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, showNextImage,
                                 <div>by {artist.username}</div>
                             </div>
                             <div className='imageCardBox__details__header__bookmark' onClick={toggleBookmark}>
-                                <Tooltip title="bookmark">{bookmark ? <BookmarkIcon /> : <BookmarkBorderIcon />}</Tooltip>
+                                <Tooltip title="bookmark"><div>{bookmark ? <BookmarkIcon /> : <BookmarkBorderIcon />}</div></Tooltip>
                             </div>
                         </div>
 

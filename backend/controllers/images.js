@@ -1,5 +1,4 @@
 const images = require('express').Router();
-
 const db = require('../db/index');
 
 images.get('/authenticate', async (req, res) => {
