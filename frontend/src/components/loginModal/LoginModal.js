@@ -7,7 +7,7 @@ import LoginAccountForm from "../loginAccountForm/LoginAccountForm";
 import CreateAccountForm from '../createAccountForm/CreateAccountForm';
 
 
-function LoginModal({ openLoginModal, setOpenLoginModal, setLoginMessage, isLoggedIn, setIsLoggedIn }) {
+function LoginModal({ openLoginModal, setOpenLoginModal, setLoginMessage, setSeverity, setLoginAlert, isLoggedIn, setIsLoggedIn }) {
     //const [login, setLogin] = useState(true);
 
     const handleClose = () => {
@@ -29,8 +29,8 @@ function LoginModal({ openLoginModal, setOpenLoginModal, setLoginMessage, isLogg
                 noValidate
                 autoComplete="off"
             >
-                {!isLoggedIn ? <LoginAccountForm setOpenLoginModal={setOpenLoginModal} setLoginMessage={setLoginMessage} /> :
-                    <CreateAccountForm setOpenLoginModal={setOpenLoginModal} setLoginMessage={setLoginMessage} />}
+                {!isLoggedIn ? <LoginAccountForm setOpenLoginModal={setOpenLoginModal} setLoginMessage={setLoginMessage} setSeverity={setSeverity} setLoginAlert={setLoginAlert} /> :
+                    <CreateAccountForm setOpenLoginModal={setOpenLoginModal} setLoginMessage={setLoginMessage} setSeverity={setSeverity} setLoginAlert={setLoginAlert}/>}
                 <div>{!isLoggedIn ?
                     <p className='loginModal__para'>Don't have an Account? <span onClick={() => setIsLoggedIn(!isLoggedIn)}>Sign up here</span></p> :
                     <p className='loginModal__para'>Already a member? <span  onClick={() => setIsLoggedIn(!isLoggedIn)}>Log in here</span></p>}

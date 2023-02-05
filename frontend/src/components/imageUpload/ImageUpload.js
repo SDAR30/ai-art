@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import UserContext from '../../UserContext';
 import { useCookies } from 'react-cookie';
 
-function NewImage() {
+function NewImage({setSeverity, setLoginMessage, setLoginAlert}) {
   const URL = apiURL();
   let navigate = useNavigate();
   const [cookies] = useCookies('token');
@@ -35,11 +35,17 @@ function NewImage() {
     fetch(`${URL}/images`, requestOptions).then(res => res.json()).then(data => {
       //image posted to backend
       //show success toast message
+      setLoginAlert(true);
+      setLoginMessage('Image uploaded successfully!');
+      setSeverity('success');
       console.log('data: ', data)
       navigate('/')
     }).catch(err => {
       //image failed to post to backend
       //show error toast message
+      setLoginMessage('Image failed to upload. Please try again.')
+      setLoginAlert(true);
+      setSeverity('error');
       console.log(err)
 
     })

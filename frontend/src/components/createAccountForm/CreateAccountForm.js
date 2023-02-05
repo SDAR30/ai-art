@@ -7,7 +7,7 @@ import './CreateAccountForm.scss'
 import UserContext from '../../UserContext';
 import { useCookies } from "react-cookie";
 
-function CreateAccountForm({ setOpenLoginModal, setLoginMessage }) {
+function CreateAccountForm({ setOpenLoginModal, setLoginMessage, setSeverity, setLoginAlert}) {
     const URL = apiURL();
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
@@ -67,6 +67,8 @@ function CreateAccountForm({ setOpenLoginModal, setLoginMessage }) {
                 }
 
                 setLoginMessage('Your account has been created!')
+                setLoginAlert(true)
+                setSeverity('success')
                 setUsername('')
                 setEmail('')
                 setPassword('')
