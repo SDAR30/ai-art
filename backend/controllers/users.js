@@ -96,6 +96,9 @@ users.post('/', async (req, res) => {
         if (password.length < 6) {
             throw { message: 'password must be at least 6 characters' }
         }
+        if((/^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/.test(email)) === false) {
+            throw { message: 'email is not valid' }
+        }
 
         const hashedPassword = await bcrypt.hash(password, 10);
 

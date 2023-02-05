@@ -115,6 +115,11 @@
                 align-items: center;
                 font-size: .85rem;
                 margin-top: 10px;
+                color: rgb(255, 255, 255);
+                cursor: pointer;
+                font-weight: 500;
+                @extend %text-shadow;
+                text-decoration: none;
 
                 >img {
                     width: 25px;
@@ -127,7 +132,7 @@
 
             }
 
-            &__bookmark{
+            &__bookmark {
                 margin-left: auto;
                 margin-top: 10px;
                 margin-right: 10px;
@@ -209,7 +214,7 @@
 
             > :first-child {
                 color: rgb(53, 53, 53);
-            }  
+            }
         }
 
         &__navigation {
@@ -237,12 +242,15 @@
             display: flex;
         }
 
-        &__close, &__next, &__prev {
-            position: unset; 
+        &__close,
+        &__next,
+        &__prev {
+            position: unset;
         }
 
     }
-    .imageCardBox{
+
+    .imageCardBox {
         width: 90%;
     }
 }

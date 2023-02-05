@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import './CreateImage.scss'
 
-function CreateImage() {
+function CreateImage({setMessage, setAlert, setSeverity}) {
     const URL = apiURL();
     const [cookies] = useCookies('token');
     const date = new Date();
@@ -35,10 +35,16 @@ function CreateImage() {
         fetch(`${URL}/images`, requestOptions).then(res => res.json()).then(data => {
             //image posted to backend
             //show success toast message
+            setAlert(true);
+            setMessage('Image sumbitted to gallery!');
+            setSeverity('success');
             data.error ? console.log('error: ', data.message) : console.log('data: ', data)
         }).catch(err => {
             //image failed to post to backend
             //show error toast message
+            setMessage('Image failed to upload. Please try again.')
+            setAlert(true);
+            setSeverity('error');
             console.log('error in submitToGallery in CreateImage')
 
         })

@@ -7,7 +7,7 @@ import './CreateAccountForm.scss'
 import UserContext from '../../UserContext';
 import { useCookies } from "react-cookie";
 
-function CreateAccountForm({ setOpenLoginModal, setLoginMessage, setSeverity, setLoginAlert}) {
+function CreateAccountForm({ setOpenLoginModal, setMessage, setSeverity, setAlert}) {
     const URL = apiURL();
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
@@ -55,19 +55,18 @@ function CreateAccountForm({ setOpenLoginModal, setLoginMessage, setSeverity, se
                 console.log('IN CreateUser fetch, data:', data)
 
                 if (data.status === 'error') {
-                    // rough way to do this
                     if (data.message.includes('users_username_key')) {
                         setFormMessage('Please choose another username. This one is already taken.');
                     } else if (data.message.includes('users_email_key')) {
                         setFormMessage('Please choose another email. This one is already taken.');
-                    } else if (data.message.includes('Password must be')) {
+                    } else {
                         setFormMessage(data.message);
                     }
                     throw data.message;
                 }
 
-                setLoginMessage('Your account has been created!')
-                setLoginAlert(true)
+                setMessage('Your account has been created!')
+                setAlert(true)
                 setSeverity('success')
                 setUsername('')
                 setEmail('')

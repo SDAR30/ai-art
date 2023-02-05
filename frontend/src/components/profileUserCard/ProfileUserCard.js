@@ -1,9 +1,7 @@
 import React from 'react';
 import './ProfileUserCard.scss';
-import { useCookies } from 'react-cookie';
 
-function ProfileUserCard({ username, email }) {
-    const [cookies] = useCookies('token');
+function ProfileUserCard({ username, email, pic }) {
     const defaultProfileImage = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/2048px-Circle-icons-profile.svg.png";
 
     return (
@@ -11,7 +9,7 @@ function ProfileUserCard({ username, email }) {
 
             <div className="profileUserCard__userInfo">
 
-                <img className="profilePic" alt='profile' src={cookies?.user ? cookies?.user?.pic : defaultProfileImage} />
+                <img className="profilePic" alt='profile' src={pic ? pic : defaultProfileImage} />
                 <div className="name">{username} </div>
                 <div className="email">{email}</div>
                 <div ><button className="editButton">edit</button></div>

@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import UserContext from '../../UserContext';
 import { useCookies } from "react-cookie";
 
-function LoginAccountForm({setOpenLoginModal, setLoginMessage, setLoginAlert}) {
+function LoginAccountForm({setOpenLoginModal, setMessage, setAlert, setSeverity}) {
     const URL = apiURL();
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('');
@@ -49,8 +49,9 @@ function LoginAccountForm({setOpenLoginModal, setLoginMessage, setLoginAlert}) {
             } 
 
             console.log('login succesful')
-            setLoginMessage('You have logged in!')
-            setLoginAlert(true)
+            setMessage('You have logged in!')
+            setAlert(true)
+            setSeverity('success')
             setUsername('');
             setPassword('');
             setOpenLoginModal(false);

@@ -18,8 +18,8 @@ import Notification from './components/notifcation/Notification';
 
 function App() {
   const [openLoginModal, setOpenLoginModal] = useState(false)
-  const [loginMessage, setLoginMessage] = useState('');
-  const [loginAlert, setLoginAlert] = useState(false);
+  const [message, setMessage] = useState('');
+  const [alert, setAlert] = useState(false);
   const [severity, setSeverity] = useState('success');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cookies] = useCookies('token');
@@ -30,14 +30,14 @@ function App() {
       <UserContext.Provider value={{ user, setUser }}>
         <Router>
           <Navbar setOpenLoginModal={setOpenLoginModal} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-          <LoginModal openLoginModal={openLoginModal} setOpenLoginModal={setOpenLoginModal} setLoginMessage={setLoginMessage} 
-          setSeverity={setSeverity} setLoginAlert={setLoginAlert} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-            <Notification message={loginMessage} severity={severity} loginAlert={loginAlert} setLoginAlert={setLoginAlert}/>
+          <LoginModal openLoginModal={openLoginModal} setOpenLoginModal={setOpenLoginModal} setMessage={setMessage} 
+          setSeverity={setSeverity} setAlert={setAlert} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+            <Notification message={message} severity={severity} alert={alert} setAlert={setAlert}/>
 
           <Routes>
             <Route path="/images/:imageID" element={<ImageView />} />
-            <Route path="images/new" element={<ImageUpload setLoginMessage={setLoginMessage} setSeverity={setSeverity} setLoginAlert={setLoginAlert}/>} />
-            <Route path='images/create' element={<CreateImage />} />
+            <Route path="images/new" element={<ImageUpload setMessage={setMessage} setSeverity={setSeverity} setAlert={setAlert}/>} />
+            <Route path='images/create' element={<CreateImage setMessage={setMessage} setSeverity={setSeverity} setAlert={setAlert}/>} />
             <Route path="/profile/:userID" element={<OtherProfile />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/" element={<Home />} />

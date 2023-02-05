@@ -4,6 +4,7 @@ import Modal from '@mui/material/Modal';
 import './ImageCardModal.scss'
 import { timeSince } from '../../utils/dateUtils';
 import { apiURL } from "../../utils/apiURL"
+import { NavLink } from 'react-router-dom';
 import HoverRating from '../hoverRating/HoverRating';
 import { roundToHalf } from '../../utils/mathUtils';
 import { useCookies } from 'react-cookie';
@@ -16,11 +17,14 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
+import Notification from '../notifcation/Notification';
 
 
 function ImageCardModal({ openCardModal, setOpenCardModal, image, showNextImage, imageDimensions }) {
     let { id, ai, date, prompt, title, instructions, url, avg_rating } = image;
     const [currentAvgRating, setCurrentAvgRating] = useState(roundToHalf(avg_rating));
+    const [loginMessage, setLoginMessage] = useState('');
+    const [alert, setAlert] = useState(false);
     const [artist, setArtist] = useState({});
     const URL = apiURL();
     const [cookies] = useCookies('token');
@@ -84,8 +88,11 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, showNextImage,
     };
 
     const submitRating = (rating) => {
-        if (!user_id)
-            return alert('Log in to rate images')
+        if (!user_id) {
+            setLoginMessage('log in to rate images');
+            setAlert(true);
+            return;
+        }
         console.log("submit rating ", rating)
         //setImageRating(convertRatingToPercent(rating))
         const requestOptions = {
@@ -104,7 +111,11 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, showNextImage,
     }
 
     const toggleBookmark = async () => {
-        if (!user_id) return alert('Log in to bookmark images');
+        if (!user_id) {
+            setLoginMessage('log in to save bookmarks');
+            setAlert(true);
+            return;
+        }
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -163,6 +174,7 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, showNextImage,
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description">
             <div>
+                <Notification alert={alert} setAlert={setAlert} message={loginMessage} severity='info' />
                 <div className='imageCardModal__navigation'>
                     <Tooltip title="previous image"><NavigateBeforeIcon className='imageCardModal__prev' onClick={() => nextImageModal(false)} fontSize='large' /></Tooltip>
                     <Tooltip title="close image"><CloseIcon className='imageCardModal__close' onClick={handleClose} fontSize='large' /></Tooltip>
@@ -180,10 +192,11 @@ function ImageCardModal({ openCardModal, setOpenCardModal, image, showNextImage,
 
                         <div className='imageCardBox__details__header'>
                             <h2 className='imageCardBox__details__header__title'> {title} </h2>
-                            <div className='imageCardBox__details__header__artist'>
-                                <img src={artist.pic} alt='profile'></img>
-                                <div>by {artist.username}</div>
-                            </div>
+                            <NavLink className='imageCardBox__details__header__artist' to={`/profile/${artist.id}`}>
+
+                                    <img src={artist.pic} alt='profile'></img>
+                                    <div>by {artist.username}</div>
+                            </NavLink >
                             <div className='imageCardBox__details__header__bookmark' onClick={toggleBookmark}>
                                 <Tooltip title="bookmark"><div>{bookmark ? <BookmarkIcon /> : <BookmarkBorderIcon />}</div></Tooltip>
                             </div>
