@@ -1,41 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import './ImageCard.scss';
 import { capitalizeFirstLetterOfEachWord, removeExtraWords } from '../../utils/stringUtils';
 import { timeSince } from '../../utils/dateUtils';
 import { ratingText } from '../../utils/mathUtils';
 import ImageCardModal from '../imageCardModal/ImageCardModal';
 
-function ImageCard({ image, width = 420, numberOfColumns, findNextImage }) {
+function ImageCard({ image, width = 420, numberOfColumns, images }) {
   const { ai, prompt, title, url, date, avg_rating} = image;
-  const [newImage, setNewImage] = useState(false);
   const [openCardModal, setOpenCardModal] = useState(false);
-  const [imageDimensions, setImageDimensions] = useState({width: 0, height: 0});
   const [height, setHeight] = useState(0);
   const divRef = useRef(null);
 
-  useEffect(() => {
-    const imgObj = new Image();
-    imgObj.src = image.url;
-    imgObj.onload = () => {
-      setImageDimensions({ width: imgObj.width, height: imgObj.height });
-    }
-  }, [image.url, image])
-
-
-  const showNextImage = (image, goForward, resetImage = false) => {
-    if (resetImage) {
-      setNewImage(false);
-      return;
-    }
-    let nextImage = findNextImage(image, goForward);
-    setNewImage(nextImage);
-    //get dimensions of next image
-    const imgObj = new Image();
-    imgObj.src = nextImage.url;
-    imgObj.onload = () => {
-      setImageDimensions({ width: imgObj.width, height: imgObj.height });
-    }
-  }
 
   const openModalForImage = () => {
     setOpenCardModal(true);
@@ -77,9 +52,8 @@ function ImageCard({ image, width = 420, numberOfColumns, findNextImage }) {
 
   return (
     <div>
-      <ImageCardModal openCardModal={openCardModal} setOpenCardModal={setOpenCardModal} image={newImage || image} imageDimensions={imageDimensions} findNextImage={findNextImage} showNextImage={showNextImage} />
+      <ImageCardModal openCardModal={openCardModal} setOpenCardModal={setOpenCardModal} startingIndex={images.findIndex(element => element.id === image.id)} images={images} />
       <div className='imageCard' ref={divRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={openModalForImage} >
-        {/* <Link className='imageCard__link' to={`/images/${id}`} state={{ image: image }}> */}
         <img className="imageCard__image" src={url} alt="ai img" />
         <div className="imageCard__overlay" style={styles.overlay}>
           <p className='imageCard__overlay__title' style={styles.title}>{capitalizeFirstLetterOfEachWord(removeExtraWords(title, 28))}</p>
@@ -89,7 +63,6 @@ function ImageCard({ image, width = 420, numberOfColumns, findNextImage }) {
           <p className='imageCard__overlay__rating' style={styles.rating}>{ratingText(avg_rating)}</p>
           {/* <p className='imageCard__overlay__dimensions' style={styles.ai}>Height: {height}</p> */}
         </div>
-        {/* </Link> */}
       </div>
     </div>
   );

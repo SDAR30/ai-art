@@ -87,7 +87,7 @@ const ImageList = () => {
                 {orderedImages.map((column, index) =>
                     <div className='imageList__column' key={index}>{column.map(image =>
                         <ImageCard image={image} key={image.id} width={width} 
-                            numberOfColumns={numberOfColumns} findNextImage={findNextImage}/>)}
+                            numberOfColumns={numberOfColumns} images={orderedImages.flat()} findNextImage={findNextImage}/>)}
                     </div>)}
             </div>
             {!orderedImages.length && <div className='imageList__noResults'>No results</div>}

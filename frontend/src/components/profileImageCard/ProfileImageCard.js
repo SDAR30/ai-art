@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ProfileImageCardModal from '../profileImageCardModal/ProfileImageCardModal';
+import ImageCardModal from '../imageCardModal/ImageCardModal';
 import './ProfileImageCard.scss';
 
 function ProfileImageCard({ image, images }) {
@@ -12,7 +12,7 @@ function ProfileImageCard({ image, images }) {
     return (
         <div>
             <div className='profileImageCard' onClick={openModalForImage}>
-                <ProfileImageCardModal openCardModal={openCardModal} setOpenCardModal={setOpenCardModal} 
+                <ImageCardModal openCardModal={openCardModal} setOpenCardModal={setOpenCardModal} 
                 startingIndex={images.findIndex(element => element.id === image.id)} images={images} />
                 <img src={image.url} alt='user ai generated' />
                 <div className='profileImageCard__overlay'>
