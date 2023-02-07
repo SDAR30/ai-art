@@ -58,7 +58,7 @@ function OtherProfile(props) {
     return (
         <div className='profile'>
             <div className='profile__section'>
-                <ProfileUserCard username={user.username} email={user.email} pic={user.pic}/>
+                <ProfileUserCard username={user.username} email={user.email} pic={user.pic} buttonText={'follow'}/>
                 <ProfileImageContainer title={userImages.length ? (user.username + '\'s images') : "No Images Yet"} images={userImages} />
             </div>
             <div className='profile__section'>

@@ -25,6 +25,10 @@
         }
     }
 
+    &:hover{
+        cursor: pointer;
+    }
+
     &:hover &__overlay{
         opacity: .96;
     }

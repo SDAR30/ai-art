@@ -49,7 +49,7 @@ function Profile(props) {
     return (
         <div className='profile'>
             <div className='profile__section'>
-                <ProfileUserCard username={user?.username} email={user?.email} pic={user?.pic}/>
+                <ProfileUserCard username={user?.username} email={user?.email} pic={user?.pic} buttonText={'edit profile'}/>
                 <ProfileImageContainer title={'My Images'} images={userImages} />
             </div>
             <div className='profile__section'>

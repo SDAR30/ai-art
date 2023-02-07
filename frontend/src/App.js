@@ -13,6 +13,7 @@ import CreateImage from './components/createImage/CreateImage';
 import Profile from './components/profile/Profile';
 import OtherProfile from './components/profile/OtherProfile';
 import Notification from './components/notifcation/Notification';
+import About from './components/about/About';
 
 
 
@@ -40,6 +41,7 @@ function App() {
             <Route path='images/create' element={<CreateImage setMessage={setMessage} setSeverity={setSeverity} setAlert={setAlert}/>} />
             <Route path="/profile/:userID" element={<OtherProfile />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path='/about' element={<About />} />
             <Route path="/" element={<Home />} />
           </Routes>
         </Router>

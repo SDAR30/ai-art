@@ -9,7 +9,7 @@ function ProfileImageContainer({ title, images }) {
             <div className='profileImageContainer__images'>
                 {images.map(image => {
                     return (
-                        <ProfileImageCard key={image.id} image={image}/>
+                        <ProfileImageCard key={image.id} image={image} images={images}/>
                     )
                 })}
             </div>

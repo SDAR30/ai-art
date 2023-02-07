@@ -12,8 +12,8 @@
 
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 4fr 1fr;
-    gap: 40px;
+    grid-template-rows: 4fr 1.5fr;
+    gap: 30px;
 
     &__userInfo {
         display: flex;
@@ -26,7 +26,7 @@
 
         .profilePic {
             border-radius: 40%;
-            margin-top: 5px;
+            margin-top: 10px;
             border: 1px solid rgb(156, 156, 156);
             padding: 5px;
             width: 100px;
@@ -37,16 +37,16 @@
 
         .editButton {
             background-color: white;
-            color: #4CAF50;
-            border: 2px solid #4CAF50;
-            margin-top: 3px;
-            margin-bottom: -5px;
+            color: $background-dark;
+            border: 2px solid $lightsky;
+            margin-top: 10px;
+            margin-bottom: 0px;
             border-radius: 10px;
             cursor: pointer;
         }
 
         .editButton:hover {
-            background-color: #4CAF50;
+            background-color: $lightsky;
             color: white;
             box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 4px 10px 0 rgba(0, 0, 0, 0.19);
         }

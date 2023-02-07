@@ -1,0 +1,13 @@
+@import './../../designUtils/fonts.scss';
+
+.about{
+    color: white;
+    @extend %roboto;
+    padding: 20px;
+    >h1{
+        font-weight: bold;
+    }
+    > p{
+        font-weight: 300;
+    }
+}
