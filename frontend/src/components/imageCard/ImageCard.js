@@ -28,7 +28,7 @@ function ImageCard({ image, width = 420, numberOfColumns, images }) {
   widthPerImage = widthPerImage > 420 ? 420 : widthPerImage;
   const styles = {
     title: {
-      fontSize: widthPerImage / 25.5,
+      fontSize: widthPerImage / 23,
       color: '#ff6b0f'
     },
     date: {
@@ -55,13 +55,13 @@ function ImageCard({ image, width = 420, numberOfColumns, images }) {
       <ImageCardModal openCardModal={openCardModal} setOpenCardModal={setOpenCardModal} startingIndex={images.findIndex(element => element.id === image.id)} images={images} />
       <div className='imageCard' ref={divRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={openModalForImage} >
         <img className="imageCard__image" src={url} alt="ai img" />
-        <div className="imageCard__overlay" style={styles.overlay}>
+        <div className="imageCard__overlay" >
           <p className='imageCard__overlay__title' style={styles.title}>{capitalizeFirstLetterOfEachWord(removeExtraWords(title, 28))}</p>
           <p className='imageCard__overlay__date' style={styles.date}>{timeSince(date)}</p>
-          <p className='imageCard__overlay__prompt' style={styles.prompt}>{removeExtraWords(prompt, 80)}</p>
+          <p className='imageCard__overlay__prompt' style={styles.prompt}>{removeExtraWords(prompt, 90)}</p>
           <p className='imageCard__overlay__ai' style={styles.ai}>made with {ai}</p>
           <p className='imageCard__overlay__rating' style={styles.rating}>{ratingText(avg_rating)}</p>
-          {/* <p className='imageCard__overlay__dimensions' style={styles.ai}>Height: {height}</p> */}
+          {/* <p className='imageCard__overlay__dimensions' style={styles.ai}>W: {widthPerImage}</p> */}
         </div>
       </div>
     </div>

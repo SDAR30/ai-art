@@ -24,47 +24,55 @@
     &__overlay{
         position: absolute;
         bottom: 2%;
-        left: 5%;
-        width: 92%;
+        left: 3%;
+        width: 94%;
         background-color: rgba(4, 4, 4);
-        border-radius: 12px;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1.2fr; 
-        grid-template-rows: 25% 50% 25%;
-        opacity: 0; 
+        border-radius: 10px;  
+        opacity: 1; 
+        min-height: 100px;
+        max-height: 110px;
         transition: opacity 0.2s ease-in-out;
         color: white;
 
         > * {
-            margin: 2% 3%;
+            margin: 1% 2%;
         }
 
         &__title{
-            grid-column: 1 / 4;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            font-weight: 500;
         }
         &__date{
-            grid-column: 4 / 5;
             position: absolute;
-            top: 1px;
-            right: 2px;
+            top: 0px;
+            right: 0px;
         }
         &__prompt{
-            grid-column: 1 / 5;
+            position: absolute;
+            top: 23%;
+            left: 0px;
             
         }
         &__ai{
-            grid-column: 1 / 4;
-            color: rgb(151, 151, 151);
+            color: grey;
             position: absolute;
             bottom: 2px;
-            left: 0px;
+            left: 1px;
         }
 
         &__rating{
             grid-column: 4 / 5;
             position: absolute;
-            bottom: 5px;
-            right: 5px;
+            bottom: 3px;
+            right: 3px;
+        }
+
+        &__dimensions{
+            position: absolute;
+            top: 60%;
+            right: 3px;
         }
         
     }

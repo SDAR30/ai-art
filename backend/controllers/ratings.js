@@ -48,7 +48,6 @@ ratings.get('/:id', async (req, res) => {
         return;
     }
     const image = await db.oneOrNone('SELECT COALESCE(AVG(ratings.rating), 0) as avg_rating FROM ratings WHERE image_id = $1', [imageID])
-    console.log(image)
     return image ? res.json(image) : res.status(422).send({ success: false, error: true, message: "No image with that id" })
 })
 

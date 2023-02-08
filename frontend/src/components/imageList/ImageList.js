@@ -37,7 +37,6 @@ const ImageList = () => {
     const reOrderImages = images => {
         let reOrderedImages = [];
         for (let i = 0; i < numberOfColumns; i++) {
-            //console.log(i)
             let j = i;
             while (images[j]) {
                 reOrderedImages.push(images[j]);
@@ -58,25 +57,6 @@ const ImageList = () => {
     let filteredImages = filterImages(images);
     let orderedImages = reOrderImages(filteredImages);
 
-    const findNextImage = (currentImage, goForward) => {
-        let allImages = orderedImages.flat();
-        let currentIndex = allImages.findIndex(image => image.id === currentImage.id);
-        if (goForward)
-            currentIndex++;
-        else
-            currentIndex--;
-        
-        if (currentIndex < 0)
-            currentIndex = allImages.length - 1;
-
-        let nextImage = allImages[currentIndex];
-        if (!nextImage)
-            nextImage = allImages[0];
-        return nextImage;
-    }
-
-
-
     return (
         <div className="imageList">
             <div className='imageList__bar'>
@@ -87,7 +67,7 @@ const ImageList = () => {
                 {orderedImages.map((column, index) =>
                     <div className='imageList__column' key={index}>{column.map(image =>
                         <ImageCard image={image} key={image.id} width={width} 
-                            numberOfColumns={numberOfColumns} images={orderedImages.flat()} findNextImage={findNextImage}/>)}
+                            numberOfColumns={numberOfColumns} images={orderedImages.flat()} />)}
                     </div>)}
             </div>
             {!orderedImages.length && <div className='imageList__noResults'>No results</div>}
