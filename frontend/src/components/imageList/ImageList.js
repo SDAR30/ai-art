@@ -5,11 +5,13 @@ import SearchBar from '../searchBar/SearchBar';
 import './ImageList.scss'
 import { apiURL } from "../../utils/apiURL"
 import useWindowDimensions from '../../utils/getWindowDimensions';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 const ImageList = () => {
     const URL = apiURL();
     const [images, setImages] = useState([])
+    const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('')
     const { width } = useWindowDimensions();
     let numberOfColumns = Math.ceil(width / 420);
@@ -18,6 +20,7 @@ const ImageList = () => {
         fetch(`${URL}/ratings/average/all`).then(res => res.json())
             .then(data => {
                 setImages(data)
+                setLoading(false);
             })
     }, [URL])
 
@@ -57,8 +60,8 @@ const ImageList = () => {
     let filteredImages = filterImages(images);
     let orderedImages = reOrderImages(filteredImages);
 
-    return (
-        <div className="imageList">
+    return (<div className="imageList">
+        {loading ? <CircularProgress className='imageList__loading' size={'4rem'}/> : <>
             <div className='imageList__bar'>
                 <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
                 <SelectBar />
@@ -66,13 +69,13 @@ const ImageList = () => {
             <div className='imageList__grid'>
                 {orderedImages.map((column, index) =>
                     <div className='imageList__column' key={index}>{column.map(image =>
-                        <ImageCard image={image} key={image.id} width={width} 
+                        <ImageCard image={image} key={image.id} width={width}
                             numberOfColumns={numberOfColumns} images={orderedImages.flat()} />)}
                     </div>)}
             </div>
             {!orderedImages.length && <div className='imageList__noResults'>No results</div>}
-        </div>
-    );
+        </>}
+    </div>);
 }
 
 export default ImageList;

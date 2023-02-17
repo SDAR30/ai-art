@@ -37,7 +37,7 @@ function ImageCard({ image, width = 420, numberOfColumns, images }) {
       color: 'grey'
     },
     prompt: {
-      fontSize: widthPerImage / 28,
+      fontSize: widthPerImage / 25,
     },
     ai: {
       fontSize: widthPerImage / 30
@@ -58,7 +58,7 @@ function ImageCard({ image, width = 420, numberOfColumns, images }) {
         <div className="imageCard__overlay" >
           <p className='imageCard__overlay__title' style={styles.title}>{capitalizeFirstLetterOfEachWord(removeExtraWords(title, 28))}</p>
           <p className='imageCard__overlay__date' style={styles.date}>{timeSince(date)}</p>
-          <p className='imageCard__overlay__prompt' style={styles.prompt}>{removeExtraWords(prompt, 90)}</p>
+          <p className='imageCard__overlay__prompt' style={styles.prompt}>{removeExtraWords(prompt, 80)}</p>
           <p className='imageCard__overlay__ai' style={styles.ai}>made with {ai}</p>
           <p className='imageCard__overlay__rating' style={styles.rating}>{ratingText(avg_rating)}</p>
           {/* <p className='imageCard__overlay__dimensions' style={styles.ai}>W: {widthPerImage}</p> */}
