@@ -1,17 +1,67 @@
 @import './../../designUtils/fonts.scss';
+@import './../../designUtils/cards.scss';
+@import './../../designUtils/colors.scss';
 
-.about{
+.about {
     color: white;
     @extend %slab;
     padding: 20px;
-    >h1{
+
+    >h1 {
         font-weight: bold;
     }
-    > p{
+
+    >p {
         font-weight: 300;
     }
-    & a{
+
+    & a {
         color: rgb(0, 255, 8);
         text-decoration: none;
+    }
+
+    ul{
+        padding-left: 15px;
+    }
+
+    &__portrait {
+        display: flex;
+        padding: 5px 5px;
+        @extend %card-outline;
+        border: 1px solid $background-light;
+
+        >* {
+            margin: auto 10px;
+        }
+
+        >img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            @extend %card-outline;
+        }
+
+        @media only screen and (max-width: 620px) {
+            display: flex;
+            flex-direction: column;
+            > *{
+                margin: auto;
+                text-align: center;
+            }
+            
+
+        }
+
+    }
+
+    &__contact{
+        text-decoration: underline;
+        float: right;
+        margin: -8px 5px 5px 0px;
+        color: rgb(255, 55, 0);
+        > a{
+            color: rgb(216, 255, 213);
+            font-size: 1rem;
+        }
     }
 }

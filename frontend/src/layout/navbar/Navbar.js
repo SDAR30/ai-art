@@ -28,9 +28,8 @@ function Navbar({ setOpenLoginModal, isLoggedIn, setIsLoggedIn }) {
                 <div className={active ? "navbar__menuItems-active" : "navbar__menuItems"} onClick={() => setActive(false)}>
                     <li className="navbar__menuItem"> <NavLink className={`navbar__navlink${active ? "-active" : ""}`} to="/">Gallery</NavLink ></li>
                     <li className="navbar__menuItem"><NavLink className={`navbar__navlink${active ? "-active" : ""}`} to="/about">About</NavLink></li>
-                    <li className="navbar__menuItem"><NavLink className={`navbar__navlink${active ? "-active" : ""}`} to="/contact">Contact</NavLink></li>
+                    <li className="navbar__menuItem"><NavLink className={`navbar__navlink${active ? "-active" : ""}`}  to="/images/new">Upload</NavLink ></li>
                     <li className="navbar__menuItem"><NavLink className={`navbar__navlink${active ? "-active" : ""}`} to="images/create">Create</NavLink></li>
-                    {user && <li className="navbar__menuItem"><NavLink className={`navbar__navlink${active ? "-active" : ""}`}  to="/images/new">Upload</NavLink ></li>}
 
                 </div>
 

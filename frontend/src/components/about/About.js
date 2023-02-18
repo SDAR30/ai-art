@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './About.scss';
 
 function About(props) {
@@ -6,6 +7,17 @@ function About(props) {
         <div className='about'>
             <h1>About</h1>
             <p>This website aims to share and explore the innovative and evolving field of artificial intelligence-generated artwork. It provides a platform for visitors to discover new examples of AI-generated images, learn about the methods used to create them, and engage with a community of like-minded individuals. By showcasing these images and providing insight into their creation, the website seeks to inspire and educate visitors about the potential of AI-generated art.</p>
+
+            
+            <div className='about__portrait'>
+                <img src='https://imgur.com/aJYw0E7.png' alt='portrait'></img>
+                <div>
+                <h2>Developer</h2>
+                <p>I’m Shoaib Dar, a detail-oriented and analytical Full Stack Developer who loves to solve problems and puzzles. I have a Bachelor's degree in Computer Science with a strong focus on artificial intelligence, machine learning and computer graphics. Through this website, I aim to provide a platform for other enthusiasts to explore and appreciate this emerging new art form. </p>
+                <span className='about__contact'><NavLink to="/contact">Contact Shoaib Dar</NavLink></span>
+                
+                </div>
+            </div>
 
             <h2>What is AI ART and how does it work?</h2>
             <p>AI art, also known as generative art or computational art, is a form of art that is created using algorithms and machine learning techniques. The process typically involves training a machine learning model on a large dataset of existing art, and then using that model to generate new artwork. AI art is a relatively new field, and there is still much to be discovered about the different techniques and approaches that can be used to create it. However, it is already producing some remarkable and thought-provoking works, and is likely to continue to be an important area of artistic and technological innovation in the years to come.</p>
