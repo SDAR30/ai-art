@@ -2,12 +2,16 @@
 
 .about{
     color: white;
-    @extend %roboto;
+    @extend %slab;
     padding: 20px;
     >h1{
         font-weight: bold;
     }
     > p{
         font-weight: 300;
+    }
+    & a{
+        color: rgb(0, 255, 8);
+        text-decoration: none;
     }
 }

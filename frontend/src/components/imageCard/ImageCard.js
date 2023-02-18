@@ -56,7 +56,7 @@ function ImageCard({ image, width = 420, numberOfColumns, images }) {
       <div className='imageCard' ref={divRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={openModalForImage} >
         <img className="imageCard__image" src={url} alt="ai img" />
         <div className="imageCard__overlay" >
-          <p className='imageCard__overlay__title' style={styles.title}>{capitalizeFirstLetterOfEachWord(removeExtraWords(title, 28))}</p>
+          <p className='imageCard__overlay__title' style={styles.title}>{capitalizeFirstLetterOfEachWord(removeExtraWords(title, 25))}</p>
           <p className='imageCard__overlay__date' style={styles.date}>{timeSince(date)}</p>
           <p className='imageCard__overlay__prompt' style={styles.prompt}>{removeExtraWords(prompt, 80)}</p>
           <p className='imageCard__overlay__ai' style={styles.ai}>made with {ai}</p>

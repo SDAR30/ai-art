@@ -22,20 +22,20 @@ function ratingText(avg) {
     let text = '';
     //let emojis = '🤮🤢😠😒 💔😐 👌🙂 ✨⚡⭐🌶🔥🥉🥈🥇'
 
-    if (avg > 4.6)
+    if (avg > 4.5)
         text += '🔥';
-    else if (avg > 4.2)
+    else if (avg > 4.1)
         text += '🌶';
     else if (avg > 3.7)
         text += '⭐';
     else if (avg > 3.3)
-        text += '✨';
+        text += '';
     else if (avg > 2.7)
-        text += '🙂';
+        text += '';
     else if (avg > 2.3)
-        text += '😐';
+        text += '';
     else if (avg > 1.8)
-        text += '😒';
+        text += '';
     else if (avg > 1.3)
         text += '😠';
     else

@@ -138,7 +138,7 @@ function ImageCardModal({ openCardModal, setOpenCardModal, startingIndex, images
         }
 
         const imgObj = new Image();
-        if(!images[currentIndex]) return;
+        if(!images[currentIndex]) return; //if images is empty during search, return
         imgObj.src = images[currentIndex].url;
         imgObj.onload = () => {
             setImageDimensions({ width: imgObj.width, height: imgObj.height });

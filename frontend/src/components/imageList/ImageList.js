@@ -61,7 +61,7 @@ const ImageList = () => {
     let orderedImages = reOrderImages(filteredImages);
 
     return (<div className="imageList">
-        {loading ? <CircularProgress className='imageList__loading' size={'4rem'}/> : <>
+        {loading ? <CircularProgress className='imageList__loading' thickness={7} size={'5rem'}/> : <>
             <div className='imageList__bar'>
                 <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
                 <SelectBar />

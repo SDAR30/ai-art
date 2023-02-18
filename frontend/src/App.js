@@ -14,6 +14,7 @@ import Profile from './components/profile/Profile';
 import OtherProfile from './components/profile/OtherProfile';
 import Notification from './components/notifcation/Notification';
 import About from './components/about/About';
+import Contact from './components/contact/Contact';
 
 
 
@@ -31,17 +32,18 @@ function App() {
       <UserContext.Provider value={{ user, setUser }}>
         <Router>
           <Navbar setOpenLoginModal={setOpenLoginModal} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-          <LoginModal openLoginModal={openLoginModal} setOpenLoginModal={setOpenLoginModal} setMessage={setMessage} 
-          setSeverity={setSeverity} setAlert={setAlert} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-            <Notification message={message} severity={severity} alert={alert} setAlert={setAlert}/>
+          <LoginModal openLoginModal={openLoginModal} setOpenLoginModal={setOpenLoginModal} setMessage={setMessage}
+            setSeverity={setSeverity} setAlert={setAlert} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+          <Notification message={message} severity={severity} alert={alert} setAlert={setAlert} />
 
           <Routes>
             <Route path="/images/:imageID" element={<ImageView />} />
-            <Route path="images/new" element={<ImageUpload setMessage={setMessage} setSeverity={setSeverity} setAlert={setAlert}/>} />
-            <Route path='images/create' element={<CreateImage setMessage={setMessage} setSeverity={setSeverity} setAlert={setAlert}/>} />
+            <Route path="images/new" element={<ImageUpload setMessage={setMessage} setSeverity={setSeverity} setAlert={setAlert} />} />
+            <Route path='images/create' element={<CreateImage setMessage={setMessage} setSeverity={setSeverity} setAlert={setAlert} />} />
             <Route path="/profile/:userID" element={<OtherProfile />} />
             <Route path="/profile" element={<Profile />} />
             <Route path='/about' element={<About />} />
+            <Route path='/contact' element={<Contact />} />
             <Route path="/" element={<Home />} />
           </Routes>
         </Router>
