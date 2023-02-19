@@ -33,7 +33,7 @@
         align-items: center;
 
         >img {
-            
+
             width: 280px;
             @extend %card-outline;
             margin: auto;
@@ -43,6 +43,13 @@
             left: 0;
             right: 0;
         }
+    }
+
+    &__loading {
+        position: absolute;
+        top: 40%;
+        left: 40%;
+        transform: translate(-40%, -40%);
     }
 
 }

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './ImageUpload.scss'
 import { apiURL } from "../../utils/apiURL"
 import { useNavigate } from 'react-router-dom';
@@ -24,7 +24,13 @@ function NewImage({setSeverity, setMessage, setAlert}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('user cookies: ', cookies.user)
+    if (!image.user_id){
+      //show error toast message
+      setMessage('Please log in to submit an image')
+      setAlert(true);
+      setSeverity('error');
+      return;
+    }
 
     //post image to backend
     const requestOptions = {
@@ -52,13 +58,21 @@ function NewImage({setSeverity, setMessage, setAlert}) {
 
   }
 
-  useEffect(() => {//check if user is logged in or not
-    if (user === null) {
-      navigate('/');
-    }
-  }, [navigate, user]);
+  // useEffect(() => {//check if user is logged in or not
+  //   if (user === null) {
+  //     navigate('/');
+  //   }
+  // }, [navigate, user]);
 
   const addPhoto = async event => {
+
+    if (!user){
+      //show error toast message
+      setMessage('Please log in to upload an image')
+      setAlert(true);
+      setSeverity('error');
+      return;
+    }
     const file = event.target.files[0]
 
     //change background image to uploaded image
@@ -106,7 +120,10 @@ function NewImage({setSeverity, setMessage, setAlert}) {
           <option value="">AI</option>
           <option value="DALL-E">DALL-E</option>
           <option value="DeepAI">DeepAI</option>
+          <option value="Midjourney">Stable Diffusion</option>
           <option value="Midjourney">Midjourney</option>
+          <option value="Midjourney">DeepDream</option>
+          <option value="Midjourney">ArtBreeder</option>
         </select>
         <textarea id='prompt' placeholder='what prompt did you use to get this image?' value={image.prompt} onChange={handleChange} maxLength="600" required />
         <textarea id='instructions' placeholder='(optional) any additional steps used to get this image?' value={image.instructions} onChange={handleChange} maxLength="600" />
