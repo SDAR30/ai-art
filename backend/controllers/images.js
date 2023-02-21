@@ -64,6 +64,7 @@ images.post('/', async (req, res) => {
         if(!url || !date || !user_id) throw new Error("missing: " + (!url ? "url" : !date ? "date" : !user_id ? "user_id" : "unknown"))
         const newImage = await db.oneOrNone('INSERT INTO images (title, ai, instructions, prompt, date, url, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
             [title, ai, instructions, prompt, date, url, user_id]);
+        //if no user exists with that id, nothing is returned.
         return newImage ? res.json(newImage) : res.status(422).send({ success: false, error: true, message: "failed to add image" })
     } catch (error) {
         res.status(500).json({ success: false, error: true, message: error.message })

@@ -2,24 +2,25 @@
 @import './colors.scss';
 @import './fonts.scss';
 
-%button-bnb{
+%button-bnb {
     display: inline-block;
-        outline: none;
+    outline: none;
+    cursor: pointer;
+    font-size: .8rem;
+    line-height: 10px;
+    font-weight: 600;
+    border-radius: 50px;
+    margin: 1px;
+    padding: 7px 13px;
+    border: 2px solid black;
+    transition: box-shadow 0.2s ease 0s, -ms-transform 0.1s ease 0s, -webkit-transform 0.1s ease 0s, transform 0.1s ease 0s;
+    //background: linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%);
+    color: #fff;
+
+    &:hover {
+        opacity: .5;
         cursor: pointer;
-        font-size: .8rem;
-        line-height: 10px;
-        font-weight: 600;
-        border-radius: 50px;
-        margin: 1px;
-        padding: 7px 13px;
-        border: 2px solid black;
-        transition: box-shadow 0.2s ease 0s, -ms-transform 0.1s ease 0s, -webkit-transform 0.1s ease 0s, transform 0.1s ease 0s;
-        //background: linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%);
-        color: #fff;
-        &:hover {
-            opacity: .5;
-            cursor: pointer;
-        }
+    }
 }
 
 //#17 https://getcssscan.com/css-buttons-examples
@@ -93,4 +94,29 @@
         box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
     }
 
+}
+
+%button-33 {
+    background-color: #c2fbd7;
+    border-radius: 100px;
+    box-shadow: rgba(57, 182, 105, 0.2) 0 -12px 9px -7px inset, rgba(44, 187, 99, .15) 0 1px 2px, rgba(44, 187, 99, .15) 0 1px 2px, rgba(44, 187, 99, .15) 0 2px 4px, rgba(44, 187, 99, .15) 0 4px 8px, rgba(44, 187, 99, .15) 0 8px 16px;
+    color: rgb(0, 89, 0);
+    cursor: pointer;
+    display: inline-block;
+    padding: 2px 8px;
+    margin: 7px 2px 0px 7px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 250ms;
+    border: 0;
+    font-size: .8rem;
+    font-weight: 700;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+
+    &:hover {
+        box-shadow: rgba(44, 187, 99, .35) 0 -25px 18px -14px inset, rgba(44, 187, 99, .25) 0 1px 2px, rgba(44, 187, 99, .25) 0 2px 4px, rgba(44, 187, 99, .25) 0 4px 8px, rgba(44, 187, 99, .25) 0 8px 16px, rgba(44, 187, 99, .25) 0 16px 32px;
+        transform: scale(1.05) rotate(-1deg);
+    }
 }

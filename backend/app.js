@@ -5,6 +5,7 @@ const usersController = require('./controllers/users')
 const ratingsController = require('./controllers/ratings')
 const accountsController = require('./controllers/accounts')
 const bookmarksController = require('./controllers/bookmarks')
+const followsController = require('./controllers/follows')
 const { generateUploadURL } = require('./s3')
 const { generateOpenAIImage } = require('./openai');
 const { generateStableImage } = require('./stability');
@@ -30,6 +31,7 @@ app.use('/users', usersController);
 app.use('/ratings', ratingsController);
 app.use('/accounts', accountsController);
 app.use('/bookmarks', bookmarksController);
+app.use('/follows', followsController);
 
 //AWS s3 URL route
 app.get('/s3url', async (req, res) => {

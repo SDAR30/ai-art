@@ -120,10 +120,10 @@ function NewImage({setSeverity, setMessage, setAlert}) {
           <option value="">AI</option>
           <option value="DALL-E">DALL-E</option>
           <option value="DeepAI">DeepAI</option>
-          <option value="Midjourney">Stable Diffusion</option>
+          <option value="Stable Diffusion">Stable Diffusion</option>
           <option value="Midjourney">Midjourney</option>
-          <option value="Midjourney">DeepDream</option>
-          <option value="Midjourney">ArtBreeder</option>
+          <option value="DeepDream">DeepDream</option>
+          <option value="ArtBreeder">ArtBreeder</option>
         </select>
         <textarea id='prompt' placeholder='what prompt did you use to get this image?' value={image.prompt} onChange={handleChange} maxLength="600" required />
         <textarea id='instructions' placeholder='(optional) any additional steps used to get this image?' value={image.instructions} onChange={handleChange} maxLength="600" />

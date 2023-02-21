@@ -2,6 +2,7 @@
 @import './../../designUtils/colors.scss';
 @import './../../designUtils/fonts.scss';
 @import './../../designUtils/dimensions.scss';
+@import './../../designUtils/buttons.scss';
 
 .imageCardModal {
     background-color: rgba(0, 0, 0, 0.7);
@@ -129,6 +130,11 @@
                     border: 1px solid black;
                     margin: 1px;
                 }
+
+            }
+
+            &__follow{
+                @extend %button-33;
 
             }
 

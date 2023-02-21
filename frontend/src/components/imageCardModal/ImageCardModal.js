@@ -21,11 +21,12 @@ import { timeSince } from '../../utils/dateUtils';
 import { roundToHalf } from '../../utils/mathUtils';
 
 function ImageCardModal({ openCardModal, setOpenCardModal, startingIndex, images }) {
-    
+
     const [currentIndex, setCurrentIndex] = useState(startingIndex);
     const [expanded, setExpanded] = useState(false);
     const [artist, setArtist] = useState({});
     const [bookmark, setBookmark] = useState(false);
+    const [following, setFollowing] = useState(false);
     const [rating, setRating] = useState(0);
     const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
     const URL = apiURL();
@@ -131,6 +132,16 @@ function ImageCardModal({ openCardModal, setOpenCardModal, startingIndex, images
             else { setBookmark(false); }
             return;
         }
+
+        const isFollowing = async () => {
+            if (!user_id) return; //if user is not logged in, return
+            const response = await fetch(`${URL}/follows/${user_id}/${images[currentIndex].user_id}`);
+            const data = await response.json();
+            if(data) { setFollowing(true); }
+            else { setFollowing(false); }
+            return;
+        }
+
         const getRating = async () => {
             const response = await fetch(`${URL}/ratings/${images[currentIndex].id}`);
             const data = await response.json();
@@ -138,13 +149,14 @@ function ImageCardModal({ openCardModal, setOpenCardModal, startingIndex, images
         }
 
         const imgObj = new Image();
-        if(!images[currentIndex]) return; //if images is empty during search, return
+        if (!images[currentIndex]) return; //if images is empty during search, return
         imgObj.src = images[currentIndex].url;
         imgObj.onload = () => {
             setImageDimensions({ width: imgObj.width, height: imgObj.height });
         }
 
         isBookmarked();
+        isFollowing();
         getArtist();
         getRating();
 
@@ -171,6 +183,29 @@ function ImageCardModal({ openCardModal, setOpenCardModal, startingIndex, images
             setBookmark(!bookmark);
         }
     }
+
+    const toggleFollow = async () => {
+        if (!user_id) {
+            setAlertMessage('log in to follow artists');
+            setAlert(true);
+            return;
+        }
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user_id: user_id, artist_id: images[currentIndex].user_id })
+        }
+        const response = await fetch(`${URL}/follows`, requestOptions);
+        const data = await response.json();
+        if (data.error) {
+            setAlertMessage('error: ' + data.message);
+            setAlert(true);
+        }
+        else {
+            setFollowing(!following);
+        }
+    }
+
 
     const handleClose = (e) => {
         e.stopPropagation();
@@ -209,6 +244,8 @@ function ImageCardModal({ openCardModal, setOpenCardModal, startingIndex, images
                                 <img src={artist.pic} alt='profile'></img>
                                 <div>by {artist.username}</div>
                             </NavLink >
+                            {artist.id !== user_id ? <button onClick={toggleFollow} className='imageCardBox__details__header__follow'>{following ? 'following' : 'follow'}</button> : null}
+
                             <div className='imageCardBox__details__header__bookmark' onClick={toggleBookmark}>
                                 <Tooltip title="bookmark"><div>{bookmark ? <BookmarkIcon /> : <BookmarkBorderIcon />}</div></Tooltip>
                             </div>
