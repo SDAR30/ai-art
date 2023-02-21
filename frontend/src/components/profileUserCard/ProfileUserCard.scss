@@ -1,5 +1,6 @@
 @import '../../designUtils/cards.scss';
 @import '../../designUtils/colors.scss';
+@import '../../designUtils/buttons.scss';
 
 .profileUserCard {
     width: 300px;
@@ -36,13 +37,14 @@
         }
 
         .editButton {
-            background-color: white;
-            color: $background-dark;
-            border: 2px solid $lightsky;
-            margin-top: 10px;
-            margin-bottom: 0px;
-            border-radius: 10px;
+            // background-color: white;
+            // color: $background-dark;
+            // border: 2px solid $lightsky;
+            // margin-top: 10px;
+            // margin-bottom: 0px;
+            // border-radius: 10px;
             cursor: pointer;
+            @extend %button-33;
         }
 
         .editButton:hover {
