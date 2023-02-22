@@ -4,9 +4,11 @@ import './ProfileUserCard.scss';
 import { apiURL } from "../../utils/apiURL";
 import Notification from '../notifcation/Notification';
 
-function ProfileUserCard({ username, userID, email, pic, myProfile}) {
+function ProfileUserCard({ username, userID, email, pic, myProfile, totalImages}) {
     const URL = apiURL();
-    const [following, setFollowing] = useState(false);
+    const [follow, setFollow] = useState(false);
+    const [followers, setFollowers] = useState(0);
+    const [following, setFollowing] = useState(0);
     const [alert, setAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
     const [cookies] = useCookies('token');
@@ -14,16 +16,33 @@ function ProfileUserCard({ username, userID, email, pic, myProfile}) {
     const defaultProfileImage = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/2048px-Circle-icons-profile.svg.png";
 
     useEffect(() => {
-        const isFollowing = async () => {
+        const isfollow = async () => {
             if (!user_id) return; //if user is not logged in, return
             if(myProfile) return; //if user is on their own profile, return
             const response = await fetch(`${URL}/follows/${user_id}/${userID}`);
             const data = await response.json();
-            if(data) { setFollowing(true); }
-            else { setFollowing(false); }
+            if(data) { setFollow(true); }
+            else { setFollow(false); }
             return;
         }
-        isFollowing();
+
+        const getFollowers = async () => {
+            let id = myProfile ? user_id : userID;
+            const response = await fetch(`${URL}/follows/followed/${id}`);
+            const data = await response.json();
+            setFollowers(data);
+        }
+
+        const getFollowing = async () => {
+            let id = myProfile ? user_id : userID;
+            const response = await fetch(`${URL}/follows/following/${id}`);
+            const data = await response.json();
+            setFollowing(data);
+        }
+
+        isfollow();
+        getFollowers();
+        getFollowing();
       
     }, [user_id, myProfile, userID, URL])
 
@@ -46,7 +65,7 @@ function ProfileUserCard({ username, userID, email, pic, myProfile}) {
             setAlert(true);
         }
         else {
-            setFollowing(!following);
+            setFollow(!follow);
         }
     }
     
@@ -60,20 +79,20 @@ function ProfileUserCard({ username, userID, email, pic, myProfile}) {
                 <img className="profilePic" alt='profile' src={pic ? pic : defaultProfileImage} />
                 <div className="name">{username} </div>
                 <div className="email">{email}</div>
-                <div ><button  onClick={toggleFollow} className="editButton">{myProfile ? 'edit profile' : (following ? 'following' : 'follow')}</button></div>
+                <div ><button  onClick={toggleFollow} className="editButton">{myProfile ? 'edit profile' : (follow ? 'following' : 'follow')}</button></div>
             </div>
 
             <div className="profileUserCard__stats">
                 <div>
-                    <div className="quantity">13</div>
+                    <div className="quantity">{totalImages}</div>
                     <div className="type">images</div>
                 </div>
                 <div>
-                    <div className="quantity">32</div>
-                    <div className="type">follewers</div>
+                    <div className="quantity">{followers?.length}</div>
+                    <div className="type">followers</div>
                 </div>
                 <div>
-                    <div className="quantity">4</div>
+                    <div className="quantity">{following?.length}</div>
                     <div className="type">following</div>
                 </div>
             </div>

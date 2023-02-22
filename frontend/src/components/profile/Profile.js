@@ -49,11 +49,11 @@ function Profile(props) {
     return (
         <div className='profile'>
             <div className='profile__section'>
-                <ProfileUserCard username={user?.username} email={user?.email} pic={user?.pic} myProfile={true}/>
+                <ProfileUserCard username={user?.username} email={user?.email} pic={user?.pic} myProfile={true} totalImages={userImages.length}/>
                 <ProfileImageContainer title={'My Images'} images={userImages} />
             </div>
             <div className='profile__section'>
-                <ProfileInfoCard images={userImages} />
+                <ProfileInfoCard userID={user.id} images={userImages} />
                 <ProfileImageContainer title={'Bookmarked Images'} images={bookmarkImages} />
 
             </div>

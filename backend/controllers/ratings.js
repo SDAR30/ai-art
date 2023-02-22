@@ -34,11 +34,34 @@ GROUP BY images.id;
 ratings.get('/average/all', async (req, res) => {
     const query = `SELECT images.*, COALESCE(AVG(ratings.rating),0) as avg_rating FROM images LEFT JOIN ratings ON images.id = ratings.image_id GROUP BY images.id;`;
     try {
-        return res.json(await db.query (query))
+        return res.json(await db.query(query))
     } catch (error) {
         res.status(500).json({ success: false, error: true, message: error.message })
     }
 })
+
+//get the average rating of all  images combined (not including unrated images) for a specific user
+/*
+SELECT ROUND(AVG(ratings.rating), 2) as avg_rating
+FROM ratings
+JOIN images ON ratings.image_id = images.id
+WHERE images.user_id = [user_id];
+*/
+ratings.get('/average/user/:user_id', async (req, res) => {
+    const userID = req.params.user_id;
+    if (!/[0-9]/.test(userID)) {
+        res.send("user id is not a number")
+        return;
+    }
+    const query = `SELECT ROUND(AVG(ratings.rating), 1) as avg_rating FROM ratings JOIN images ON ratings.image_id = images.id WHERE images.user_id = $1;`;
+    try {
+        const average = await db.oneOrNone(query, [userID])
+        return average ? res.json(average) : res.status(422).send({ success: false, error: true, message: "No user with that id" })
+    } catch (error) {
+        res.status(500).json({ success: false, error: true, message: error.message })
+    }
+})
+
 
 //get average rating of one specific image, or return 0 if no rating or image
 ratings.get('/:id', async (req, res) => {

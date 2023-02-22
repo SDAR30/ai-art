@@ -2,6 +2,23 @@ const bookmarks = require('express').Router();
 const db = require('../db/index');
 
 
+//check how many users have bookmarked images from an artist
+/*
+SELECT COUNT(DISTINCT user_id) FROM bookmarks
+JOIN images ON bookmarks.image_id = images.id
+WHERE images.artist_id = [artist_id];
+*/
+bookmarks.get('/artist/:artist_id', async (req, res) => {
+    const artistID = req.params.artist_id;
+    if (!/[0-9]/.test(artistID)) {
+        res.send("artist id is not a number")
+        return;
+    }
+    const query = 'SELECT COUNT(DISTINCT bookmarks.user_id) FROM bookmarks JOIN images ON bookmarks.image_id = images.id WHERE images.user_id = $1';
+    const bookmarkCount = await db.oneOrNone(query, [artistID]);
+    return res.json(bookmarkCount)
+})
+
 //check if a user has bookmarked an image
 /*
 SELECT * FROM bookmarks

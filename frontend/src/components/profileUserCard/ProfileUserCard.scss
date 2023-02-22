@@ -43,8 +43,8 @@
             // margin-top: 10px;
             // margin-bottom: 0px;
             // border-radius: 10px;
-            cursor: pointer;
             @extend %button-33;
+            cursor: pointer;
         }
 
         .editButton:hover {
