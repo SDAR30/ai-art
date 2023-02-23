@@ -6,6 +6,7 @@ import './ImageList.scss'
 import { apiURL } from "../../utils/apiURL"
 import useWindowDimensions from '../../utils/getWindowDimensions';
 import CircularProgress from '@mui/material/CircularProgress';
+import { getFirstFiveWords } from '../../utils/stringUtils';
 
 
 const ImageList = () => {
@@ -34,8 +35,9 @@ const ImageList = () => {
         if (searchTerm) {
             filteredImages = images.filter(image => {
                 const search = searchTerm.toLowerCase();
-                const title = image.title.toLowerCase();
-                return title.split(' ').some(word => word.startsWith(search)) ? title : null;
+                let title = image.title.toLowerCase();
+                let keywords = [...title.split(' '), ...getFirstFiveWords(image.prompt).toLowerCase().split(' ')]
+                return keywords.some(word => word.startsWith(search)) ? title : null;
             })
         }
         numberOfColumns = filteredImages.length < numberOfColumns ? filteredImages.length : numberOfColumns;

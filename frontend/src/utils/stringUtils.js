@@ -18,4 +18,19 @@ const removeExtraWords = (str, limit) => {
     return newStr + '...';
 }
 
-module.exports = { capitalizeFirstLetterOfEachWord, removeExtraWords };
+//return up to the first 5 words of a string that are more than 2 letters long
+const getFirstFiveWords = (str) => {
+    if(!str.length) return '';
+    str = str.trim();
+    let words = str.split(' ');
+    let newStr = '';
+    let i = 0;
+    while (i < 5) {
+        if(!words[i]) break;
+        if(words[i].length > 2) newStr += words[i] + ' ';
+        i++;
+    }
+    return newStr.trim();
+}
+
+module.exports = { capitalizeFirstLetterOfEachWord, removeExtraWords, getFirstFiveWords };
