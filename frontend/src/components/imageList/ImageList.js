@@ -13,8 +13,13 @@ const ImageList = () => {
     const [images, setImages] = useState([])
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('')
+    const [selectedOption, setSelectedOption] = useState('');
     const { width } = useWindowDimensions();
     let numberOfColumns = Math.ceil(width / 420);
+
+    const handleSelectChange = (event) => {
+        setSelectedOption(parseInt(event.target.value));
+    }
 
     useEffect(() => {
         fetch(`${URL}/ratings/average/all`).then(res => res.json())
@@ -37,6 +42,28 @@ const ImageList = () => {
         return filteredImages;
     }
 
+    const orderImages = images => {
+        if (!selectedOption) return images;
+        let orderedImages = images;
+        switch (selectedOption) {
+            case 1: //latest
+                orderedImages = images.sort((a, b) => new Date(b.date) - new Date(a.date));
+                break;
+            case 2: //oldest
+                orderedImages = images.sort((a, b) => new Date(a.date) - new Date(b.date));
+                break;
+            case 3: //rating
+                orderedImages = images.sort((a, b) => b.avg_rating - a.avg_rating);
+                break;
+            case 4: //ai name, alphabetically
+                orderedImages = images.sort((a, b) => a.ai.localeCompare(b.ai));
+                break;
+            default:
+                break;
+        }
+        return orderedImages;
+    }
+
     const reOrderImages = images => {
         let reOrderedImages = [];
         for (let i = 0; i < numberOfColumns; i++) {
@@ -57,14 +84,14 @@ const ImageList = () => {
         return styledImages;
     }
 
-    let filteredImages = filterImages(images);
+    let filteredImages = orderImages(filterImages(images));
     let orderedImages = reOrderImages(filteredImages);
 
     return (<div className="imageList">
-        {loading ? <CircularProgress className='imageList__loading' thickness={7} size={'5rem'}/> : <>
+        {loading ? <CircularProgress className='imageList__loading' thickness={7} size={'5rem'} /> : <>
             <div className='imageList__bar'>
                 <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-                <SelectBar />
+                <SelectBar selectedOption={selectedOption} handleSelectChange={handleSelectChange} />
             </div>
             <div className='imageList__grid'>
                 {orderedImages.map((column, index) =>

@@ -82,7 +82,26 @@ VALUES ('Mechanical Skull', 'Midjourney','https://imgur.com/c5fgeoH.png','', 'bi
 ('cherry blossom tree house', 'Midjourney', 'https://imgur.com/AZSoMUL.png', '','THE CHERRY BLOSSOM TREE HOUSE at ancient japanese street, by Ghibli studio','2023-01-21',23),
 ('battlemap of mushroom village', 'DeepAI', 'https://imgur.com/6s12Xt1.png','','battlemap, directly top down view of a cave filled with various coloful mushrooms, river flowing through cave, two exit tunnels, mushrooms the size of trees, hot springs, Painting By John Howe','2022-09-23',9),
 ('alien chrome motorbike', 'DeepAI', 'https://imgur.com/X9Bax6C.png','','DeepAI: spider frame predator and alien futuristic chopper motorbike, chrome and tribals, real bones and skulls, big v twin engine, mad max style, black and white sketch, extremely high details, super realistic, extremly realistic, hyperrealistic, Unreal engine v5, 8k, low angle','2023-01-03',20),
-('charmander', 'Midjourney', 'https://imgur.com/SDa70d2.png','','cute high-rank charmander pokemon, studio lightning, natural colors, editorial high key photoshoot','2023-02-14',24);
+('charmander', 'Midjourney', 'https://imgur.com/SDa70d2.png','','cute high-rank charmander pokemon, studio lightning, natural colors, editorial high key photoshoot','2023-02-14',24),
+('Cats stained glass', 'Midjourney', 'https://imgur.com/i3ATp4r.png','','Chibi style cats on stained glass, kaleidoscope effect, many details','2022-02-15',2),
+('London''s skyline','DALL-E','https://imgur.com/bY8IZ2P.png','first generate the thames winds its way under and through the bottom of Tower Bridge',' Big Ben accurately portayed and can be seen with the clock face showing the time as 2:50pm, Tower Bridge features prominently and accurate to real life','2022-06-23',3),
+('Huge Blue Tiled Apartment', 'DeepAI','https://imgur.com/C6VqOG8.png','','A Huge Blue Tiled Apartment Building of Howl''s Moving Castle Ghibli, by Vincent Di Fate Nausicaa, Ghibli, Breath of The Wild, epic composition, green plants','2022-07-13',5),
+('The tale of a fox and squirrel','Midjourney','https://imgur.com/8u1054I.png','it''s based on a illustration for a children story,warm lighting--v 4 seed 2109422049','a cute red fox and a little black squirrel character for a storybook,going into the forest,illustration for a storybook,watercolor and black ink style','2022-10-04',6),
+('Decorated Sneakers', 'Midjourney','https://imgur.com/dPetzFN.png','','Sneakers with silk embroidery 4л','2022-10-24',8),
+('Beksinski quilt landscape','Stable Diffusion','https://imgur.com/KYIx67R.png','','Beautiful dutch Landscape oil painting masterpiece, paper art, paper quilling, paper illustration, In the style of Beksinski and Leonid Afremov, Starry Night, Pattern, yaacov agam','2022-11-11',9),
+('Blooming flower planet','Midjourney','https://imgur.com/MgEtk5K.png','','A large colorful planet surrounded by beautiful and strange flowers, stardust, glitter, 4k,','2022-12-01',10),
+('elven forest paper cutout','Midjourney','https://imgur.com/YwcKmAL.png','','paper cutout, layered, Lord of the Rings, elven forest, fantasy, dynamic lighting, wimsical','2023-01-09',11),
+('james gurney rock city', 'DeepAI','https://imgur.com/U7fQgrg.png','','ancient city made of red rock, moab slickrock, sandstone and water, fusion of modernist and brutalist slab architecture, artstation, james gurney','2023-01-01',15),
+('apartment with floating pool','Stable Diffusion','https://imgur.com/v8abJcs.png','','panoramic view , liminal floating multi-tiered pools each with water cascading into the pool below , sideways gravity , by Geof Darrow and Dieter Rams and Steve Ditko','2023-01-04',11),
+('wizards guild', 'Midjourney','https://imgur.com/Jl4k0n6.png','','wizards guild in mediveal city, No letters, dungeon and dragons style','2022-11-23',14),
+('organic biomimetic landscape', 'Midjourney','https://imgur.com/ObJ90iV.png','','A small group of about a dozen futuristic scientists inspired by and expanding upon regenerative tech. Their work is on organic biomimetic research that heals landscapes through fungi. octane render.','2023-01-22',18),
+('sustainable energy efficient city', 'Midjourney','https://imgur.com/Stw08D6.png','','energy efficient, sustainable city of today highlighting transportation, renewable energy generation, rivers, plants and trees, and clean air --ar 16:9','2023-01-03',20),
+('abstract ink composition','Stable Diffusion', 'https://imgur.com/ggLPMR3.png','','abstract composition created by alcohol ink, the spots of ink are arranged in flowers, ultra detailed, beautifull, gold line, glitter, 4k','2022-12-20',21),
+('biohazard lab', 'Midjourney','https://imgur.com/9PDO3PM.png','','ultra realistic nuclear research labor, dangerous, dark, scary, toxic','2023-01-11',22),
+('house bursting with water', 'Midjourney','https://imgur.com/uJNgAXu.png','','realistic house, leaking problems inside, people getting water with buckets, contractor ready to help, hyper realistic, HD','2023-02-01',23),
+('samurai shiba inu','Midjourney','https://imgur.com/faQh9Pt.png','','Cute samurai shiba inu','2022-11-30',16),
+('floating battleship','DALL-E','https://imgur.com/18sPdyK.png','','city ​​on a floating island mechanical science steampunk sun day many airship','2022-10-19',17),
+('Billy and the Monsters', 'Midjourney','https://imgur.com/7naKvx9.png','','Illustrate a 12 year old boy at a playground with his Monster friends, Whimsical Style ','2023-02-19',8);
 
 
 INSERT INTO ratings (image_id, user_id, rating, created_at) VALUES
