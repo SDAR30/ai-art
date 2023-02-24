@@ -6,9 +6,11 @@ import Button from '@mui/material/Button';
 import './CreateAccountForm.scss'
 import UserContext from '../../UserContext';
 import { useCookies } from "react-cookie";
+import { useNavigate } from 'react-router-dom';
 
 function CreateAccountForm({ setOpenLoginModal, setMessage, setSeverity, setAlert}) {
     const URL = apiURL();
+    let navigate = useNavigate();
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('');
@@ -84,6 +86,8 @@ function CreateAccountForm({ setOpenLoginModal, setMessage, setSeverity, setAler
                     id: data.user.id,
                     token: data.accessToken
                 })
+
+                navigate('/');
 
             }).catch(err => {
                 console.log('catching error in createUser in CreateAccountForm')

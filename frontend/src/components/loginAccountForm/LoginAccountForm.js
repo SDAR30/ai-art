@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
-import { apiURL } from "../../utils/apiURL"
+import { apiURL } from "../../utils/apiURL";
+import { useNavigate } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -8,6 +9,7 @@ import { useCookies } from "react-cookie";
 
 function LoginAccountForm({setOpenLoginModal, setMessage, setAlert, setSeverity}) {
     const URL = apiURL();
+    let navigate = useNavigate();
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('');
     const [usernameError, setUsernameError] = useState(false)
@@ -67,6 +69,8 @@ function LoginAccountForm({setOpenLoginModal, setMessage, setAlert, setSeverity}
                 id: data.user.id,
                 token: data.accessToken
             })
+
+            navigate('/');
             
             // save token to cookie
             //document.cookie = 'accessToken=' + data.accessToken;

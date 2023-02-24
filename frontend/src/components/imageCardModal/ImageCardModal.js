@@ -252,10 +252,10 @@ function ImageCardModal({ openCardModal, setOpenCardModal, startingIndex, images
                         </div>
 
                         <div className='imageCardBox__details__prompt'>
-                            <span>prompt: </span><span title='copy' ref={textRef} onClick={copyText}>{images[currentIndex]?.prompt}</span>
+                            <span><b>prompt:</b> </span><span title='copy' ref={textRef} onClick={copyText}>{images[currentIndex]?.prompt}</span>
                         </div>
 
-                        {images[currentIndex]?.instructions && <div className='imageCardBox__details__instructions'>Extra steps: {images[currentIndex]?.instructions}</div>}
+                        {images[currentIndex]?.instructions && <div className='imageCardBox__details__instructions'><b>Extra steps:</b> {images[currentIndex]?.instructions}</div>}
 
                         <div className='imageCardBox__details__date' >created {timeSince(images[currentIndex]?.date)} using {images[currentIndex]?.ai}</div>
 
