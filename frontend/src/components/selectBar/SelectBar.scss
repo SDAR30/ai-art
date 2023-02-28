@@ -3,9 +3,11 @@
 .selectBar {
     @extend %text-input;
     min-width: 110px;
-    width: 20%;
+    width: 36%;
     margin: 0 5px;
     // padding: 5px 10px;
     // max-height: calc(1.2em + 24.9px);
     height: calc(1.2em + 24.9px);
+    color: rgb(255, 255, 255);
+    font-weight: 500;
   }

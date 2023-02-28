@@ -24,7 +24,7 @@
         >a {
             font-size: 2.5rem;
             font-weight: 600;
-            @extend %roboto;
+            @extend %slab;
             @extend %title-shadow;
             color: white;
             text-decoration: none;

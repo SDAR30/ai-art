@@ -3,6 +3,9 @@
 
 .searchBar {
     @extend %text-input;
-     width: 50%;
+     width: 60%;
      margin: 0 0 0 5px;
+     &::-webkit-input-placeholder {
+        font-weight: 600;
+    }
 }
