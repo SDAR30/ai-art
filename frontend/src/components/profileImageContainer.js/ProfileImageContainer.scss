@@ -34,8 +34,10 @@
     @media (max-width: $minimum-navbar-width) {
         width: 300px;
         &__images{
-            display:flex;
             flex-direction: column;
+            > * {
+                margin: 5px 5px;
+            }
         }
 
     }
