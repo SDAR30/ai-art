@@ -19,6 +19,7 @@ import { apiURL } from "../../utils/apiURL";
 import { NavLink } from 'react-router-dom';
 import { timeSince } from '../../utils/dateUtils';
 import { roundToHalf } from '../../utils/mathUtils';
+import { capitalizeFirstLetterOfEachWord } from '../../utils/stringUtils';
 
 function ImageCardModal({ openCardModal, setOpenCardModal, startingIndex, images }) {
 
@@ -238,7 +239,7 @@ function ImageCardModal({ openCardModal, setOpenCardModal, startingIndex, images
                     <div className='imageCardBox__details'>
 
                         <div className='imageCardBox__details__header'>
-                            <h2 className='imageCardBox__details__header__title'> {images[currentIndex]?.title} </h2>
+                            <h2 className='imageCardBox__details__header__title'> {capitalizeFirstLetterOfEachWord(images[currentIndex]?.title)} </h2>
                             <NavLink className='imageCardBox__details__header__artist' to={`/profile/${artist.id}`}>
 
                                 <img src={artist.pic} alt='profile'></img>
@@ -252,7 +253,7 @@ function ImageCardModal({ openCardModal, setOpenCardModal, startingIndex, images
                         </div>
 
                         <div className='imageCardBox__details__prompt'>
-                            <span><b>prompt:</b> </span><span title='copy' ref={textRef} onClick={copyText}>{images[currentIndex]?.prompt}</span>
+                            <span><b>prompt:</b></span><span title='copy' ref={textRef} onClick={copyText}> {images[currentIndex]?.prompt}</span>
                         </div>
 
                         {images[currentIndex]?.instructions && <div className='imageCardBox__details__instructions'><b>Extra steps:</b> {images[currentIndex]?.instructions}</div>}
@@ -264,10 +265,10 @@ function ImageCardModal({ openCardModal, setOpenCardModal, startingIndex, images
                             <div>{imageDimensions.width} x {imageDimensions.height}</div>
                         </div>
 
-                        <div className='imageCardBox__details__rating'>
-                            <div>Rating</div>
-                            <HoverRating rating={rating} submitRating={submitRating} />
-                        </div>
+                        <Tooltip title='Rate This Image'><div className='imageCardBox__details__rating'>
+                        <div>Rating</div>
+                        <HoverRating rating={rating} submitRating={submitRating} />
+                        </div></Tooltip>
 
                     </div>
 

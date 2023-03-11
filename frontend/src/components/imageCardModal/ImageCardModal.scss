@@ -156,6 +156,7 @@
             margin: .4rem;
 
             > :first-child {
+                text-decoration: underline;
                 // unable to select
                 -webkit-user-select: none;
                 /* Chrome all / Safari all */
@@ -216,13 +217,15 @@
             justify-content: center;
             align-items: center;
 
-            margin: 10px auto 100px;
-            border: 2px solid rgb(59, 59, 59);
+            margin: 15px auto 100px;
+            border: 1px solid $steel;
             border-radius: 20px;
             padding: 0 25px;
 
             > :first-child {
-                color: rgb(53, 53, 53);
+                font-size: .9rem;
+                color: $steel;
+                padding: 2px 0px;
             }
         }
 

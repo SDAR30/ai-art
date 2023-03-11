@@ -27,14 +27,14 @@ images.get('/user/:id', async (req, res) => {
     try {
         
         const userID = req.params.id;
-        console.log('inside images/user/:id route ueer id: ', userID)
+        // console.log('inside images/user/:id route ueer id: ', userID)
         if (!/[0-9]/.test(userID)) {
             res.send("user id is not a number")
             return;
         }
         const userImages = await db.any('SELECT * FROM images where user_id = $1', [userID])
-        console.log('inside images/user/:id route ')
-        console.log('userImages: ', userImages)
+        // console.log('inside images/user/:id route ')
+        // console.log('userImages: ', userImages)
         return userImages ? res.json(userImages) : res.status(422).send({ success: false, error: true, message: "No images for that user" })
     } catch (error) {
         res.status(500).json({ success: false, error: true, message: error.message })
@@ -58,7 +58,7 @@ images.get('/:id', async (req, res) => {
 
 images.post('/', async (req, res) => {
     try {
-        console.log("req obj recieved: ", req.body)
+        // console.log("req obj recieved: ", req.body)
         const { title, ai, instructions, prompt, date, url, user_id } = req.body;
         if (!title || !ai || !prompt) throw new Error("missing: " + (!title ? "title" : !ai ? "ai" : !prompt ? "prompt" : "unknown"))
         if(!url || !date || !user_id) throw new Error("missing: " + (!url ? "url" : !date ? "date" : !user_id ? "user_id" : "unknown"))

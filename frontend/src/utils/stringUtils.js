@@ -1,5 +1,6 @@
 //capitalize first letter of each word in a string
 const capitalizeFirstLetterOfEachWord = (str) => {
+    if(!str) return '';
     return str.split(' ').map(word => word[0].toUpperCase() + word.slice(1)).join(' ');
 }
 
