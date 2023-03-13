@@ -15,6 +15,7 @@ import OtherProfile from './components/profile/OtherProfile';
 import Notification from './components/notifcation/Notification';
 import About from './components/about/About';
 import Contact from './components/contact/Contact';
+import EditProfile from './components/editProfile/EditProfile';
 
 
 
@@ -40,6 +41,7 @@ function App() {
             <Route path="/images/:imageID" element={<ImageView />} />
             <Route path="images/new" element={<ImageUpload setMessage={setMessage} setSeverity={setSeverity} setAlert={setAlert} />} />
             <Route path='images/create' element={<CreateImage setMessage={setMessage} setSeverity={setSeverity} setAlert={setAlert} />} />
+            <Route path='/profile/edit' element={<EditProfile />} />
             <Route path="/profile/:userID" element={<OtherProfile />} />
             <Route path="/profile" element={<Profile />} />
             <Route path='/about' element={<About />} />

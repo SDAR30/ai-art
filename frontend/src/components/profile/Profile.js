@@ -53,7 +53,7 @@ function Profile(props) {
                 <ProfileImageContainer title={'My Images'} images={userImages} />
             </div>
             <div className='profile__section'>
-                <ProfileInfoCard userID={user.id} images={userImages} />
+                <ProfileInfoCard userID={user?.id} images={userImages} />
                 <ProfileImageContainer title={'Bookmarked Images'} images={bookmarkImages} />
 
             </div>

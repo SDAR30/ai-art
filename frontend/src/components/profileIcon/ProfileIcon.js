@@ -54,7 +54,7 @@ export default function ProfileIcon({ setActive }) {
         // transformOrigin={{ vertical: 'middle', horizontal: 'right', }}
       >
         <MenuItem className='profileIconMenu__item' onClick={handleClose}><NavLink to="/profile">Profile</NavLink></MenuItem>
-        <MenuItem className='profileIconMenu__item' onClick={handleClose}>Settings</MenuItem>
+        <MenuItem className='profileIconMenu__item' onClick={handleClose}><NavLink to="/profile/edit">Settings</NavLink></MenuItem>
         <MenuItem  className='profileIconMenu__item' onClick={logOut}>Logout</MenuItem>
       </Menu>
     </div>

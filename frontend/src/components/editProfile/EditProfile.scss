@@ -1,0 +1,69 @@
+@import './../../designUtils/buttons.scss';
+@import './../../designUtils/cards.scss';
+@import './../../designUtils/textfields.scss';
+@import './../../designUtils/container.scss';
+
+.editForm {
+    @extend %form-container;
+    @extend %card-outline;
+
+    &__details{
+        >#info{
+            margin: 5px 0 0 15px;
+        }
+        >#error{
+            margin: 2px 0 0 15px;
+            color: red;
+            font-weight: 500;
+        }
+    }
+
+    &__image {
+
+        &>button {
+            border: 2px solid $background-dark;
+            color: $background-dark;
+            background-color: white;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            margin: 0;
+            position: absolute;
+            top: 93%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            z-index: 2;
+
+        }
+
+        &>input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            cursor: pointer;
+
+        }
+
+        & > img {
+            max-width: 95%;
+            max-height: 95%;
+            position: absolute;
+            margin: auto;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50%;
+            @extend %card-outline;
+        }
+
+    }
+
+}
+

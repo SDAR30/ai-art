@@ -119,4 +119,65 @@ users.post('/', async (req, res) => {
     }
 })
 
+/*
+change password and user profile image for user
+for password change, user must provide old password
+check to see if old password matches password in database
+*/
+users.put('/:id', async (req, res) => {
+    
+    try {
+        const userID = req.params.id;
+        const { currentPassword, newPassword, pic } = req.body;
+        console.log('inside put request')
+
+        if (!/[0-9]/.test(userID)) {
+            res.send('user ID must be a number')
+            return;
+        }
+
+        const user = await db.oneOrNone('SELECT * FROM users WHERE id = $1', [userID])
+
+        
+        if (!user) {
+            throw { message: 'user not found' }
+        }
+
+        if (currentPassword && newPassword) {
+            console.log('inside if statement' + currentPassword + ' ' + newPassword)
+            const validPassword = await bcrypt.compare(currentPassword, user.password)
+
+            if (!validPassword) {
+                throw { message: 'current password is incorrect' }
+            }
+
+            const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+            const updatedUser = await db.one('UPDATE users SET password = $1 WHERE id = $2 RETURNING id, username, email, pic',
+                [hashedPassword, userID]);
+            
+            console.log(updatedUser)
+
+            res.json(updatedUser)
+            return;
+        }
+
+        if (pic) {
+            console.log('inside pic if statement' + pic)
+            const updatedUser = await db.one('UPDATE users SET pic = $1 WHERE id = $2 RETURNING id, username, email, pic',
+                [pic, userID]);
+            console.log(updatedUser)
+
+            res.json(updatedUser)
+        }
+
+    } catch (err) {
+        res.status(500).send({ status: 'error', error: true, message: err.message })
+    }
+})
+
+
+
+
+
 module.exports = users;
