@@ -1,11 +1,11 @@
 import { useContext, useState } from 'react';
 import { apiURL } from "../../utils/apiURL";
 import { useNavigate } from 'react-router-dom';
-import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import UserContext from '../../UserContext';
 import { useCookies } from "react-cookie";
+import './LoginAccountForm.scss';
 
 function LoginAccountForm({setOpenLoginModal, setMessage, setAlert, setSeverity}) {
     const URL = apiURL();
@@ -85,9 +85,9 @@ function LoginAccountForm({setOpenLoginModal, setMessage, setAlert, setSeverity}
 
     return (
         <>
-            <Typography className='loginModal__title' id="modal-modal-title" variant="h6" component="h2">
+            <div className='loginModal__title'>
                 Log In
-            </Typography>
+            </div>
             <div className="form__errorText" style={{"color" : "red"}}>
                 {formMessage}
             </div>

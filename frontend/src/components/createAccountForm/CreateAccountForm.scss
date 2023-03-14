@@ -1,0 +1,15 @@
+@import './../../designUtils/fonts.scss';
+
+.loginModal{
+
+    &__title{
+        font-size: 1.5rem;
+        @extend %roboto;
+        font-weight: 500;
+        // @extend %title-shadow;
+    }
+    &__caption{
+        font-size: .9rem;
+       
+    }
+}

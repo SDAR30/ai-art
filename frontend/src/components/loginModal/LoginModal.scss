@@ -15,7 +15,7 @@
         display: grid;
         grid-template-columns: 1fr;
         column-gap: 10px;
-        row-gap: 15px;
+        row-gap: 10px;
         margin: auto;
         // :nth-child(n + 3) {
         //     grid-column: span 2;
@@ -23,7 +23,7 @@
     }
 
     &__para {
-        font-size: .9rem;
+        font-size: 1rem;
         text-align: center;
 
         > span {

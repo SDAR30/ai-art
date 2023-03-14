@@ -1,6 +1,5 @@
 import { useContext, useState } from 'react';
 import { apiURL } from "../../utils/apiURL"
-import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import './CreateAccountForm.scss'
@@ -97,12 +96,11 @@ function CreateAccountForm({ setOpenLoginModal, setMessage, setSeverity, setAler
 
     return (
         <>
-            <Typography className='loginModal__title' id="modal-modal-title" variant="h6" component="h2">
+            <div className='loginModal__title'>
                 Create an account       
-            </Typography>
-            <Typography className='loginModal__title' id="modal-modal-title" variant="caption" component="h2">
-                Explore, create and share incredible images made by AI, and learn how they were generated.      
-            </Typography>
+            </div>
+            
+              <div className='loginModal__caption'>  Explore, create and share incredible images made by AI, and learn how they were generated.    </div>
             
             {formMessage &&
                 <div className="form__errorText" style={{ "color": "red" }}>

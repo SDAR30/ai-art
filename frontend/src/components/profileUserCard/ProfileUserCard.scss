@@ -45,6 +45,10 @@
             // border-radius: 10px;
             @extend %button-33;
             cursor: pointer;
+            &  a{
+                text-decoration: none;
+                color: black;
+            }
         }
 
         .editButton:hover {

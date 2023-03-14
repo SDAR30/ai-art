@@ -3,6 +3,7 @@ import { useCookies } from 'react-cookie';
 import './ProfileUserCard.scss';
 import { apiURL } from "../../utils/apiURL";
 import Notification from '../notifcation/Notification';
+import { NavLink } from 'react-router-dom';
 
 function ProfileUserCard({ username, userID, email, pic, myProfile, totalImages}) {
     const URL = apiURL();
@@ -79,7 +80,7 @@ function ProfileUserCard({ username, userID, email, pic, myProfile, totalImages}
                 <img className="profilePic" alt='profile' src={pic ? pic : defaultProfileImage} />
                 <div className="name">{username} </div>
                 <div className="email">{email}</div>
-                <div ><button  onClick={toggleFollow} className="editButton">{myProfile ? 'edit profile' : (follow ? 'following' : 'follow')}</button></div>
+                <div ><button  onClick={toggleFollow} className="editButton">{myProfile ? <NavLink to="/profile/edit">Edit Profile</NavLink> : (follow ? 'following' : 'follow')}</button></div>
             </div>
 
             <div className="profileUserCard__stats">
