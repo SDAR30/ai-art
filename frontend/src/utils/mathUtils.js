@@ -20,13 +20,13 @@ function ratingText(avg) {
     avg = roundToOneDecimal(parseFloat(avg));
     if (!avg) return 'Not rated';
     let text = '';
-    //let emojis = '🤮🤢😠😒 💔😐 👌🙂 ✨⚡⭐🌶🔥🥉🥈🥇'
+    //let emojis = '😡🤮🤢😠😒 💔😐 👌🙂 ✨⚡⭐🌶🔥🥉🥈🥇'
 
     if (avg > 4.5)
         text += '🔥';
-    else if (avg > 4.1)
+    else if (avg >= 4.0)
         text += '🌶';
-    else if (avg > 3.7)
+    else if (avg > 3.6)
         text += '⭐';
     else if (avg > 3.3)
         text += '';
@@ -35,9 +35,9 @@ function ratingText(avg) {
     else if (avg > 2.3)
         text += '';
     else if (avg > 1.8)
-        text += '';
+        text += '🤮';
     else if (avg > 1.3)
-        text += '😠';
+        text += '🤮';
     else
         text += '🤮';
 

@@ -6,7 +6,7 @@ import './ImageList.scss'
 import { apiURL } from "../../utils/apiURL"
 import useWindowDimensions from '../../utils/getWindowDimensions';
 import CircularProgress from '@mui/material/CircularProgress';
-import { getFirstFiveWords } from '../../utils/stringUtils';
+import { getFirstNWords } from '../../utils/stringUtils';
 
 
 const ImageList = () => {
@@ -36,7 +36,22 @@ const ImageList = () => {
             filteredImages = images.filter(image => {
                 const search = searchTerm.toLowerCase();
                 let title = image.title.toLowerCase();
-                let keywords = [...title.split(' '), ...getFirstFiveWords(image.prompt).toLowerCase().split(' ')]
+                let titleWords = title.split(' ');
+                //if there is any word in titleWords that has a -, split it into two words and add both to titleWords
+                titleWords = titleWords.reduce((acc, word) => {
+                    if (word.includes('-')) {
+                        let splitWords = word.split('-');
+                        acc.push(splitWords[0]);
+                        acc.push(splitWords[1]);
+                        acc.push(word)
+                    } else {
+                        acc.push(word);
+                    }
+                    return acc;
+                }, [])
+
+
+                let keywords = [...titleWords, ...getFirstNWords(image.prompt, 10).toLowerCase().split(' ')]
                 return keywords.some(word => word.startsWith(search)) ? title : null;
             })
         }
