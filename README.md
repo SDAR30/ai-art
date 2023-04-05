@@ -2,6 +2,26 @@
 
 Welcome to [AI Art](https://ai-art.adaptable.app/)! This website aims to share and explore the innovative and evolving field of artificial intelligence-generated artwork. It provides a platform for visitors to discover new examples of AI-generated images, learn about the methods used to create them, and engage with a community of like-minded individuals. By showcasing these images and providing insight into their creation, the website seeks to inspire and educate visitors about the potential of AI-generated art.
 
+<div align="center">
+  <table>
+    <tr>
+      <td>
+        <img src="https://i.imgur.com/SRwumQw.png" alt="Image 5" width="270">
+      </td>
+      <td>
+        <img src="https://imgur.com/Rn2twtS.png" alt="Image 1" width="200">
+        <br>
+        <img src="https://imgur.com/UiL33SQ.png" alt="Image 2" width="200">
+      </td>
+      <td>
+        <img src="https://i.imgur.com/YPbOVDX.png" alt="Image 3" width="200">
+        <br>
+        <img src="https://i.imgur.com/ggLPMR3.png" alt="Image 4" width="200">
+      </td>
+    </tr>
+  </table>
+</div>
+
 ## Table of Contents
 
 1. [Introduction](#1-introduction)
