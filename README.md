@@ -32,6 +32,7 @@ Welcome to [AI Art](https://ai-art.adaptable.app/)! This website aims to share a
 6. [Support and Feedback](#6-support-and-feedback)
 7. [Licensing and Attribution](#7-licensing-and-attribution)
 8. [Acknowledgments](#8-acknowledgments)
+9. [Link to Website](#9-link-to-website)
 
 ## 2. Features
 
@@ -91,3 +92,8 @@ All artwork displayed in the Gallery is the property of the respective artists a
 ## 8. Acknowledgments
 
 I would like to express my gratitude to the AI art community, the artists, and researchers whose work is featured on our platform, and everyone who has supported this mission to promote the understanding and appreciation of AI-generated art.
+
+## 9. Link To Website
+
+https://ai-art.adaptable.app/
+
